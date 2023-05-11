@@ -2,6 +2,10 @@ import React, {Dispatch, FC, ReactNode, SetStateAction, useCallback, useEffect, 
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
 
 import {useWindowSize} from "../hooks/useWindowSize";
+import congestionDataSample from "../../public/data/congestionDataSample.json";
+
+import CongestionType from "../type/CongestionType";
+import StorePaneInfoType from "../type/StorePaneInfoType";
 
 /*最初に形を会わないのは開発者モードのときのみ*/
 //TODO:画面がリサイズされたらリセットされるようにする
@@ -11,20 +15,11 @@ import {useWindowSize} from "../hooks/useWindowSize";
 // 横幅のbaseを100として考える。
 //
 
-
 const points = [
-    {id: 'point-1', x: 500, y: 500},
-    {id: 'point-2', x: 600, y: 600},
-    {id: 'point-3', x: 700, y: 700},
+    {areaNum: 1, x: 500, y: 500},
+    {areaNum: 2, x: 600, y: 600},
+    {areaNum: 3, x: 700, y: 700},
 ];
-
-//画像のサイズを定義
-// もともと定まっているスクリーンの大きさから画像のサイズを逆算
-
-const imgConfig = {
-    height: "100px",
-    width: 200
-}
 
 type Borders = {
     leftXBoarder: number;
@@ -34,25 +29,28 @@ type Borders = {
 }
 
 type Props = {
-    focusedNumSetter: Dispatch<SetStateAction<number | null>>
+    storePaneInfoSetter: Dispatch<SetStateAction<StorePaneInfoType | null>>
 };
 
 
-const PanZoomComponent: FC<Props> = ({focusedNumSetter}: Props) => {
+const PanZoomComponent: FC<Props> = ({storePaneInfoSetter}: Props) => {
     const [screenHookWidth, screenHookHeight] = useWindowSize();
 
     const [scale, setScale] = useState<number>(1);
+
+    const congestionsInfo: CongestionType[] = congestionDataSample;
 
     const movableRef = useRef<any>(null);
     const imgRef = useRef<HTMLImageElement | null>(null);
     const divRef = useRef<HTMLDivElement | null>(null);
 
-  /*  useEffect(() => {
-        alert(screenHookHeight + "に変化しました");
-    }, [screenHookHeight])*/
+    const handleImgClicked = (index: number, congestionLevel: 0 | 1 | 2 | 3) => {
+        const value: StorePaneInfoType = {
+            focusedNum: index,
+            congestionLevel: congestionLevel
+        };
 
-    const handleImgClicked = (index: number) => {
-        focusedNumSetter(index);
+        storePaneInfoSetter(value);
     }
 
     const getBoarders = (scale: number): Borders => {
@@ -83,10 +81,7 @@ const PanZoomComponent: FC<Props> = ({focusedNumSetter}: Props) => {
             topYBoarder = 0;
             bottomYBoarder = innerHeightSize - imgRef.current!.clientHeight * scale;
         }
-
-
-        console.log("leftXBoarder:" + leftXBoarder + " / rightXBoarder:" + rightXBoarder + " / topYBoarder:" + topYBoarder + " / bottomYBoarder:" + bottomYBoarder);
-
+        //console.log("leftXBoarder:" + leftXBoarder + " / rightXBoarder:" + rightXBoarder + " / topYBoarder:" + topYBoarder + " / bottomYBoarder:" + bottomYBoarder);
 
         return {leftXBoarder, rightXBoarder, topYBoarder, bottomYBoarder};
 
@@ -171,14 +166,13 @@ const PanZoomComponent: FC<Props> = ({focusedNumSetter}: Props) => {
                         <img
                             ref={imgRef}
                             height={screenHookHeight}
-                            //src="/campusMap.svg"
-                            src="https://cdn.pixabay.com/photo/2015/02/24/15/41/dog-647528__340.jpg"
+                            src="/img/campusMap.svg"
+                            //src="https://cdn.pixabay.com/photo/2015/02/24/15/41/dog-647528__340.jpg"
                             alt="test 2"
                             // style={{border: "10px solid red", boxSizing: "border-box"}}
 
                         />
                         <div
-
                             style={{
                                 height: screenHookHeight,
                                 width: "auto",
@@ -190,59 +184,35 @@ const PanZoomComponent: FC<Props> = ({focusedNumSetter}: Props) => {
                                 pointerEvents: "none",
                             }}
                         >
+                            {congestionsInfo.map((value) => {
+                                    const point = points.find((temp) => temp.areaNum == value.areaNum)
+                                    if (!point) {
+                                        return null;
+                                    } else {
+                                        return (
+                                            // Imageタグにすると画質が劣化するので、imgタグで対応
+                                            <img src={`/img/marks/congestion${value.congestion}.webp`} alt={"busy"}
+                                                 key={value.areaNum}
+                                                 onClick={() => {
+                                                     const myZeroToThree: 0|1|2|3 = value.congestion as 0|1|2|3;
+                                                     handleImgClicked(value.areaNum, myZeroToThree);
+                                                 }}
+                                                 width={(25 / 1000) * screenHookHeight}
+                                                 height={(25 / 1000) * screenHookHeight}
 
-
-                            {points.map((point, index) => (
-                                // Imageタグにすると画質が劣化するので、imgタグで対応
-                                <img src={"/marks/busy.webp"} alt={"busy"} key={index}
-                                     onClick={() => {
-                                         handleImgClicked(index)
-                                     }}
-                                     width={(25 / 1000) * screenHookHeight}
-                                     height={(25 / 1000) * screenHookHeight}
-
-                                     style={{
-                                         position: "absolute",
-                                         top: `${(screenHookHeight / 1000) * point.y}px`,
-                                         left: `${(screenHookHeight / 1000) * point.x}px`,
-                                         zIndex: 1,
-                                         pointerEvents: "auto"
-                                     }}
-                                />
-                            ))}
+                                                 style={{
+                                                     position: "absolute",
+                                                     top: `${(screenHookHeight / 1000) * point?.y}px`,
+                                                     left: `${(screenHookHeight / 1000) * point?.x}px`,
+                                                     zIndex: 1,
+                                                     pointerEvents: "auto"
+                                                 }}
+                                            />
+                                        );
+                                    }
+                                }
+                            )}
                         </div>
-
-                        {/*
-                        <svg
-                            style={{
-                                height: screenHookHeight,
-                                position: "absolute",
-                                width: "auto",
-                                top: 0,
-                                left: 0,
-                                //maxHeight: height,
-                                width: "auto",
-                                display: "block",
-                                margin: "0 auto",
-                                pointerEvents: "none",
-                            }}
-                        >
-                            {points.map((point, index) => (
-                                <circle
-                                    onClick={() => {
-                                        alert(index + "a")
-                                    }}
-                                    key={index}
-                                    cx={`${(screenHookHeight / 1000) * point.x}px`}
-                                    cy={`${(screenHookHeight / 1000) * point.y}px`}
-                                    r={(25 / 1000) * screenHookHeight}
-                                    fill="red"
-                                    stroke="black"
-                                    strokeWidth="1"
-                                    style={{pointerEvents: "auto"}}
-                                />
-                            ))}
-                        </svg>*/}
                     </div>
                 </TransformComponent>
             </TransformWrapper>

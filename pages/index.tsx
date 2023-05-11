@@ -1,14 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PanZoomComponent from "../lib/components/PanZoomComponent";
-import {useWindowSize} from "../lib/hooks/useWindowSize";
 import Header from "../lib/components/Header";
 import HEAD from "next/head"
-import StyledFixedBox from "../lib/style/StyledFixedBox";
-import styled from "styled-components";
+import StorePane from "../lib/components/StorePane";
+import StorePaneInfoType from "../lib/type/StorePaneInfoType";
+import Image from "next/image";
 
 const App = () => {
-    const [screenWidth, screenHeight] = useWindowSize();
-    const [focusedNum, setFocusedNum] = useState<number | null>(null);
+    const [storePaneInfo, setStorePaneInfo] = useState<StorePaneInfoType | null>(null);
+
+    useEffect(() => {
+        document.addEventListener("touchmove", mobile_no_scroll, {passive: false});
+    }, []);
+
+    function mobile_no_scroll(event: any) {
+        // ２本指での操作の場合
+        if (event.touches.length >= 2) {
+            // デフォルトの動作をさせない
+            event.preventDefault();
+        }
+    }
 
     return (
         <>
@@ -24,12 +35,27 @@ const App = () => {
                     justifyContent: "center",
                     alignItems: "center"
                 }}>
-                    <PanZoomComponent focusedNumSetter={setFocusedNum}/>
+                    <PanZoomComponent storePaneInfoSetter={setStorePaneInfo}/>
                 </div>
-                {focusedNum != null && <StyledFixedBox focusedNumSetter={setFocusedNum}>
-                    {focusedNum}
-                </StyledFixedBox>}
+                {storePaneInfo != null &&
+                    <StorePane storePaneInfoSetter={setStorePaneInfo} storePaneInfo={storePaneInfo}/>}
 
+                <div style={{
+                    position: "fixed",
+                    right: 0,
+                    bottom: 0,
+                    width: "50%",
+                    height: "15%",
+                    zIndex: 300,
+
+                }}>
+                    <Image src={"/img/congestion_list2.webp"} alt={"congestion_list"} fill
+                           style={{
+                               objectFit: "contain",
+                               width: "100%",
+                               pointerEvents: "none",
+                           }}/>
+                </div>
             </div>
         </>
     );

@@ -1,0 +1,17 @@
+[
+  {
+    "areaNum": 1,
+    "storeName": "たかやまの丸焼き",
+    "food": "肉巻き"
+  },
+  {
+    "areaNum": 2,
+    "storeName": "はやとんじる",
+    "food": "豚汁"
+  },
+  {
+    "areaNum": 3,
+    "storeName": "いべぢたぶる",
+    "food": "サラダ"
+  }
+]

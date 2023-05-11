@@ -1,0 +1,17 @@
+[
+  {
+    "areaNum": 1,
+    "congestion": 1,
+    "updateTime": "22:32"
+  },
+  {
+    "areaNum": 2,
+    "congestion": 1,
+    "updateTime": "10:40"
+  },
+  {
+    "areaNum": 3,
+    "congestion": 3,
+    "updateTime": "12:10"
+  }
+]
