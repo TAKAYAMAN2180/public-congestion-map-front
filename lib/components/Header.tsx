@@ -48,9 +48,21 @@ const Header: FC = () => {
                             </Box>
                             {/*//TODO:この幅に応じて表示させる画像を変化させる*/}
                             <Box sx={{height: 70, flexGrow: 1}}>
-                                <div style={{height: "auto", margin: "11px 0px"}}>
+                                <div style={{
+                                    height: "100%",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center"
+                                }}>
                                     <Image src={"/img/header2.webp"} alt={"Header_Image"} height={48} width={380}
-                                           style={{display: "block", margin: "0 auto"}}/>
+                                           sizes="100vw"
+                                           style={{
+                                               display: "block",
+                                               margin: "0 auto",
+                                               objectFit: "contain",
+                                               width: '100%',
+                                               height: 'auto',
+                                           }}/>
                                 </div>
                             </Box>
                             <Box sx={{height: "100%", width: "auto", flexGrow: 0}}>
