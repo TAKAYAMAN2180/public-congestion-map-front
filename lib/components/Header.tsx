@@ -13,14 +13,17 @@ const Header: FC = () => {
     const [isListOpen, setIsListOpen] = useState<boolean>(false);
     const [isSearchBoxOpen, setIsSearchBoxOpen] = useState<boolean>(false);
 
-    const handleSearchIconClicked = (event: any) => {
-        event.preventDefault();
+    const handleSearchIconClicked = () => {
         setIsListOpen(false);
         setIsSearchBoxOpen(true);
     }
 
-    const handleCloseIconClicked = (event: any) => {
-        event.preventDefault();
+    const handleMenuClicked = () => {
+        setIsSearchBoxOpen(false);
+        setIsListOpen(true);
+    }
+
+    const handleCloseIconClicked = () => {
         setIsListOpen(false);
         setIsSearchBoxOpen(false);
     }
@@ -43,7 +46,15 @@ const Header: FC = () => {
                                     aria-haspopup="true"
                                     color="inherit"
                                 >
-                                    <Hamburger toggled={isListOpen} toggle={setIsListOpen} size={20}/>
+                                    <Hamburger toggled={isListOpen} size={20} onToggle={toggled => {
+                                        if (toggled) {
+                                            // open a menu
+                                            handleMenuClicked();
+                                        } else {
+                                            // close a menu
+                                            handleCloseIconClicked();
+                                        }
+                                    }}/>
                                 </IconButton>
                             </Box>
                             {/*//TODO:この幅に応じて表示させる画像を変化させる*/}
