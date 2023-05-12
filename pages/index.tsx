@@ -14,9 +14,7 @@ const App = () => {
     }, []);
 
     function mobile_no_scroll(event: any) {
-        // ２本指での操作の場合
         if (event.touches.length >= 2) {
-            // デフォルトの動作をさせない
             event.preventDefault();
         }
     }

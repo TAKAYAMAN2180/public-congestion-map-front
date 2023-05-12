@@ -4,21 +4,19 @@ import {styled} from '@mui/system';
 
 
 const CustomTextField = styled(TextField)`
-  background-color: rgba(256,256,256,0.7);
-  
-  
-  
+  background-color: rgba(256,256,256,0.9);
+     
   & .MuiInputBase-root {
-    color: #ffffff; // 例: #ff9800;
+    color: #000000; // 例: #ff9800;
   }
 
   & .MuiInputLabel-root {
     color: black; // 例: #ff9800;
-    margin-left: 9rem;
+    margin-left: 8.5rem;
   }
 
   & .MuiInput-underline:before {
-    border-bottom-color: #ffffff; // 例: #ff9800;
+    border-bottom-color: #000000; // 例: #ff9800;
   }
 `;
 

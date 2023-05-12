@@ -1,9 +1,7 @@
-import React, {Dispatch, FC, ReactNode, SetStateAction, useCallback, useEffect, useRef, useState} from 'react';
+import React, {Dispatch, FC,  SetStateAction,  useRef, useState} from 'react';
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
-
 import {useWindowSize} from "../hooks/useWindowSize";
 import congestionDataSample from "../../public/data/congestionDataSample.json";
-
 import CongestionType from "../type/CongestionType";
 import StorePaneInfoType from "../type/StorePaneInfoType";
 
@@ -13,7 +11,6 @@ import StorePaneInfoType from "../type/StorePaneInfoType";
 
 /*ここの横幅を1000として考える。この1000と比べて何倍になっているかで計算*/
 // 横幅のbaseを100として考える。
-//
 
 const points = [
     {areaNum: 1, x: 500, y: 500},
