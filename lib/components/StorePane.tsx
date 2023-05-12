@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Box} from "@mui/material";
+import {Box, Grow} from "@mui/material";
 import {Dispatch, FC, ReactNode, SetStateAction, useEffect, useState} from "react";
 import Image from "next/image";
 import CancelBtn from "./CancelBtn";
@@ -9,8 +9,9 @@ import StorePaneInfoType from "../type/StorePaneInfoType";
 
 type Props = {
     children?: ReactNode;
-    storePaneInfoSetter: Dispatch<SetStateAction<StorePaneInfoType | null>>
     storePaneInfo: StorePaneInfoType;
+    visible: boolean;
+    visibleSetter: Dispatch<SetStateAction<boolean>>
 };
 
 
@@ -43,8 +44,8 @@ const StoreDescDiv = ({title, desc}: StoreDescProps) => {
     );
 }
 
-const StorePane = ({children, storePaneInfoSetter, storePaneInfo}: Props) => {
-    const [storeInfo, setStoreInfo] = useState<StoresInfoType | null>(null);
+const StorePane = ({children, storePaneInfo, visibleSetter, visible}: Props) => {
+    const [storeInfo, setStoreInfo] = useState<StoresInfoType>();
 
     useEffect(() => {
         const getStoreInfo = storesInfoData.find((storeInfo) => storeInfo.areaNum == storePaneInfo.focusedNum);
@@ -58,25 +59,26 @@ const StorePane = ({children, storePaneInfoSetter, storePaneInfo}: Props) => {
 
     const handleIconClicked = (event: any) => {
         event.preventDefault();
-        storePaneInfoSetter(null);
+        visibleSetter(false);
     }
 
 
     return (
-        <div style={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            zIndex: 400,
-        }}>
-            <FixedBox sx={{boxShadow: 3}} borderRadius={3}>
-                <CancelBtn onClick={handleIconClicked}/>
+        <Grow in={visible}>
+            <div style={{
+                position: "fixed",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                zIndex: 400,
+            }}>
+                <FixedBox sx={{boxShadow: 3}} borderRadius={3}>
+                    <CancelBtn onClick={handleIconClicked}/>
 
-                <div style={{textAlign: "center",pointerEvents: "none"}}>
-                    <Image src={`/img/marks/congestion${storePaneInfo.congestionLevel}.webp`}
-                           alt={"congestion_level"} height={32} width={32}/>
-                    <span style={{fontSize: "2rem", marginLeft: "1rem"}}>
+                    <div style={{textAlign: "center", pointerEvents: "none"}}>
+                        <Image src={`/img/marks/congestion${storePaneInfo.congestionLevel}.webp`}
+                               alt={"congestion_level"} height={32} width={32}/>
+                        <span style={{fontSize: "2rem", marginLeft: "1rem"}}>
                          {(() => {
                              switch (storePaneInfo.congestionLevel) {
                                  case 0:
@@ -90,13 +92,14 @@ const StorePane = ({children, storePaneInfoSetter, storePaneInfo}: Props) => {
                              }
                          })()}
                             </span>
-                </div>
-                <StoreDescDiv title={"区画番号"} desc={storeInfo?.areaNum}/>
-                <StoreDescDiv title={"販売品目"} desc={storeInfo?.food}/>
-                <StoreDescDiv title={"店舗名"} desc={storeInfo?.storeName}/>
+                    </div>
+                    <StoreDescDiv title={"区画番号"} desc={storeInfo?.areaNum}/>
+                    <StoreDescDiv title={"販売品目"} desc={storeInfo?.food}/>
+                    <StoreDescDiv title={"店舗名"} desc={storeInfo?.storeName}/>
 
-            </FixedBox>
-        </div>
+                </FixedBox>
+            </div>
+        </Grow>
     )
 }
 

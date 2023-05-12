@@ -8,10 +8,17 @@ import Image from "next/image";
 
 const App = () => {
     const [storePaneInfo, setStorePaneInfo] = useState<StorePaneInfoType | null>(null);
+    const [isStorePaneVisible, setIsStorePaneVisible] = useState<boolean>(false);
 
     useEffect(() => {
         document.addEventListener("touchmove", mobile_no_scroll, {passive: false});
     }, []);
+
+    useEffect(() => {
+        if (storePaneInfo != null) {
+            setIsStorePaneVisible(true);
+        }
+    }, [storePaneInfo])
 
     function mobile_no_scroll(event: any) {
         if (event.touches.length >= 2) {
@@ -35,8 +42,12 @@ const App = () => {
                 }}>
                     <PanZoomComponent storePaneInfoSetter={setStorePaneInfo}/>
                 </div>
+
                 {storePaneInfo != null &&
-                    <StorePane storePaneInfoSetter={setStorePaneInfo} storePaneInfo={storePaneInfo}/>}
+                    <StorePane visible={isStorePaneVisible}
+                               visibleSetter={setIsStorePaneVisible}
+                               storePaneInfo={storePaneInfo}/>
+                }
 
                 <div style={{
                     position: "fixed",
