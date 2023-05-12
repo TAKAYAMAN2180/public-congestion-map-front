@@ -10,25 +10,16 @@ import {
     Toolbar
 } from "@mui/material";
 import theme from "../theme";
-import MenuIcon from "@mui/icons-material/Menu";
-import React, {FC, MutableRefObject, useState} from "react";
+import React, {FC, useState} from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import MenuDrawer from "./MenuDrawer";
 import SearchDrawer from "./SearchDrawer";
 import SearchIcon from "../../public/img/store-search.svg";
-import {useWindowSize} from "../hooks/useWindowSize";
 import Hamburger from 'hamburger-react'
 
 const Header: FC = () => {
     const [isListOpen, setIsListOpen] = useState<boolean>(false);
     const [isSearchBoxOpen, setIsSearchBoxOpen] = useState<boolean>(false);
-    const [screenHookWidth, screenHookHeight] = useWindowSize();
-
-    const handleMenuIconClicked = (event: any) => {
-        event.preventDefault();
-        setIsSearchBoxOpen(false);
-        setIsListOpen(true);
-    }
 
     const handleSearchIconClicked = (event: any) => {
         event.preventDefault();
@@ -65,7 +56,7 @@ const Header: FC = () => {
                                          style={{height: "90%", width: "100%", objectFit: "contain"}}/>
                                 </div>
                             </Box>
-                            <Box sx={{height: "100%", width: "auto", flexGrow: 0,padding: "6px 0"}}>
+                            <Box sx={{height: "100%", width: "auto", flexGrow: 0, padding: "6px 0"}}>
                                 {isSearchBoxOpen ?
                                     <IconButton
                                         size="large"

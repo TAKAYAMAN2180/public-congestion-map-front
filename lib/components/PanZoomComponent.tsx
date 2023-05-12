@@ -5,13 +5,6 @@ import congestionDataSample from "../../public/data/congestionDataSample.json";
 import CongestionType from "../type/CongestionType";
 import StorePaneInfoType from "../type/StorePaneInfoType";
 
-/*最初に形を会わないのは開発者モードのときのみ*/
-//TODO:画面がリサイズされたらリセットされるようにする
-//TODO:画面が横→縦になるとバグるエラーを解決
-
-/*ここの横幅を1000として考える。この1000と比べて何倍になっているかで計算*/
-// 横幅のbaseを100として考える。
-
 const points = [
     {areaNum: 1, x: 500, y: 500},
     {areaNum: 2, x: 600, y: 600},
@@ -32,8 +25,6 @@ type Props = {
 
 const PanZoomComponent: FC<Props> = ({storePaneInfoSetter}: Props) => {
     const [screenHookWidth, screenHookHeight] = useWindowSize();
-
-    const [scale, setScale] = useState<number>(1);
 
     const congestionsInfo: CongestionType[] = congestionDataSample;
 
@@ -91,10 +82,10 @@ const PanZoomComponent: FC<Props> = ({storePaneInfoSetter}: Props) => {
         const {leftXBoarder, rightXBoarder, topYBoarder, bottomYBoarder} = getBoarders(scale);
         //alert(`x:${positionX}, y:${positionY}, scale: ${scale}, screenHeight: ${innerHeightSize},screenWidth: ${innerWidthSize}`);
         if (scale < 1) {
-            setScale(1);
+
             //デフォルトの機能で戻ってくれる
         } else {
-            setScale(scale);
+
             if (positionX > leftXBoarder && positionY > topYBoarder) {
                 //console.log("should move 左上");
                 movableRef.current.setTransform(leftXBoarder, topYBoarder, scale);

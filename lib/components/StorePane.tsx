@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import {Box, IconButton} from "@mui/material";
+import {Box} from "@mui/material";
 import {Dispatch, FC, ReactNode, SetStateAction, useEffect, useState} from "react";
-import CancelIcon from '@mui/icons-material/Cancel';
 import Image from "next/image";
 import CancelBtn from "./CancelBtn";
 import StoresInfoType from "../type/StoresInfoType";
