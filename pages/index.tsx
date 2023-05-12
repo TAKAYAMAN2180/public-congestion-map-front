@@ -56,7 +56,7 @@ const App = () => {
                     width: "50%",
                     height: "15%",
                     zIndex: 300,
-
+                    pointerEvents: "none",
                 }}>
                     <Image src={"/img/congestion_list2.webp"} alt={"congestion_list"} fill
                            style={{

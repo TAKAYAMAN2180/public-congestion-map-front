@@ -66,7 +66,7 @@ const Header: FC = () => {
                                     alignItems: "center"
                                 }}>
                                     <Image src={"/img/header2.webp"} alt={"Header_Image"} height={48} width={380}
-                                           sizes="100vw"
+                                           sizes="100vw" priority
                                            style={{
                                                display: "block",
                                                margin: "0 auto",
