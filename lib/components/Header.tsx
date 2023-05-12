@@ -17,6 +17,7 @@ import MenuDrawer from "./MenuDrawer";
 import SearchDrawer from "./SearchDrawer";
 import SearchIcon from "../../public/img/store-search.svg";
 import {useWindowSize} from "../hooks/useWindowSize";
+import Hamburger from 'hamburger-react'
 
 const Header: FC = () => {
     const [isListOpen, setIsListOpen] = useState<boolean>(false);
@@ -47,41 +48,29 @@ const Header: FC = () => {
                 <AppBar position="fixed" sx={{padding: 0, zIndex: 1000, height: "70px"}}>
                     <Toolbar sx={{padding: 1}}>
                         <Box sx={{display: "flex", width: "100%"}}>
-                            <Box sx={{height: "100%", width: 48, flexGrow: 0}}>
-                                {isListOpen ?
-                                    <IconButton
-                                        size="large"
-                                        aria-controls="menu-appbar"
-                                        aria-haspopup="true"
-                                        onClick={handleCloseIconClicked}
-                                        color="inherit"
-                                    >
-                                        <CloseIcon/>
-                                    </IconButton> : <IconButton
-                                        size="large"
-                                        aria-label="account of current user"
-                                        aria-controls="menu-appbar"
-                                        aria-haspopup="true"
-                                        onClick={handleMenuIconClicked}
-                                        color="inherit"
-                                    >
-                                        <MenuIcon/>
-                                    </IconButton>}
+                            <Box sx={{height: "100%", width: "auto", flexGrow: 0}}>
+                                <IconButton
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    color="inherit"
+                                >
+                                    <Hamburger toggled={isListOpen} toggle={setIsListOpen} size={20}/>
+                                </IconButton>
                             </Box>
                             {/*//TODO:この幅に応じて表示させる画像を変化させる*/}
                             <Box sx={{height: "auto", flexGrow: 1}}>
-                                <div style={{display: "flex", justifyContent: "center", height: 48}}>
+                                <div style={{display: "flex", justifyContent: "center", height: 60}}>
                                     {/*<div style={{display: "block", height: "100%"}}></div>*/}
                                     <img src={"/img/header2.webp"} alt={"Header Image"} placeholder={"blur"}
-                                         style={{height: "100%", width: "100%", objectFit: "contain"}}/>
+                                         style={{height: "90%", width: "100%", objectFit: "contain"}}/>
                                 </div>
                             </Box>
-                            <Box sx={{height: "100%", width: 48, flexGrow: 0}}>
+                            <Box sx={{height: "100%", width: "auto", flexGrow: 0,padding: "6px 0"}}>
                                 {isSearchBoxOpen ?
                                     <IconButton
                                         size="large"
                                         aria-label="account of current user"
-                                        aria-controls="menu-appbar"
+                                        aria-controls="search-appbar"
                                         aria-haspopup="true"
                                         onClick={handleCloseIconClicked}
                                         color="inherit"
