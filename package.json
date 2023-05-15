@@ -14,6 +14,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.1",
     "@svgr/webpack": "^7.0.0",
+    "algoliasearch": "^4.17.0",
     "core-js": "^3.30.1",
     "hamburger-react": "^2.5.0",
     "next": "13.3.0",

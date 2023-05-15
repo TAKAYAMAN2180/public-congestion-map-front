@@ -21,11 +21,12 @@ const FixedBox = styled(Box)`
   bottom: 0;
   left: 0;
   right: 0;
-  margin: 20px;
+  margin: 20px auto;
   padding: 5px;
   opacity: 0.92;
   background-color: #ffffff; // お好みの背景色に変更
-  max-width: 500px;
+  width: 95%;
+  max-width: 550px;
 `;
 
 type StoreDescProps = {
@@ -47,7 +48,7 @@ const StorePane = ({storePaneInfo, visibleSetter, visible}: Props) => {
     const [storeInfo, setStoreInfo] = useState<StoresInfoType>();
 
     useEffect(() => {
-        const getStoreInfo = storesInfoData.find((storeInfo) => storeInfo.areaNum == storePaneInfo.focusedNum);
+        const getStoreInfo = storesInfoData.find((storeInfo) => storeInfo.areaNum == storePaneInfo.focusedAreaNum);
         if (getStoreInfo == null) {
             window.alert("存在しない区画番号が参照されています");
         } else {
@@ -77,7 +78,7 @@ const StorePane = ({storePaneInfo, visibleSetter, visible}: Props) => {
                     <div style={{textAlign: "center", pointerEvents: "none"}}>
                         <Image src={`/img/marks/congestion${storePaneInfo.congestionLevel}.webp`}
                                alt={"congestion_level"} height={32} width={32}/>
-                        <span style={{fontSize: "2rem", marginLeft: "1rem"}}>
+                        <span style={{fontSize: "1.7rem", marginLeft: "1rem",fontWeight: "bold"}}>
                          {(() => {
                              switch (storePaneInfo.congestionLevel) {
                                  case 0:

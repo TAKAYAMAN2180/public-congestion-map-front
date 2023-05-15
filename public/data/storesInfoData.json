@@ -13,5 +13,20 @@
     "areaNum": 3,
     "storeName": "いべぢたぶる",
     "food": "サラダ"
+  },
+  {
+    "areaNum": 4,
+    "storeName": "ふぇすじんじゃー",
+    "food": "ジンジャーエール"
+  },
+  {
+    "areaNum": 5,
+    "storeName": "さいじんぎすかん",
+    "food": "ジンギスカン"
+  },
+  {
+    "areaNum": 6,
+    "storeName": "ビリーの焼肉",
+    "food": "肉巻き"
   }
 ]

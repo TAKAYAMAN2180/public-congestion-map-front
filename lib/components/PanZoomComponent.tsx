@@ -1,14 +1,20 @@
-import React, {Dispatch, FC,  SetStateAction,  useRef, useState} from 'react';
+import React, {Dispatch, FC, SetStateAction, useRef, useState} from 'react';
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
 import {useWindowSize} from "../hooks/useWindowSize";
-import congestionDataSample from "../../public/data/congestionDataSample.json";
-import CongestionType from "../type/CongestionType";
+import StoresInfoType from "../type/StoresInfoType";
 import StorePaneInfoType from "../type/StorePaneInfoType";
 
+import congestionDataSample from "../../public/data/congestionDataSample.json";
+import CongestionDataType from "../type/CongestionDataType";
+
+//TODO:座標のデータを入れたものを作る
 const points = [
     {areaNum: 1, x: 500, y: 500},
     {areaNum: 2, x: 600, y: 600},
     {areaNum: 3, x: 700, y: 700},
+    {areaNum: 4, x: 850, y: 350},
+    {areaNum: 5, x: 900, y: 350},
+    {areaNum: 6, x: 950, y: 350},
 ];
 
 type Borders = {
@@ -20,25 +26,27 @@ type Borders = {
 
 type Props = {
     storePaneInfoSetter: Dispatch<SetStateAction<StorePaneInfoType | null>>
+    targetStoresInfo: StoresInfoType[];
 };
 
 
-const PanZoomComponent: FC<Props> = ({storePaneInfoSetter}: Props) => {
+const PanZoomComponent: FC<Props> = ({storePaneInfoSetter,targetStoresInfo}: Props) => {
     const [screenHookWidth, screenHookHeight] = useWindowSize();
-
-    const congestionsInfo: CongestionType[] = congestionDataSample;
-
     const movableRef = useRef<any>(null);
     const imgRef = useRef<HTMLImageElement | null>(null);
     const divRef = useRef<HTMLDivElement | null>(null);
 
+    const storesInfoData: StoresInfoType[] = targetStoresInfo;
+    const congestionData: CongestionDataType[] = congestionDataSample;
+
+
     const handleImgClicked = (index: number, congestionLevel: 0 | 1 | 2 | 3) => {
-        const value: StorePaneInfoType = {
-            focusedNum: index,
+        const storePaneInfoTemp: StorePaneInfoType = {
+            focusedAreaNum: index,
             congestionLevel: congestionLevel
         };
 
-        storePaneInfoSetter(value);
+        storePaneInfoSetter(storePaneInfoTemp);
     }
 
     const getBoarders = (scale: number): Borders => {
@@ -172,17 +180,18 @@ const PanZoomComponent: FC<Props> = ({storePaneInfoSetter}: Props) => {
                                 pointerEvents: "none",
                             }}
                         >
-                            {congestionsInfo.map((value) => {
+                            {storesInfoData.map((value) => {
                                     const point = points.find((temp) => temp.areaNum == value.areaNum)
-                                    if (!point) {
+                                    const eachCongestion = congestionData.find((temp) => temp.areaNum == value.areaNum)
+                                    if (!point||!eachCongestion) {
                                         return null;
                                     } else {
                                         return (
                                             // Imageタグにすると画質が劣化するので、imgタグで対応
-                                            <img src={`/img/marks/congestion${value.congestion}.webp`} alt={"busy"}
+                                            <img src={`/img/marks/congestion${eachCongestion.congestion}.webp`} alt={"busy"}
                                                  key={value.areaNum}
                                                  onClick={() => {
-                                                     const myZeroToThree: 0|1|2|3 = value.congestion as 0|1|2|3;
+                                                     const myZeroToThree: 0 | 1 | 2 | 3 = eachCongestion.congestion as 0 | 1 | 2 | 3;
                                                      handleImgClicked(value.areaNum, myZeroToThree);
                                                  }}
                                                  width={(25 / 1000) * screenHookHeight}
@@ -193,7 +202,9 @@ const PanZoomComponent: FC<Props> = ({storePaneInfoSetter}: Props) => {
                                                      top: `${(screenHookHeight / 1000) * point?.y}px`,
                                                      left: `${(screenHookHeight / 1000) * point?.x}px`,
                                                      zIndex: 1,
-                                                     pointerEvents: "auto"
+                                                     boxShadow: "0 0 4px gray",
+                                                     pointerEvents: "auto",
+                                                     borderRadius: "50%"
                                                  }}
                                             />
                                         );

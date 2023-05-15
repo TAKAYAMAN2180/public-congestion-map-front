@@ -1,15 +1,20 @@
 import {AppBar, Box, IconButton, ThemeProvider, Toolbar} from "@mui/material";
-import theme from "../theme";
-import React, {FC, useState} from "react";
+import theme from "../style/theme";
+import React, {Dispatch, FC, SetStateAction, useState} from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import MenuDrawer from "./MenuDrawer";
 import SearchDrawer from "./SearchDrawer";
 import SearchIcon from "../../public/img/store-search.svg";
 import Hamburger from 'hamburger-react';
-import Image from "next/image";
+
+import StoresInfoType from "../type/StoresInfoType";
+
+type Props = {
+    setStoresInfo: Dispatch<SetStateAction<StoresInfoType[]>>;
+}
 
 
-const Header: FC = () => {
+const Header: FC<Props> = ({setStoresInfo}: Props) => {
     const [isListOpen, setIsListOpen] = useState<boolean>(false);
     const [isSearchBoxOpen, setIsSearchBoxOpen] = useState<boolean>(false);
 
@@ -61,23 +66,17 @@ const Header: FC = () => {
                             <Box sx={{height: 70, flexGrow: 1}}>
                                 <div style={{
                                     height: "100%",
+                                    width: "100%",
                                     display: "flex",
                                     justifyContent: "center",
                                     alignItems: "center"
                                 }}>
-                                    <Image src={"/img/header2.webp"} alt={"Header_Image"} height={48} width={380}
-                                           sizes="100vw" priority
-                                           style={{
-                                               display: "block",
-                                               margin: "0 auto",
-                                               objectFit: "contain",
-                                               width: '100%',
-                                               height: 'auto',
-                                           }}/>
+                                    <img src={"/img/header2.webp"} alt={"Header Image"} placeholder={"blur"}
+                                         style={{height: "90%", width: "100%", objectFit: "contain"}}/>
                                 </div>
                             </Box>
                             <Box sx={{height: "100%", width: "auto", flexGrow: 0}}>
-                                <div style={{height: "auto", margin: "6px 0"}}>
+                                <div style={{height: "auto", margin: "6px"}}>
                                     {isSearchBoxOpen ?
                                         <IconButton
                                             size="large"
@@ -106,7 +105,7 @@ const Header: FC = () => {
                     </Toolbar>
                 </AppBar>
                 <MenuDrawer {...{isListOpen, handleCloseIconClicked}}/>
-                <SearchDrawer {...{isSearchBoxOpen, handleCloseIconClicked}}/>
+                <SearchDrawer {...{isSearchBoxOpen, handleCloseIconClicked, setStoresInfo}}/>
             </ThemeProvider>
         </>
     );

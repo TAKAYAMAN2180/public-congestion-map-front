@@ -13,5 +13,21 @@
     "areaNum": 3,
     "congestion": 3,
     "updateTime": "12:10"
-  }
+  },
+  {
+    "areaNum": 4,
+    "congestion": 2,
+    "updateTime": "12:10"
+  },
+  {
+    "areaNum": 5,
+    "congestion": 1,
+    "updateTime": "12:10"
+  },
+  {
+  "areaNum": 6,
+  "congestion": 2,
+  "updateTime": "12:10"
+}
+
 ]

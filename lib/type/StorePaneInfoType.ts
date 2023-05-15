@@ -1,5 +1,5 @@
 type StorePaneInfoType = {
-    focusedNum: number,
+    focusedAreaNum: number,
     congestionLevel: 0 | 1 | 2 | 3;
 }
 

@@ -1,16 +1,20 @@
-import {Box, IconButton, ThemeProvider} from "@mui/material";
-import React, {useState} from "react";
+import {Backdrop, Box, CircularProgress, IconButton, InputAdornment, ThemeProvider} from "@mui/material";
+import React, {Dispatch, SetStateAction, useState} from "react";
 import StyledDrawer from "../style/StyledDrawer";
 import CustomTextField from "../style/CustomTextField";
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import InputAdornment from '@mui/material/InputAdornment';
 import {createTheme} from "@mui/material/styles";
 import SearchIcon from '@mui/icons-material/Search';
+import search from "../search"
+import StoresInfoType from "../type/StoresInfoType";
+import initStoresInfoData from "../../public/data/storesInfoData.json";
+import CancelBtn from "./CancelBtn";
+import {margin} from "@mui/system";
+
 
 type Props = {
     isSearchBoxOpen: boolean;
     handleCloseIconClicked: (event: any) => void;
+    setStoresInfo: Dispatch<SetStateAction<StoresInfoType[]>>;
 }
 
 const subTheme = createTheme({
@@ -21,11 +25,35 @@ const subTheme = createTheme({
     }
 });
 
+function reformat(arg: any[]): StoresInfoType[] {
+    return arg.map(({areaNum, storeName, food}) => ({areaNum, storeName, food}));
+}
+
+
 //TODO:ここを対象に拡大すると表示がおかしくなるのを解消
 
-const SearchDrawer = ({isSearchBoxOpen, handleCloseIconClicked}: Props) => {
-    const [value, setValue] = useState<number>();
+const SearchDrawer = ({isSearchBoxOpen, handleCloseIconClicked, setStoresInfo}: Props) => {
+    const [textFieldValue, setTextFieldValue] = useState<string>("");
+    const [preTextFieldValue, setPreTextFieldValue] = useState<string>("");
 
+    const resetStoresInfo = () => {
+        setStoresInfo(initStoresInfoData);
+    }
+
+    const handleSearchBtnClick = async () => {
+        if (textFieldValue === preTextFieldValue) {
+            return;
+        } else {
+            setPreTextFieldValue(textFieldValue);
+            if (textFieldValue === "") {
+                resetStoresInfo();
+            } else {
+                let getData = await search(textFieldValue);
+                getData = reformat(getData);
+                setStoresInfo(getData);
+            }
+        }
+    }
 
     return (
         <>
@@ -37,9 +65,12 @@ const SearchDrawer = ({isSearchBoxOpen, handleCloseIconClicked}: Props) => {
                 <div style={{height: 70}}/>
                 <Box sx={{padding: 1, display: "flex", justifyContent: "right", height: 70, width: "auto"}}>
                     <ThemeProvider theme={subTheme}>
-                        <CustomTextField
+                        {/*<CustomTextField
                             id="input-with-icon-textfield"
                             label="キーワードを入力..."
+                            onChange={(event) => {
+                                setTextFieldValue(event.currentTarget.value);
+                            }}
 
                             InputProps={{
                                 startAdornment: (
@@ -54,20 +85,45 @@ const SearchDrawer = ({isSearchBoxOpen, handleCloseIconClicked}: Props) => {
                                             }}
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                            value={value}
+                                            value={selectorValue}
+                                            onChange={(event) => {
+                                                setSelectorValue(event.target.value);
+                                            }}
                                         >
-                                            <MenuItem value={10}>店舗名</MenuItem>
-                                            <MenuItem value={20}>販売品目</MenuItem>
+                                            <MenuItem value={"storeName"}>店舗名</MenuItem>
+                                            <MenuItem value={"food"}>販売品目</MenuItem>
                                         </Select>
                                     </InputAdornment>
                                 ),
                             }}
                             variant="filled"
+                        />*/}
+                        <CustomTextField
+                            id="input-with-icon-textfield"
+                            label="キーワードを入力..."
+                            onChange={(event) => {
+                                setTextFieldValue(event.currentTarget.value);
+                            }}
+                            value={textFieldValue}
+                            variant="filled"
+
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <CancelBtn onClick={() => {
+                                            resetStoresInfo();
+                                            setTextFieldValue("");
+                                        }}/>
+                                    </InputAdornment>
+                                ),
+                            }}
                         />
                     </ThemeProvider>
                     <div style={{backgroundColor: "rgba(223,223,223,255)"}}>
                         <IconButton
                             aria-label={"search"}
+                            onClick={handleSearchBtnClick}
+
                             sx={{
                                 margin: "7px 5px",
                                 width: 42,

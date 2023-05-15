@@ -5,20 +5,40 @@ import HEAD from "next/head"
 import StorePane from "../lib/components/StorePane";
 import StorePaneInfoType from "../lib/type/StorePaneInfoType";
 import Image from "next/image";
+import initStoresInfoData from "../public/data/storesInfoData.json";
+import StoresInfoType from "../lib/type/StoresInfoType";
+
+
+type Position = {
+    latitude: number | null,
+    longitude: number | null
+}
 
 const App = () => {
     const [storePaneInfo, setStorePaneInfo] = useState<StorePaneInfoType | null>(null);
     const [isStorePaneVisible, setIsStorePaneVisible] = useState<boolean>(false);
+    const [position, setPosition] = useState<Position>({latitude: null, longitude: null});
+    const [storesInfo, setStoresInfo] = useState<StoresInfoType[]>(initStoresInfoData);
 
     useEffect(() => {
         document.addEventListener("touchmove", mobile_no_scroll, {passive: false});
+        navigator.geolocation.getCurrentPosition(position => {
+            const {latitude, longitude} = position.coords;
+            setPosition({latitude, longitude});
+        });
+
+
     }, []);
 
     useEffect(() => {
         if (storePaneInfo != null) {
             setIsStorePaneVisible(true);
         }
-    }, [storePaneInfo])
+    }, [storePaneInfo]);
+
+    useEffect(() => {
+        setIsStorePaneVisible(false);
+    }, [storesInfo]);
 
     function mobile_no_scroll(event: any) {
         if (event.touches.length >= 2) {
@@ -33,20 +53,20 @@ const App = () => {
             </HEAD>
 
             <div style={{msOverflowStyle: "none"}}>
-                <Header/>
+                <Header {...{setStoresInfo}}/>
                 <div style={{
                     width: "100%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center"
                 }}>
-                    <PanZoomComponent storePaneInfoSetter={setStorePaneInfo}/>
+                    <PanZoomComponent storePaneInfoSetter={setStorePaneInfo} targetStoresInfo={storesInfo}/>
                 </div>
 
                 {storePaneInfo != null &&
                     <StorePane visible={isStorePaneVisible}
                                visibleSetter={setIsStorePaneVisible}
-                               storePaneInfo={storePaneInfo}/>
+                               {...{storePaneInfo}}/>
                 }
 
                 <div style={{
@@ -58,6 +78,7 @@ const App = () => {
                     zIndex: 300,
                     pointerEvents: "none",
                 }}>
+
                     <Image src={"/img/congestion_list2.webp"} alt={"congestion_list"} fill
                            style={{
                                objectFit: "contain",
