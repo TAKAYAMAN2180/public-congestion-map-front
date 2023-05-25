@@ -162,7 +162,7 @@ const PanZoomComponent: FC<Props> = ({storePaneInfoSetter,targetStoresInfo}: Pro
                         <img
                             ref={imgRef}
                             height={screenHookHeight}
-                            src="/img/campusMap.svg"
+                            src="/img/0522-campusMap.svg"
                             //src="https://cdn.pixabay.com/photo/2015/02/24/15/41/dog-647528__340.jpg"
                             alt="test 2"
                             // style={{border: "10px solid red", boxSizing: "border-box"}}
