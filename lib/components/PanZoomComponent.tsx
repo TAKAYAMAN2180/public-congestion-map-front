@@ -2,7 +2,6 @@ import React, {Dispatch, FC, SetStateAction, useRef, useState} from 'react';
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
 import {useWindowSize} from "../hooks/useWindowSize";
 import StoresInfoType from "../type/StoresInfoType";
-import StorePaneInfoType from "../type/StorePaneInfoType";
 
 import congestionDataSample from "../../public/data/congestionDataSample.json";
 import CongestionDataType from "../type/CongestionDataType";
