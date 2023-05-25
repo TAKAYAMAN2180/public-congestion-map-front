@@ -7,6 +7,7 @@ import StorePaneInfoType from "../lib/type/StorePaneInfoType";
 import Image from "next/image";
 import initStoresInfoData from "../public/data/storesInfoData.json";
 import StoresInfoType from "../lib/type/StoresInfoType";
+import CongestionDataType from "../lib/type/CongestionDataType";
 
 
 type Position = {
@@ -15,7 +16,7 @@ type Position = {
 }
 
 const App = () => {
-    const [storePaneInfo, setStorePaneInfo] = useState<StorePaneInfoType | null>(null);
+    const [congestionData, setCongestionData] = useState<CongestionDataType | null>(null);
     const [isStorePaneVisible, setIsStorePaneVisible] = useState<boolean>(false);
     const [position, setPosition] = useState<Position>({latitude: null, longitude: null});
     const [storesInfo, setStoresInfo] = useState<StoresInfoType[]>(initStoresInfoData);
@@ -31,10 +32,10 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        if (storePaneInfo != null) {
+        if (congestionData != null) {
             setIsStorePaneVisible(true);
         }
-    }, [storePaneInfo]);
+    }, [congestionData]);
 
     useEffect(() => {
         setIsStorePaneVisible(false);
@@ -60,13 +61,13 @@ const App = () => {
                     justifyContent: "center",
                     alignItems: "center"
                 }}>
-                    <PanZoomComponent storePaneInfoSetter={setStorePaneInfo} targetStoresInfo={storesInfo}/>
+                    <PanZoomComponent congestionDataSetter={setCongestionData} targetStoresInfo={storesInfo}/>
                 </div>
 
-                {storePaneInfo != null &&
+                {congestionData != null &&
                     <StorePane visible={isStorePaneVisible}
                                visibleSetter={setIsStorePaneVisible}
-                               {...{storePaneInfo}}/>
+                               {...{congestionData}}/>
                 }
 
                 <div style={{

@@ -1,6 +1,6 @@
 type CongestionDataType = {
     areaNum: number,
-    congestion: number,
+    congestionLevel: number,
     updateTime: string
 };
 

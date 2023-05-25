@@ -25,12 +25,12 @@ type Borders = {
 }
 
 type Props = {
-    storePaneInfoSetter: Dispatch<SetStateAction<StorePaneInfoType | null>>
+    congestionDataSetter: Dispatch<SetStateAction<CongestionDataType | null>>
     targetStoresInfo: StoresInfoType[];
 };
 
 
-const PanZoomComponent: FC<Props> = ({storePaneInfoSetter,targetStoresInfo}: Props) => {
+const PanZoomComponent: FC<Props> = ({congestionDataSetter, targetStoresInfo}: Props) => {
     const [screenHookWidth, screenHookHeight] = useWindowSize();
     const movableRef = useRef<any>(null);
     const imgRef = useRef<HTMLImageElement | null>(null);
@@ -40,13 +40,8 @@ const PanZoomComponent: FC<Props> = ({storePaneInfoSetter,targetStoresInfo}: Pro
     const congestionData: CongestionDataType[] = congestionDataSample;
 
 
-    const handleImgClicked = (index: number, congestionLevel: 0 | 1 | 2 | 3) => {
-        const storePaneInfoTemp: StorePaneInfoType = {
-            focusedAreaNum: index,
-            congestionLevel: congestionLevel
-        };
-
-        storePaneInfoSetter(storePaneInfoTemp);
+    const handleImgClicked = (getCongestionData: CongestionDataType) => {
+        congestionDataSetter(getCongestionData);
     }
 
     const getBoarders = (scale: number): Borders => {
@@ -183,16 +178,16 @@ const PanZoomComponent: FC<Props> = ({storePaneInfoSetter,targetStoresInfo}: Pro
                             {storesInfoData.map((value) => {
                                     const point = points.find((temp) => temp.areaNum == value.areaNum)
                                     const eachCongestion = congestionData.find((temp) => temp.areaNum == value.areaNum)
-                                    if (!point||!eachCongestion) {
+                                    if (!point || !eachCongestion) {
                                         return null;
                                     } else {
                                         return (
                                             // Imageタグにすると画質が劣化するので、imgタグで対応
-                                            <img src={`/img/marks/congestion${eachCongestion.congestion}.webp`} alt={"busy"}
+                                            <img src={`/img/marks/congestion${eachCongestion.congestionLevel}.webp`}
+                                                 alt={"busy"}
                                                  key={value.areaNum}
                                                  onClick={() => {
-                                                     const myZeroToThree: 0 | 1 | 2 | 3 = eachCongestion.congestion as 0 | 1 | 2 | 3;
-                                                     handleImgClicked(value.areaNum, myZeroToThree);
+                                                     handleImgClicked(eachCongestion);
                                                  }}
                                                  width={(25 / 1000) * screenHookHeight}
                                                  height={(25 / 1000) * screenHookHeight}
