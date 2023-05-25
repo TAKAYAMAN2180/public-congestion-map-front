@@ -3,7 +3,6 @@ import PanZoomComponent from "../lib/components/PanZoomComponent";
 import Header from "../lib/components/Header";
 import HEAD from "next/head"
 import StorePane from "../lib/components/StorePane";
-import StorePaneInfoType from "../lib/type/StorePaneInfoType";
 import Image from "next/image";
 import initStoresInfoData from "../public/data/storesInfoData.json";
 import StoresInfoType from "../lib/type/StoresInfoType";
