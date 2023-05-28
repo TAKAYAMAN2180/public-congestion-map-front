@@ -8,13 +8,14 @@ import CongestionDataType from "../type/CongestionDataType";
 import StorePaneType from "../type/StorePaneType";
 
 //TODO:座標のデータを入れたものを作る
+//下のはサンプルデータ
 const points = [
-    {areaNum: 1, x: 500, y: 500},
-    {areaNum: 2, x: 600, y: 600},
-    {areaNum: 3, x: 700, y: 700},
-    {areaNum: 4, x: 850, y: 350},
-    {areaNum: 5, x: 900, y: 350},
-    {areaNum: 6, x: 950, y: 350},
+    {areaNum: 1, x: 1090, y: 450},
+    {areaNum: 2, x: 1090, y: 480},
+    {areaNum: 3, x: 1090, y: 510},
+    {areaNum: 4, x: 950, y: 385},
+    {areaNum: 5, x: 1000, y: 385},
+    {areaNum: 6, x: 1050, y: 385},
 ];
 
 type Borders = {
@@ -133,10 +134,12 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
     const makeCenterFocus = (x: number, y: number) => {
         //console.log(`x-point:${(screenHookHeight / 1000) * point?.x}, y-point:${(screenHookHeight / 1000) * point?.y}`);
 
+        const FOCUS_SCALE = 1.5;
+
         //中央にフォーカスさせる
         movableRef.current.setTransform(
-            -(screenHookHeight / 1000) * x * MAX_SCALE + divRef.current!.clientWidth / 2,
-            -(screenHookHeight / 1000) * y * MAX_SCALE + screenHookHeight / 2, MAX_SCALE);
+            -(screenHookHeight / 1000) * x * FOCUS_SCALE + divRef.current!.clientWidth / 2,
+            -(screenHookHeight / 1000) * y * FOCUS_SCALE + screenHookHeight / 2, FOCUS_SCALE);
     }
 
 
