@@ -7,6 +7,7 @@ import Image from "next/image";
 import initStoresInfoData from "../public/data/storesInfoData.json";
 import StoresInfoType from "../lib/type/StoresInfoType";
 import CongestionDataType from "../lib/type/CongestionDataType";
+import StorePaneType from "../lib/type/StorePaneType";
 
 
 type Position = {
@@ -15,10 +16,9 @@ type Position = {
 }
 
 const App = () => {
-    const [congestionData, setCongestionData] = useState<CongestionDataType | null>(null);
-    const [isStorePaneVisible, setIsStorePaneVisible] = useState<boolean>(false);
     const [position, setPosition] = useState<Position>({latitude: null, longitude: null});
     const [storesInfo, setStoresInfo] = useState<StoresInfoType[]>(initStoresInfoData);
+    const [storePaneData, setStorePaneData] = useState<StorePaneType | null>(null);
 
     useEffect(() => {
         document.addEventListener("touchmove", mobile_no_scroll, {passive: false});
@@ -26,19 +26,7 @@ const App = () => {
             const {latitude, longitude} = position.coords;
             setPosition({latitude, longitude});
         });
-
-
     }, []);
-
-    useEffect(() => {
-        if (congestionData != null) {
-            setIsStorePaneVisible(true);
-        }
-    }, [congestionData]);
-
-    useEffect(() => {
-        setIsStorePaneVisible(false);
-    }, [storesInfo]);
 
     function mobile_no_scroll(event: any) {
         if (event.touches.length >= 2) {
@@ -60,14 +48,13 @@ const App = () => {
                     justifyContent: "center",
                     alignItems: "center"
                 }}>
-                    <PanZoomComponent congestionDataSetter={setCongestionData} targetStoresInfo={storesInfo}/>
+                    <PanZoomComponent storePaneDataSetter={setStorePaneData} targetStoresInfo={storesInfo}
+                                      focusedNum={storePaneData?.areaNum}/>
                 </div>
 
-                {congestionData != null &&
-                    <StorePane visible={isStorePaneVisible}
-                               visibleSetter={setIsStorePaneVisible}
-                               {...{congestionData}}/>
-                }
+                <StorePane handleClosed={(event) => {
+                    setStorePaneData(null);
+                }} {...{storePaneData}}/>
 
                 <div style={{
                     position: "fixed",

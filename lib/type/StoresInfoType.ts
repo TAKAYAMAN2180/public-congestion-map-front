@@ -1,5 +1,7 @@
-export default interface StoresInfoType {
-    areaNum: number;
-    storeName: string;
-    food: string;
-}
+type StoresInfoType= {
+    areaNum: number,
+    storeName: string,
+    food: string
+};
+
+export default StoresInfoType; 

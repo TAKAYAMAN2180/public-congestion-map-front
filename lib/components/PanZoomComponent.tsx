@@ -5,6 +5,7 @@ import StoresInfoType from "../type/StoresInfoType";
 
 import congestionDataSample from "../../public/data/congestionDataSample.json";
 import CongestionDataType from "../type/CongestionDataType";
+import StorePaneType from "../type/StorePaneType";
 
 //TODO:座標のデータを入れたものを作る
 const points = [
@@ -24,12 +25,13 @@ type Borders = {
 }
 
 type Props = {
-    congestionDataSetter: Dispatch<SetStateAction<CongestionDataType | null>>
+    storePaneDataSetter: Dispatch<SetStateAction<StorePaneType | null>>
     targetStoresInfo: StoresInfoType[];
+    focusedNum: number | null | undefined;
 };
 
 
-const PanZoomComponent: FC<Props> = ({congestionDataSetter, targetStoresInfo}: Props) => {
+const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, focusedNum}: Props) => {
     const [screenHookWidth, screenHookHeight] = useWindowSize();
     const movableRef = useRef<any>(null);
     const imgRef = useRef<HTMLImageElement | null>(null);
@@ -38,19 +40,21 @@ const PanZoomComponent: FC<Props> = ({congestionDataSetter, targetStoresInfo}: P
     const storesInfoData: StoresInfoType[] = targetStoresInfo;
     const congestionData: CongestionDataType[] = congestionDataSample;
 
+    const MAX_SCALE = 2.5;
 
-    const handleImgClicked = (getCongestionData: CongestionDataType) => {
-        congestionDataSetter(getCongestionData);
+
+    const handleImgClicked = (getStorePaneData: StorePaneType) => {
+        storePaneDataSetter(getStorePaneData);
     }
 
     const getBoarders = (scale: number): Borders => {
         const innerWidthSize = window.innerWidth;
         const innerHeightSize = window.innerHeight;
 
-        /*
+
         console.log("image-width:" + imgRef.current!.clientWidth + " / image-height:" + imgRef.current!.clientHeight);
         console.log("screen-width:" + innerWidthSize + " / screen-height:" + innerHeightSize);
-         */
+
 
         let leftXBoarder;
         let rightXBoarder;
@@ -65,24 +69,29 @@ const PanZoomComponent: FC<Props> = ({congestionDataSetter, targetStoresInfo}: P
             bottomYBoarder = innerHeightSize - imgRef.current!.clientHeight * scale;
 
         } else {
-            //　スマホなどで小さく表示されるとき
+            //　スマホなどで横の方が小さく表示されるとき
             leftXBoarder = ((imgRef.current!.clientWidth - innerWidthSize) / 2);
             rightXBoarder = -(imgRef.current!.clientWidth * scale - (leftXBoarder + innerWidthSize));
             topYBoarder = 0;
             bottomYBoarder = innerHeightSize - imgRef.current!.clientHeight * scale;
         }
-        //console.log("leftXBoarder:" + leftXBoarder + " / rightXBoarder:" + rightXBoarder + " / topYBoarder:" + topYBoarder + " / bottomYBoarder:" + bottomYBoarder);
+        console.log("leftXBoarder:" + leftXBoarder + " / rightXBoarder:" + rightXBoarder + " / topYBoarder:" + topYBoarder + " / bottomYBoarder:" + bottomYBoarder);
 
         return {leftXBoarder, rightXBoarder, topYBoarder, bottomYBoarder};
 
     };
 
     const handleStop = (e: any) => {
+        const innerWidthSize = window.innerWidth;
+        const innerHeightSize = window.innerHeight;
 
         let {positionX, positionY, scale} = e.state;
 
         const {leftXBoarder, rightXBoarder, topYBoarder, bottomYBoarder} = getBoarders(scale);
         //alert(`x:${positionX}, y:${positionY}, scale: ${scale}, screenHeight: ${innerHeightSize},screenWidth: ${innerWidthSize}`);
+
+        console.log(`x:${positionX}, y:${positionY}, scale: ${scale}, screenHeight: ${innerHeightSize},screenWidth: ${innerWidthSize}`);
+
         if (scale < 1) {
 
             //デフォルトの機能で戻ってくれる
@@ -119,8 +128,17 @@ const PanZoomComponent: FC<Props> = ({congestionDataSetter, targetStoresInfo}: P
             }
 
         }
-
     }
+
+    const makeCenterFocus = (x: number, y: number) => {
+        //console.log(`x-point:${(screenHookHeight / 1000) * point?.x}, y-point:${(screenHookHeight / 1000) * point?.y}`);
+
+        //中央にフォーカスさせる
+        movableRef.current.setTransform(
+            -(screenHookHeight / 1000) * x * MAX_SCALE + divRef.current!.clientWidth / 2,
+            -(screenHookHeight / 1000) * y * MAX_SCALE + screenHookHeight / 2, MAX_SCALE);
+    }
+
 
     return (
         <div
@@ -134,7 +152,7 @@ const PanZoomComponent: FC<Props> = ({congestionDataSetter, targetStoresInfo}: P
             <TransformWrapper
                 initialScale={1}
                 minScale={1}
-                maxScale={2.5}
+                maxScale={MAX_SCALE}
 
                 limitToBounds={false}
                 onPanningStop={(event) => {
@@ -174,19 +192,31 @@ const PanZoomComponent: FC<Props> = ({congestionDataSetter, targetStoresInfo}: P
                                 pointerEvents: "none",
                             }}
                         >
-                            {storesInfoData.map((value) => {
-                                    const point = points.find((temp) => temp.areaNum == value.areaNum)
-                                    const eachCongestion = congestionData.find((temp) => temp.areaNum == value.areaNum)
+                            {storesInfoData.map((storeInfo) => {
+                                    const point = points.find((temp) => temp.areaNum == storeInfo.areaNum)
+                                    const eachCongestion = congestionData.find((temp) => temp.areaNum == storeInfo.areaNum)
                                     if (!point || !eachCongestion) {
                                         return null;
                                     } else {
+                                        let opacity: number;
+                                        if (focusedNum == null) {
+                                            opacity = 1;
+                                        } else {
+                                            if (focusedNum == storeInfo.areaNum) {
+                                                opacity = 1;
+                                            } else {
+                                                opacity = 0.4;
+                                            }
+                                        }
+
                                         return (
                                             // Imageタグにすると画質が劣化するので、imgタグで対応
                                             <img src={`/img/marks/congestion${eachCongestion.congestionLevel}.webp`}
                                                  alt={"busy"}
-                                                 key={value.areaNum}
+                                                 key={storeInfo.areaNum}
                                                  onClick={() => {
-                                                     handleImgClicked(eachCongestion);
+                                                     handleImgClicked({...eachCongestion, ...storeInfo});
+                                                     makeCenterFocus(point?.x, point?.y);
                                                  }}
                                                  width={(25 / 1000) * screenHookHeight}
                                                  height={(25 / 1000) * screenHookHeight}
@@ -198,7 +228,8 @@ const PanZoomComponent: FC<Props> = ({congestionDataSetter, targetStoresInfo}: P
                                                      zIndex: 1,
                                                      boxShadow: "0 0 4px gray",
                                                      pointerEvents: "auto",
-                                                     borderRadius: "50%"
+                                                     borderRadius: "50%",
+                                                     opacity: `${opacity}`
                                                  }}
                                             />
                                         );

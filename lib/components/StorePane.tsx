@@ -6,11 +6,11 @@ import CancelBtn from "./CancelBtn";
 import StoresInfoType from "../type/StoresInfoType";
 import storesInfoData from "../../public/data/storesInfoData.json"
 import CongestionDataType from "../type/CongestionDataType";
+import StorePaneType from "../type/StorePaneType";
 
 type Props = {
-    congestionData: CongestionDataType;
-    visible: boolean;
-    visibleSetter: Dispatch<SetStateAction<boolean>>
+    storePaneData: StorePaneType | null;
+    handleClosed: (event?: any) => void;
 };
 
 
@@ -44,44 +44,39 @@ const StoreDescDiv = ({title, desc}: StoreDescProps) => {
     );
 }
 
-const StorePane = ({congestionData, visibleSetter, visible}: Props) => {
-    const [storeInfo, setStoreInfo] = useState<StoresInfoType>();
+const StorePane = ({storePaneData, handleClosed}: Props) => {
+    //
+    const [isStorePaneVisible, setIsStorePaneVisible] = useState<boolean>(false);
 
     useEffect(() => {
-        const getStoreInfo = storesInfoData.find((storeInfo) => storeInfo.areaNum == congestionData.areaNum);
-        if (getStoreInfo == null) {
-            window.alert("存在しない区画番号が参照されています");
+        if (storePaneData == null) {
+            setIsStorePaneVisible(false);
         } else {
-            setStoreInfo(getStoreInfo);
+            setIsStorePaneVisible(true);
         }
-
-    }, [congestionData]);
-
-    const handleIconClicked = (event: any) => {
-        event.preventDefault();
-        visibleSetter(false);
-    }
-
+    }, [storePaneData]);
 
     return (
-        <Grow in={visible}>
-            <div style={{
-                position: "fixed",
-                bottom: 0,
-                left: 0,
-                right: 0,
-                zIndex: 400,
-            }}>
-                <FixedBox sx={{boxShadow: 3}} borderRadius={3}>
-                    <CancelBtn onClick={handleIconClicked}/>
+            <>
+            {storePaneData != null ?
+                <Grow in={isStorePaneVisible}>
+                <div style={{
+                    position: "fixed",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    zIndex: 400,
+                }}>
+                    <FixedBox sx={{boxShadow: 3}} borderRadius={3}>
+                        <CancelBtn onClick={()=>{handleClosed()}}/>
 
-                    <div style={{textAlign: "center", pointerEvents: "none"}}>
-                        <Image src={`/img/marks/congestion${congestionData.congestionLevel}.webp`}
-                               alt={"congestion_level"} height={32} width={32}
-                               style={{position: "relative", top: 6}}/>
-                        <span style={{fontSize: "1.7rem", marginLeft: "1rem", fontWeight: "bold"}}>
+                        <div style={{textAlign: "center", pointerEvents: "none"}}>
+                            <Image src={`/img/marks/congestion${storePaneData?.congestionLevel}.webp`}
+                                   alt={"congestion_level"} height={32} width={32}
+                                   style={{position: "relative", top: 6}}/>
+                            <span style={{fontSize: "1.7rem", marginLeft: "1rem", fontWeight: "bold"}}>
                          {(() => {
-                             switch (congestionData.congestionLevel) {
+                             switch (storePaneData?.congestionLevel) {
                                  case 0:
                                      return "中止しています";
                                  case 1:
@@ -93,17 +88,24 @@ const StorePane = ({congestionData, visibleSetter, visible}: Props) => {
                              }
                          })()}
                             </span>
-                    </div>
-                    <StoreDescDiv title={"店舗名"} desc={storeInfo?.storeName}/>
-                    <StoreDescDiv title={"販売品目"} desc={storeInfo?.food}/>
-                    <StoreDescDiv title={"区画番号"} desc={storeInfo?.areaNum}/>
-                    <div style={{textAlign: "center", position: "absolute", right: 15, top: "75%",color:"#696969"}}>
-                        <div style={{fontSize: 10, marginBottom: -5}}>更新時間</div>
-                        <div>{congestionData.updateTime}</div>
-                    </div>
-                </FixedBox>
-            </div>
-        </Grow>
+                        </div>
+                        <StoreDescDiv title={"店舗名"} desc={storePaneData?.storeName}/>
+                        <StoreDescDiv title={"販売品目"} desc={storePaneData?.food}/>
+                        <StoreDescDiv title={"区画番号"} desc={storePaneData?.areaNum}/>
+                        <div style={{
+                            textAlign: "center",
+                            position: "absolute",
+                            right: 15,
+                            top: "75%",
+                            color: "#696969"
+                        }}>
+                            <div style={{fontSize: 10, marginBottom: -5}}>更新時間</div>
+                            <div>{storePaneData?.updateTime}</div>
+                        </div>
+                    </FixedBox>
+                </div></Grow>:<></>
+            }
+            </>
     )
 }
 
