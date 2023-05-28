@@ -1,8 +1,8 @@
 [
   {
     "areaNum": 1,
-    "storeName": "たかやまの丸焼き",
-    "food": "肉巻き"
+    "storeName": "たかやまの焼肉弁当",
+    "food": "焼肉"
   },
   {
     "areaNum": 2,
@@ -28,5 +28,50 @@
     "areaNum": 6,
     "storeName": "ビリーの焼肉",
     "food": "肉巻き"
+  },
+  {
+    "areaNum": 7,
+    "storeName": "副部長のチョリソー",
+    "food": "チョリソー"
+  },
+  {
+    "areaNum": 8,
+    "storeName": "ケビンお手製餃子",
+    "food": "餃子"
+  },
+  {
+    "areaNum": 9,
+    "storeName": "オスカーのフランクフルト",
+    "food": "フランクフルト"
+  },
+  {
+    "areaNum": 10,
+    "storeName": "りつめいぷるぱん",
+    "food": "メイプルパン"
+  },
+  {
+    "areaNum": 11,
+    "storeName": "特別事業部の焼きそば",
+    "food": "焼きそば"
+  },
+  {
+    "areaNum": 12,
+    "storeName": "たくみの巧みなお好み焼き",
+    "food": "お好み焼き"
+  },
+  {
+    "areaNum": 13,
+    "storeName": "もぎっともぎ",
+    "food": "フルーツ"
+  },
+  {
+    "areaNum": 14,
+    "storeName": "おおおおでんん",
+    "food": "おでん"
+  },
+  {
+    "areaNum": 15,
+    "storeName": "BKCの焼き鳥",
+    "food": "焼き鳥"
   }
 ]

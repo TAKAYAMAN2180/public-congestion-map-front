@@ -25,9 +25,53 @@
     "updateTime": "12:10"
   },
   {
-  "areaNum": 6,
-  "congestionLevel": 2,
-  "updateTime": "12:10"
-}
-
+    "areaNum": 6,
+    "congestionLevel": 2,
+    "updateTime": "12:10"
+  },
+  {
+    "areaNum": 7,
+    "congestionLevel": 0,
+    "updateTime": "12:10"
+  },
+  {
+    "areaNum": 8,
+    "congestionLevel": 3,
+    "updateTime": "12:10"
+  },
+  {
+    "areaNum": 9,
+    "congestionLevel": 1,
+    "updateTime": "12:10"
+  },
+  {
+    "areaNum": 10,
+    "congestionLevel": 2,
+    "updateTime": "12:10"
+  },
+  {
+    "areaNum": 11,
+    "congestionLevel": 2,
+    "updateTime": "12:10"
+  },
+  {
+    "areaNum": 12,
+    "congestionLevel": 1,
+    "updateTime": "12:10"
+  },
+  {
+    "areaNum": 13,
+    "congestionLevel": 2,
+    "updateTime": "12:10"
+  },
+  {
+    "areaNum": 14,
+    "congestionLevel": 1,
+    "updateTime": "12:10"
+  },
+  {
+    "areaNum": 15,
+    "congestionLevel": 1,
+    "updateTime": "12:10"
+  }
 ]

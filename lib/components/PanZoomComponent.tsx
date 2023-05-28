@@ -15,7 +15,16 @@ const points = [
     {areaNum: 3, x: 1090, y: 510},
     {areaNum: 4, x: 950, y: 385},
     {areaNum: 5, x: 1000, y: 385},
-    {areaNum: 6, x: 1050, y: 385},
+    {areaNum: 6, x: 1070, y: 535},
+    {areaNum: 7, x: 1045, y: 560},
+    {areaNum: 8, x: 1020, y: 585},
+    {areaNum: 9, x: 995, y: 605},
+    {areaNum: 10, x: 970, y: 585},
+    {areaNum: 11, x: 945, y: 560},
+    {areaNum: 12, x: 920, y: 535},
+    {areaNum: 13, x: 885, y: 535},
+    {areaNum: 14, x: 860, y: 510},
+    {areaNum: 15, x: 1050, y: 385},
 ];
 
 type Borders = {
@@ -134,7 +143,8 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
     const makeCenterFocus = (x: number, y: number) => {
         //console.log(`x-point:${(screenHookHeight / 1000) * point?.x}, y-point:${(screenHookHeight / 1000) * point?.y}`);
 
-        const FOCUS_SCALE = 1.5;
+        //1.5がMAX_SCALEがいい
+        const FOCUS_SCALE = MAX_SCALE;
 
         //中央にフォーカスさせる
         movableRef.current.setTransform(
