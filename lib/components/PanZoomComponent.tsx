@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, SetStateAction,  useRef, useState} from 'react';
+import React, {Dispatch, FC, SetStateAction, useEffect, useRef, useState} from 'react';
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
 import {useWindowSize} from "../hooks/useWindowSize";
 import StoresInfoType from "../type/StoresInfoType";
@@ -50,7 +50,17 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
     const storesInfoData: StoresInfoType[] = targetStoresInfo;
     const congestionData: CongestionDataType[] = congestionDataSample;
 
+    const [screenHeight, setScreenHeight] = useState<number>();
+
     const MAX_SCALE = 2.5;
+
+    useEffect(() => {
+        const innerHeightSize = window.innerHeight;
+
+        //なぜかconsole.logをすると治る
+        //console.log("innerHeightSize:" + innerHeightSize);
+        //setScreenHeight(innerHeightSize);
+    }, []);
 
 
     const handleImgClicked = (getStorePaneData: StorePaneType) => {
@@ -205,6 +215,46 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
                                 pointerEvents: "none",
                             }}
                         >
+                            <img src={"/img/illustrations/centralstage_illustration.webp"}
+                                 //heightの数字を変えるとサイズが変更
+                                 //topとleftの最後の値を変えると座標が変化
+                                 height={(90 / 1000) * screenHookHeight}
+                                 style={{
+                                     position: "absolute",
+                                     top: `${(screenHookHeight / 1000) * 340}px`,
+                                     left: `${(screenHookHeight / 1000) * 650}px`,
+                                     zIndex: 1,
+                                     filter: "drop-shadow(2px 2px 2px gray)",
+                                     pointerEvents: "none",
+                                 }}
+                            />
+                            <img src={"/img/illustrations/beingstage_illustration.webp"}
+                                //heightの数字を変えるとサイズが変更
+                                //topとleftの最後の値を変えると座標が変化
+                                 height={(90 / 1000) * screenHookHeight}
+                                 style={{
+                                     position: "absolute",
+                                     top: `${(screenHookHeight / 1000) * 640}px`,
+                                     left: `${(screenHookHeight / 1000) * 950}px`,
+                                     zIndex: 1,
+                                     filter: "drop-shadow(2px 2px 2px gray)",
+                                     pointerEvents: "none",
+                                 }}
+                            />
+                            <img src={"/img/illustrations/freemarket_illustration.webp"}
+                                //heightの数字を変えるとサイズが変更
+                                //topとleftの最後の値を変えると座標が変化
+                                 height={(90 / 1000) * screenHookHeight}
+                                 style={{
+                                     position: "absolute",
+                                     top: `${(screenHookHeight / 1000) * 340}px`,
+                                     left: `${(screenHookHeight / 1000) * 1100}px`,
+                                     zIndex: 1,
+                                     filter: "drop-shadow(2px 2px 2px gray)",
+                                     pointerEvents: "none",
+                                 }}
+                            />
+
                             {storesInfoData.map((storeInfo) => {
                                     const point = points.find((temp) => temp.areaNum == storeInfo.areaNum)
                                     const eachCongestion = congestionData.find((temp) => temp.areaNum == storeInfo.areaNum)
