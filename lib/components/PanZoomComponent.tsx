@@ -72,8 +72,8 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
         const innerHeightSize = window.innerHeight;
 
 
-        console.log("image-width:" + imgRef.current!.clientWidth + " / image-height:" + imgRef.current!.clientHeight);
-        console.log("screen-width:" + innerWidthSize + " / screen-height:" + innerHeightSize);
+        //console.log("image-width:" + imgRef.current!.clientWidth + " / image-height:" + imgRef.current!.clientHeight);
+        //console.log("screen-width:" + innerWidthSize + " / screen-height:" + innerHeightSize);
 
 
         let leftXBoarder;
@@ -95,22 +95,22 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
             topYBoarder = 0;
             bottomYBoarder = innerHeightSize - imgRef.current!.clientHeight * scale;
         }
-        console.log("leftXBoarder:" + leftXBoarder + " / rightXBoarder:" + rightXBoarder + " / topYBoarder:" + topYBoarder + " / bottomYBoarder:" + bottomYBoarder);
+        //console.log("leftXBoarder:" + leftXBoarder + " / rightXBoarder:" + rightXBoarder + " / topYBoarder:" + topYBoarder + " / bottomYBoarder:" + bottomYBoarder);
 
         return {leftXBoarder, rightXBoarder, topYBoarder, bottomYBoarder};
 
     };
 
     const handleStop = (e: any) => {
-        const innerWidthSize = window.innerWidth;
-        const innerHeightSize = window.innerHeight;
+        //const innerWidthSize = window.innerWidth;
+        //const innerHeightSize = window.innerHeight;
 
         let {positionX, positionY, scale} = e.state;
 
         const {leftXBoarder, rightXBoarder, topYBoarder, bottomYBoarder} = getBoarders(scale);
         //alert(`x:${positionX}, y:${positionY}, scale: ${scale}, screenHeight: ${innerHeightSize},screenWidth: ${innerWidthSize}`);
 
-        console.log(`x:${positionX}, y:${positionY}, scale: ${scale}, screenHeight: ${innerHeightSize},screenWidth: ${innerWidthSize}`);
+        //console.log(`x:${positionX}, y:${positionY}, scale: ${scale}, screenHeight: ${innerHeightSize},screenWidth: ${innerWidthSize}`);
 
         if (scale < 1) {
 
@@ -215,7 +215,7 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
                                 pointerEvents: "none",
                             }}
                         >
-                            <img src={"/img/illustrations/centralstage_illustration.webp"}
+                            <img src={"/img/illustrations/vvvlow_centralstage_illustration.webp"}
                                  //heightの数字を変えるとサイズが変更
                                  //topとleftの最後の値を変えると座標が変化
                                  height={(90 / 1000) * screenHookHeight}
@@ -228,7 +228,7 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
                                      pointerEvents: "none",
                                  }}
                             />
-                            <img src={"/img/illustrations/beingstage_illustration.webp"}
+                            <img src={"/img/illustrations/vbeingstage_illustration.webp"}
                                 //heightの数字を変えるとサイズが変更
                                 //topとleftの最後の値を変えると座標が変化
                                  height={(90 / 1000) * screenHookHeight}
@@ -241,7 +241,7 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
                                      pointerEvents: "none",
                                  }}
                             />
-                            <img src={"/img/illustrations/freemarket_illustration.webp"}
+                            <img src={"/img/illustrations/vfreemarket_illustration.webp"}
                                 //heightの数字を変えるとサイズが変更
                                 //topとleftの最後の値を変えると座標が変化
                                  height={(90 / 1000) * screenHookHeight}
@@ -249,6 +249,19 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
                                      position: "absolute",
                                      top: `${(screenHookHeight / 1000) * 340}px`,
                                      left: `${(screenHookHeight / 1000) * 1100}px`,
+                                     zIndex: 1,
+                                     filter: "drop-shadow(2px 2px 2px gray)",
+                                     pointerEvents: "none",
+                                 }}
+                            />
+                            <img src={"/img/illustrations/bus.webp"}
+                                //heightの数字を変えるとサイズが変更
+                                //topとleftの最後の値を変えると座標が変化
+                                 height={(50 / 1000) * screenHookHeight}
+                                 style={{
+                                     position: "absolute",
+                                     top: `${(screenHookHeight / 1000) * 550}px`,
+                                     left: `${(screenHookHeight / 1000) * 700}px`,
                                      zIndex: 1,
                                      filter: "drop-shadow(2px 2px 2px gray)",
                                      pointerEvents: "none",
