@@ -6,6 +6,7 @@ import {
 const StyledDrawer = styled(Drawer)`
   .MuiDrawer-paper {
     background-color: rgba(0, 0, 0, 0.7);
+    z-index: 500;
   }
 
   .MuiBackdrop-root {

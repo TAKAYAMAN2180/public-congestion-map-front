@@ -1,7 +1,7 @@
 import TextField from '@mui/material/TextField';
 import {styled} from '@mui/system';
 
-const CustomTextField = styled(TextField)`
+const StyledTextField = styled(TextField)`
   background-color: rgba(256, 256, 256, 0.9);
   width: 250px;
 
@@ -26,4 +26,4 @@ const CustomTextField = styled(TextField)`
 ,
 `;
 
-export default CustomTextField;
+export default StyledTextField;

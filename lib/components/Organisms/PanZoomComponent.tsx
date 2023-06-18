@@ -1,11 +1,14 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useRef, useState} from 'react';
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
-import {useWindowSize} from "../hooks/useWindowSize";
-import StoresInfoType from "../type/StoresInfoType";
+import {useWindowSize} from "../../hooks/useWindowSize";
+import StoresInfoType from "../../type/StoresInfoType";
 
-import congestionDataSample from "../../public/data/congestionDataSample.json";
-import CongestionDataType from "../type/CongestionDataType";
-import StorePaneType from "../type/StorePaneType";
+import congestionDataSample from "../../../public/data/congestionDataSample.json";
+import CongestionDataType from "../../type/CongestionDataType";
+import StorePaneType from "../../type/StorePaneType";
+import SpecialMark from "../Atom/Image/SpecialMark";
+import SpecialMarks from "../Molecules/SpecialMarks";
+import CongestionMark from "../Atom/Image/CongestionMark";
 
 //TODO:座標のデータを入れたものを作る
 //下のはサンプルデータ
@@ -57,7 +60,6 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
     useEffect(() => {
         const innerHeightSize = window.innerHeight;
 
-        //なぜかconsole.logをすると治る
         //console.log("innerHeightSize:" + innerHeightSize);
         //setScreenHeight(innerHeightSize);
     }, []);
@@ -199,7 +201,7 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
                             height={screenHookHeight}
                             src="/img/0522-campusMap.svg"
                             //src="https://cdn.pixabay.com/photo/2015/02/24/15/41/dog-647528__340.jpg"
-                            alt="test 2"
+                            alt="campusMap"
                             // style={{border: "10px solid red", boxSizing: "border-box"}}
 
                         />
@@ -215,98 +217,23 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
                                 pointerEvents: "none",
                             }}
                         >
-                            <img src={"/img/illustrations/vvvlow_centralstage_illustration.webp"}
-                                 //heightの数字を変えるとサイズが変更
-                                 //topとleftの最後の値を変えると座標が変化
-                                 height={(90 / 1000) * screenHookHeight}
-                                 style={{
-                                     position: "absolute",
-                                     top: `${(screenHookHeight / 1000) * 340}px`,
-                                     left: `${(screenHookHeight / 1000) * 650}px`,
-                                     zIndex: 1,
-                                     filter: "drop-shadow(2px 2px 2px gray)",
-                                     pointerEvents: "none",
-                                 }}
-                            />
-                            <img src={"/img/illustrations/vbeingstage_illustration.webp"}
-                                //heightの数字を変えるとサイズが変更
-                                //topとleftの最後の値を変えると座標が変化
-                                 height={(90 / 1000) * screenHookHeight}
-                                 style={{
-                                     position: "absolute",
-                                     top: `${(screenHookHeight / 1000) * 640}px`,
-                                     left: `${(screenHookHeight / 1000) * 950}px`,
-                                     zIndex: 1,
-                                     filter: "drop-shadow(2px 2px 2px gray)",
-                                     pointerEvents: "none",
-                                 }}
-                            />
-                            <img src={"/img/illustrations/vfreemarket_illustration.webp"}
-                                //heightの数字を変えるとサイズが変更
-                                //topとleftの最後の値を変えると座標が変化
-                                 height={(90 / 1000) * screenHookHeight}
-                                 style={{
-                                     position: "absolute",
-                                     top: `${(screenHookHeight / 1000) * 340}px`,
-                                     left: `${(screenHookHeight / 1000) * 1100}px`,
-                                     zIndex: 1,
-                                     filter: "drop-shadow(2px 2px 2px gray)",
-                                     pointerEvents: "none",
-                                 }}
-                            />
-                            <img src={"/img/illustrations/bus.webp"}
-                                //heightの数字を変えるとサイズが変更
-                                //topとleftの最後の値を変えると座標が変化
-                                 height={(50 / 1000) * screenHookHeight}
-                                 style={{
-                                     position: "absolute",
-                                     top: `${(screenHookHeight / 1000) * 550}px`,
-                                     left: `${(screenHookHeight / 1000) * 700}px`,
-                                     zIndex: 1,
-                                     filter: "drop-shadow(2px 2px 2px gray)",
-                                     pointerEvents: "none",
-                                 }}
-                            />
+                            {/*BSや抽選所など特別なマークを定義*/}
+                            <SpecialMarks {...{screenHookHeight}}/>
 
                             {storesInfoData.map((storeInfo) => {
-                                    const point = points.find((temp) => temp.areaNum == storeInfo.areaNum)
-                                    const eachCongestion = congestionData.find((temp) => temp.areaNum == storeInfo.areaNum)
+                                    const point = points.find((temp) => temp.areaNum == storeInfo.areaNum);
+                                    const eachCongestion = congestionData.find((temp) => temp.areaNum == storeInfo.areaNum);
                                     if (!point || !eachCongestion) {
                                         return null;
                                     } else {
-                                        let opacity: number;
-                                        if (focusedNum == null) {
-                                            opacity = 1;
-                                        } else {
-                                            if (focusedNum == storeInfo.areaNum) {
-                                                opacity = 1;
-                                            } else {
-                                                opacity = 0.4;
-                                            }
-                                        }
-
                                         return (
-                                            // Imageタグにすると画質が劣化するので、imgタグで対応
-                                            <img src={`/img/marks/congestion${eachCongestion.congestionLevel}.webp`}
-                                                 alt={"busy"}
-                                                 key={storeInfo.areaNum}
-                                                 onClick={() => {
-                                                     handleImgClicked({...eachCongestion, ...storeInfo});
-                                                     makeCenterFocus(point?.x, point?.y);
-                                                 }}
-                                                 width={(25 / 1000) * screenHookHeight}
-                                                 height={(25 / 1000) * screenHookHeight}
-
-                                                 style={{
-                                                     position: "absolute",
-                                                     top: `${(screenHookHeight / 1000) * point?.y}px`,
-                                                     left: `${(screenHookHeight / 1000) * point?.x}px`,
-                                                     zIndex: 1,
-                                                     boxShadow: "0 0 4px gray",
-                                                     pointerEvents: "auto",
-                                                     borderRadius: "50%",
-                                                     opacity: `${opacity}`
-                                                 }}
+                                            <CongestionMark focusedNum={focusedNum} screenHookHeight={screenHookHeight}
+                                                            point={point} key={storeInfo.areaNum}
+                                                            eachCongestion={eachCongestion} storeInfo={storeInfo}
+                                                            handleOnClicked={() => {
+                                                                handleImgClicked({...eachCongestion, ...storeInfo});
+                                                                makeCenterFocus(point?.x, point?.y);
+                                                            }}
                                             />
                                         );
                                     }

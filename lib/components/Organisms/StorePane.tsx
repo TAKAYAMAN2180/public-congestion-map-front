@@ -2,11 +2,11 @@ import styled from "styled-components";
 import {Box, Grow} from "@mui/material";
 import {Dispatch, SetStateAction, useEffect, useState} from "react";
 import Image from "next/image";
-import CancelBtn from "./CancelBtn";
-import StoresInfoType from "../type/StoresInfoType";
-import storesInfoData from "../../public/data/storesInfoData.json"
-import CongestionDataType from "../type/CongestionDataType";
-import StorePaneType from "../type/StorePaneType";
+import CancelBtn from "../Atom/Button/CancelBtn";
+import StoresInfoType from "../../type/StoresInfoType";
+import storesInfoData from "../../../public/data/storesInfoData.json"
+import CongestionDataType from "../../type/CongestionDataType";
+import StorePaneType from "../../type/StorePaneType";
 
 type Props = {
     storePaneData: StorePaneType | null;

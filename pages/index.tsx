@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import PanZoomComponent from "../lib/components/PanZoomComponent";
-import Header from "../lib/components/Header";
+import PanZoomComponent from "../lib/components/Organisms/PanZoomComponent";
+import Header from "../lib/components/Organisms/Header";
 import HEAD from "next/head"
-import StorePane from "../lib/components/StorePane";
+import StorePane from "../lib/components/Organisms/StorePane";
 import Image from "next/image";
 import initStoresInfoData from "../public/data/storesInfoData.json";
 import StoresInfoType from "../lib/type/StoresInfoType";
