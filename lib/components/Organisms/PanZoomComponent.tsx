@@ -3,10 +3,9 @@ import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
 import {useWindowSize} from "../../hooks/useWindowSize";
 import StoresInfoType from "../../type/StoresInfoType";
 
-import congestionDataSample from "../../../public/data/congestionDataSample.json";
+import congestionDataSample from "../../../public/data/test/congestionDataSample.json";
 import CongestionDataType from "../../type/CongestionDataType";
 import StorePaneType from "../../type/StorePaneType";
-import SpecialMark from "../Atom/Image/SpecialMark";
 import SpecialMarks from "../Molecules/SpecialMarks";
 import CongestionMark from "../Atom/Image/CongestionMark";
 

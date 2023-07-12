@@ -1,23 +1,20 @@
-import {AppBar, Box, IconButton, ThemeProvider, Toolbar} from "@mui/material";
+import {AppBar, Box, ThemeProvider, Toolbar} from "@mui/material";
 import theme from "../../style/theme";
 import React, {Dispatch, FC, SetStateAction, useState} from "react";
-import CloseIcon from '@mui/icons-material/Close';
 import MenuDrawer from "./Drawer/MenuDrawer";
 import SearchDrawer from "./Drawer/SearchDrawer";
-import SearchIcon from "../../../public/img/store-search.svg";
-import Hamburger from 'hamburger-react';
 import MenuBtn from '../Atom/Button/MenuBtn'
-
 import StoresInfoType from "../../type/StoresInfoType";
 import SearchDrawerBtn from "../Atom/Button/SearchDrawerBtn";
 import BannerLogo from "../Atom/Image/BannerLogo";
 
 type Props = {
-    setStoresInfo: Dispatch<SetStateAction<StoresInfoType[]>>;
+    setStoresInfo?: Dispatch<SetStateAction<StoresInfoType[]>>;
+    isMapPage: boolean;
 }
 
 
-const Header: FC<Props> = ({setStoresInfo}: Props) => {
+const Header: FC<Props> = ({setStoresInfo, isMapPage}: Props) => {
     const [isListOpen, setIsListOpen] = useState<boolean>(false);
     const [isSearchBoxOpen, setIsSearchBoxOpen] = useState<boolean>(false);
 
@@ -62,17 +59,22 @@ const Header: FC<Props> = ({setStoresInfo}: Props) => {
                             <Box sx={{height: 70, flexGrow: 1}}>
                                 <BannerLogo/>
                             </Box>
-                            <Box sx={{height: "100%", width: "auto", flexGrow: 0}}>
-                                <SearchDrawerBtn {...{isSearchBoxOpen, handleCloseIconClicked, handleSearchIconClicked}}/>
+                            <Box sx={{height: "100%", width: "60px", flexGrow: 0}}>
+                                {isMapPage && <SearchDrawerBtn {...{
+                                    isSearchBoxOpen,
+                                    handleCloseIconClicked,
+                                    handleSearchIconClicked
+                                }}/>}
                             </Box>
                         </Box>
                     </Toolbar>
                 </AppBar>
                 <MenuDrawer {...{isListOpen, handleCloseIconClicked}}/>
-                <SearchDrawer {...{isSearchBoxOpen, handleCloseIconClicked, setStoresInfo}}/>
+                {isMapPage && setStoresInfo != undefined &&
+                    <SearchDrawer {...{isSearchBoxOpen, handleCloseIconClicked, setStoresInfo}}/>
+                }
             </ThemeProvider>
         </>
     );
 }
-
 export default Header;

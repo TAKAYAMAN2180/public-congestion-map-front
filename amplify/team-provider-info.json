@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-congestionmappage-dev-164639-authRole",
+      "UnauthRoleArn": "arn:aws:iam::138063517375:role/amplify-congestionmappage-dev-164639-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::138063517375:role/amplify-congestionmappage-dev-164639-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-congestionmappage-dev-164639-deployment",
+      "UnauthRoleName": "amplify-congestionmappage-dev-164639-unauthRole",
+      "StackName": "amplify-congestionmappage-dev-164639",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:138063517375:stack/amplify-congestionmappage-dev-164639/473ff900-2088-11ee-9d3a-06c764b75e41",
+      "AmplifyAppId": "d2513ldr84aks4"
+    }
+  }
+}

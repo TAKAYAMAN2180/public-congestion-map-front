@@ -4,10 +4,10 @@ import Header from "../lib/components/Organisms/Header";
 import HEAD from "next/head"
 import StorePane from "../lib/components/Organisms/StorePane";
 import Image from "next/image";
-import initStoresInfoData from "../public/data/storesInfoData.json";
+import initStoresInfoData from "../public/data/test/storesInfoData.json";
 import StoresInfoType from "../lib/type/StoresInfoType";
-import CongestionDataType from "../lib/type/CongestionDataType";
 import StorePaneType from "../lib/type/StorePaneType";
+import {NextPage} from "next";
 
 
 type Position = {
@@ -15,7 +15,7 @@ type Position = {
     longitude: number | null
 }
 
-const App = () => {
+const App: NextPage = () => {
     const [position, setPosition] = useState<Position>({latitude: null, longitude: null});
     const [storesInfo, setStoresInfo] = useState<StoresInfoType[]>(initStoresInfoData);
     const [storePaneData, setStorePaneData] = useState<StorePaneType | null>(null);
@@ -37,12 +37,12 @@ const App = () => {
     return (
         <>
             <HEAD>
-                <link rel={"icon"} href={"/favicon.png"}/>
+                <link rel={"icon"} href={"/img/favicon.png"}/>
                 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
             </HEAD>
 
             <div style={{msOverflowStyle: "none"}}>
-                <Header {...{setStoresInfo}}/>
+                <Header isMapPage={true} {...{setStoresInfo}}/>
                 <div style={{
                     width: "100%",
                     display: "flex",

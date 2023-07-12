@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import {
-    Drawer
-} from "@mui/material";
+import {Drawer} from "@mui/material";
 
 const StyledDrawer = styled(Drawer)`
   .MuiDrawer-paper {
@@ -16,8 +14,8 @@ const StyledDrawer = styled(Drawer)`
   > * {
     color: white;
   }
-  
-  
+
+
   z-index: 500;
 `;
 
