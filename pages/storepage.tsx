@@ -226,7 +226,7 @@ const Storepage = () => {
                                 </div>
                                 <Image src={"/img/illustrations/store_illustration.webp"} alt={"store_illustration"} width={100} height={(100*348)/420}/>
                                 <ThemeProvider theme={theme}>
-                                    <Button variant="contained" sx={{fontSize: "1.5rem", fontWeight: "bold"}}>ログイン</Button>
+                                    <Button variant="contained" sx={{fontSize: "1.5rem", fontWeight: "bold"}} onClick={() => signIn('cognito')}>ログイン</Button>
                                 </ThemeProvider>
                             </div>
                         </div>
