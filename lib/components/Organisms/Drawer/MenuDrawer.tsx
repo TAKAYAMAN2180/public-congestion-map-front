@@ -25,7 +25,7 @@ const MenuDrawer = ({isListOpen, handleCloseIconClicked}: Props) => {
             >
                 <div style={{height: 70}}/>
                 <List>
-                    {/*<SideDrawerBtn text={'混雑マップ'} key={'Map'} SvgIcon={MapIcon}/>*/}
+                    <SideDrawerBtn text={'混雑マップ'} key={'Map'} SvgIcon={MapIcon} page={"/"}/>
                     {/*<SideDrawerBtn text={'各種リンク'} key={'Links'} SvgIcon={LinkIcon}/>*/}
                     {/*<SideDrawerBtn text={'困ったときは？'} key={'Info'} SvgIcon={HelpOutlineIcon}/>*/}
                     {/*<SideDrawerBtn text={'このサイトについて'} key={'Explain'} SvgIcon={LightbulbIcon}/>*/}

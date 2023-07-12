@@ -9,6 +9,7 @@ const StyledDrawer = styled(Drawer)`
 
   .MuiBackdrop-root {
     background-color: transparent;
+    z-index: 500;
   }
 
   > * {

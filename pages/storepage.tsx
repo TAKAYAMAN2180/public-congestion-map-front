@@ -186,7 +186,7 @@ const Storepage = () => {
 
             <Header isMapPage={false}/>
             <div style={{marginTop: "70px"}}>
-                {!loading && !isPageLoading && (session ?
+                {!loading  && (session ?
                         <div style={{padding: "20px"}}>
                             <div style={{fontWeight: "bold"}}>
                                 <span style={{fontSize: "2rem"}}>{store?.storeName}</span><br/>

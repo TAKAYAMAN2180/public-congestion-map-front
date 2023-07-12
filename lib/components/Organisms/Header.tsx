@@ -36,7 +36,7 @@ const Header: FC<Props> = ({setStoresInfo, isMapPage}: Props) => {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <AppBar position="fixed" sx={{padding: 0, zIndex: 1000, height: "70px"}}>
+                <AppBar position="fixed" sx={{padding: 0, zIndex: 2000, height: "70px"}}>
                     <Toolbar sx={{padding: 1}}>
                         <Box sx={{display: "flex", width: "100%", height: "70px"}}>
                             <Box sx={{
