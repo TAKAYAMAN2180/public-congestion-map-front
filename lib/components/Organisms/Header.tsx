@@ -37,12 +37,11 @@ const Header: FC<Props> = ({setStoresInfo, isMapPage}: Props) => {
         <>
             <ThemeProvider theme={theme}>
                 <AppBar position="fixed" sx={{padding: 0, zIndex: 2000, height: "70px"}}>
-                    <Toolbar sx={{padding: 1}}>
+                    <Toolbar sx={{padding: "8px"}}>
                         <Box sx={{display: "flex", width: "100%", height: "70px"}}>
                             <Box sx={{
                                 height: "100%",
                                 width: "auto",
-                                flexGrow: 0,
                                 padding: "6px 0"
                             }}>
                                 <MenuBtn onToggleHandle={toggled => {
@@ -56,10 +55,10 @@ const Header: FC<Props> = ({setStoresInfo, isMapPage}: Props) => {
                                 }} toggled={isListOpen}/>
                             </Box>
                             {/*//TODO:この幅に応じて表示させる画像を変化させる*/}
-                            <Box sx={{height: 70, flexGrow: 1}}>
+                            <Box sx={{height: 70, width: 'calc(100% - 60px - 58px)'}}>
                                 <BannerLogo/>
                             </Box>
-                            <Box sx={{height: "100%", width: "60px", flexGrow: 0}}>
+                            <Box sx={{height: 70, width: "60px"}}>
                                 {isMapPage && <SearchDrawerBtn {...{
                                     isSearchBoxOpen,
                                     handleCloseIconClicked,
