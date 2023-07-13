@@ -9,6 +9,7 @@ import React from "react";
 import SideDrawerBtn from "../../Molecules/SideDrawerBtn";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import storepage from "../../../../pages/storepage";
+import StoreIcon from '@mui/icons-material/Store';
 
 type Props = {
     isListOpen: boolean;
@@ -29,7 +30,8 @@ const MenuDrawer = ({isListOpen, handleCloseIconClicked}: Props) => {
                     {/*<SideDrawerBtn text={'各種リンク'} key={'Links'} SvgIcon={LinkIcon}/>*/}
                     {/*<SideDrawerBtn text={'困ったときは？'} key={'Info'} SvgIcon={HelpOutlineIcon}/>*/}
                     {/*<SideDrawerBtn text={'このサイトについて'} key={'Explain'} SvgIcon={LightbulbIcon}/>*/}
-                    <SideDrawerBtn text={'出店者向けページ'} key={'StorePage'} SvgIcon={AdminPanelSettingsIcon} page={"/storepage"}/>
+                    <SideDrawerBtn text={'出店者向けページ'} key={'StorePage'} SvgIcon={StoreIcon} page={"/storepage"}/>
+                    <SideDrawerBtn text={'事業部向けページ'} key={'AdminPage'} SvgIcon={AdminPanelSettingsIcon} page={"/"}/>
                 </List>
             </StyledDrawer>
         </>
