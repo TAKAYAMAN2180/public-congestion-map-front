@@ -1,12 +1,12 @@
 import {Backdrop, Box, CircularProgress, IconButton, InputAdornment, ThemeProvider} from "@mui/material";
 import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
-import StyledDrawer from "../../../style/StyledDrawer";
+import StyledDrawer from "@/lib/style/StyledDrawer";
 import SearchIcon from '@mui/icons-material/Search';
-import search from "../../../search"
-import StoresInfoType from "../../../type/StoresInfoType";
-import initStoresInfoData from "../../../../public/data/test/storesInfoData.json";
-import CustomTextField from "../../Molecules/CustomTextField";
-import SearchBtn from "../../Atom/Button/SearchBtn";
+import search from "@/lib/search"
+import StoresInfoType from "@/lib/type/StoresInfoType";
+import initStoresInfoData from "@/public/data/test/storesInfoData.json";
+import CustomTextField from "@/lib/components/Molecules/CustomTextField";
+import SearchBtn from "@/lib/components/Atom/Button/SearchBtn";
 
 
 type Props = {

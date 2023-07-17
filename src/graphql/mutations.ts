@@ -2,9 +2,9 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const updateCongestion = /* GraphQL */ `
-  mutation UpdateCongestion($input: CongestionInput!) {
-    updateCongestion(input: $input) {
+export const updateStoreCongestionByStoreID = /* GraphQL */ `
+  mutation UpdateStoreCongestionByStoreID($input: CongestionInput!) {
+    updateStoreCongestionByStoreID(input: $input) {
       storeID
       congestionLevel
       editAt
@@ -12,27 +12,27 @@ export const updateCongestion = /* GraphQL */ `
     }
   }
 `;
-export const createDeduction = /* GraphQL */ `
-  mutation CreateDeduction($input: DeductionInput!) {
-    createDeduction(input: $input) {
+export const createStoreDeduction = /* GraphQL */ `
+  mutation CreateStoreDeduction($input: DeductionInput!) {
+    createStoreDeduction(input: $input) {
       storeID
       deductionID
       deductionIndex
       status
-      createdAt
+      createAt
       editAt
       __typename
     }
   }
 `;
-export const updateDeduction = /* GraphQL */ `
-  mutation UpdateDeduction($input: DeductionInput!) {
-    updateDeduction(input: $input) {
+export const updateStoreDeduction = /* GraphQL */ `
+  mutation UpdateStoreDeduction($input: DeductionInput!) {
+    updateStoreDeduction(input: $input) {
       storeID
       deductionID
       deductionIndex
       status
-      createdAt
+      createAt
       editAt
       __typename
     }

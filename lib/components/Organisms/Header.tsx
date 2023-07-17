@@ -1,10 +1,10 @@
 import {AppBar, Box, ThemeProvider, Toolbar} from "@mui/material";
-import theme from "../../style/theme";
+import theme from "@/lib/style/theme";
 import React, {Dispatch, FC, SetStateAction, useState} from "react";
 import MenuDrawer from "./Drawer/MenuDrawer";
 import SearchDrawer from "./Drawer/SearchDrawer";
 import MenuBtn from '../Atom/Button/MenuBtn'
-import StoresInfoType from "../../type/StoresInfoType";
+import StoresInfoType from "@/lib/type/StoresInfoType";
 import SearchDrawerBtn from "../Atom/Button/SearchDrawerBtn";
 import BannerLogo from "../Atom/Image/BannerLogo";
 

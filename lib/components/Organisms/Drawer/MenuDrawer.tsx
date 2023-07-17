@@ -1,14 +1,12 @@
 import {List, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import MapIcon from "@mui/icons-material/Map";
-import LinkIcon from "@mui/icons-material/Link";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
-import StyledDrawer from "../../../style/StyledDrawer";
-import StyledWhiteDivider from "../../Atom/StyledWhiteDivider";
+import StyledDrawer from "@/lib/style/StyledDrawer";
+import StyledWhiteDivider from "@/lib/components/Atom/StyledWhiteDivider";
 import React from "react";
-import SideDrawerBtn from "../../Molecules/SideDrawerBtn";
+import SideDrawerBtn from "@/lib/components/Molecules/SideDrawerBtn";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import storepage from "../../../../pages/storepage";
 import StoreIcon from '@mui/icons-material/Store';
 
 type Props = {

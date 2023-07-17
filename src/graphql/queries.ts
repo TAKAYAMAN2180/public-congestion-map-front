@@ -29,7 +29,7 @@ export const fetchStoreDeductionsByStoreID = /* GraphQL */ `
       deductionID
       deductionIndex
       status
-      createdAt
+      createAt
       editAt
       __typename
     }

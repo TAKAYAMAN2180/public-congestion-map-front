@@ -3,7 +3,7 @@ import {Box, Grow} from "@mui/material";
 import {useEffect, useState} from "react";
 import Image from "next/image";
 import CancelBtn from "../Atom/Button/CancelBtn";
-import StorePaneType from "../../type/StorePaneType";
+import StorePaneType from "@/lib/type/StorePaneType";
 import CongestionSentence from "../Atom/CongestionSentence";
 
 type Props = {

@@ -1,9 +1,8 @@
 import {ListItemButton, ListItemIcon, ListItemText, SvgIconTypeMap} from "@mui/material";
 import React from "react";
 import {OverridableComponent} from "@mui/material/OverridableComponent";
-import StyledWhiteDivider from "../Atom/StyledWhiteDivider";
+import StyledWhiteDivider from "@/lib/components/Atom/StyledWhiteDivider";
 import Link from "next/link";
-import {Url} from "url";
 
 
 const SideDrawerBtn = ({text, key, SvgIcon, page}: {

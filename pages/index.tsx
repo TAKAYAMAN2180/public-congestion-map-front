@@ -36,11 +36,6 @@ const App: NextPage = () => {
 
     return (
         <>
-            <HEAD>
-                <link rel={"icon"} href={"/img/favicon.png"}/>
-                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-            </HEAD>
-
             <div style={{msOverflowStyle: "none"}}>
                 <Header isMapPage={true} {...{setStoresInfo}}/>
                 <div style={{

@@ -1,13 +1,13 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useRef, useState} from 'react';
 import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
-import {useWindowSize} from "../../hooks/useWindowSize";
-import StoresInfoType from "../../type/StoresInfoType";
+import {useWindowSize} from "@/lib/hooks/useWindowSize";
+import StoresInfoType from "@/lib/type/StoresInfoType";
 
-import congestionDataSample from "../../../public/data/test/congestionDataSample.json";
-import CongestionDataType from "../../type/CongestionDataType";
-import StorePaneType from "../../type/StorePaneType";
-import SpecialMarks from "../Molecules/SpecialMarks";
-import CongestionMark from "../Atom/Image/CongestionMark";
+import congestionDataSample from "@/public/data/test/congestionDataSample.json";
+import CongestionDataType from "@/lib/type/CongestionDataType";
+import StorePaneType from "@/lib/type/StorePaneType";
+import SpecialMarks from "@/lib/components/Molecules/SpecialMarks";
+import CongestionMark from "@/lib/components/Atom/Image/CongestionMark";
 
 //TODO:座標のデータを入れたものを作る
 //下のはサンプルデータ

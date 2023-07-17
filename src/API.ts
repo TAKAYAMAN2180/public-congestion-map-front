@@ -5,21 +5,19 @@
 export type CongestionInput = {
   storeID: string,
   congestionLevel: number,
-  editAt: string,
 };
 
 export type Congestion = {
   __typename: "Congestion",
   storeID: string,
   congestionLevel: number,
-  editAt: number,
+  editAt: string,
 };
 
 export type DeductionInput = {
   storeID: string,
-  deductionID: string,
   deductionIndex: number,
-  createdAt: number,
+  status: number,
 };
 
 export type Deduction = {
@@ -28,7 +26,7 @@ export type Deduction = {
   deductionID: string,
   deductionIndex: number,
   status: number,
-  createdAt: string,
+  createAt: string,
   editAt: string,
 };
 
@@ -38,47 +36,47 @@ export type Store = {
   areaNum: number,
 };
 
-export type UpdateCongestionMutationVariables = {
+export type UpdateStoreCongestionByStoreIDMutationVariables = {
   input: CongestionInput,
 };
 
-export type UpdateCongestionMutation = {
-  updateCongestion:  {
+export type UpdateStoreCongestionByStoreIDMutation = {
+  updateStoreCongestionByStoreID?:  {
     __typename: "Congestion",
     storeID: string,
     congestionLevel: number,
-    editAt: number,
-  },
-};
-
-export type CreateDeductionMutationVariables = {
-  input: DeductionInput,
-};
-
-export type CreateDeductionMutation = {
-  createDeduction:  {
-    __typename: "Deduction",
-    storeID: string,
-    deductionID: string,
-    deductionIndex: number,
-    status: number,
-    createdAt: string,
     editAt: string,
-  },
+  } | null,
 };
 
-export type UpdateDeductionMutationVariables = {
+export type CreateStoreDeductionMutationVariables = {
   input: DeductionInput,
 };
 
-export type UpdateDeductionMutation = {
-  updateDeduction:  {
+export type CreateStoreDeductionMutation = {
+  createStoreDeduction?:  {
     __typename: "Deduction",
     storeID: string,
     deductionID: string,
     deductionIndex: number,
     status: number,
-    createdAt: string,
+    createAt: string,
+    editAt: string,
+  } | null,
+};
+
+export type UpdateStoreDeductionMutationVariables = {
+  input: DeductionInput,
+};
+
+export type UpdateStoreDeductionMutation = {
+  updateStoreDeduction:  {
+    __typename: "Deduction",
+    storeID: string,
+    deductionID: string,
+    deductionIndex: number,
+    status: number,
+    createAt: string,
     editAt: string,
   },
 };
@@ -88,7 +86,7 @@ export type FetchAllCongestionsQuery = {
     __typename: "Congestion",
     storeID: string,
     congestionLevel: number,
-    editAt: number,
+    editAt: string,
   } >,
 };
 
@@ -101,7 +99,7 @@ export type FetchStoreCongestionByStoreIDQuery = {
     __typename: "Congestion",
     storeID: string,
     congestionLevel: number,
-    editAt: number,
+    editAt: string,
   } | null,
 };
 
@@ -116,7 +114,7 @@ export type FetchStoreDeductionsByStoreIDQuery = {
     deductionID: string,
     deductionIndex: number,
     status: number,
-    createdAt: string,
+    createAt: string,
     editAt: string,
   } | null >,
 };

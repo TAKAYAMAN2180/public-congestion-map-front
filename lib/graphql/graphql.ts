@@ -28,8 +28,8 @@ export const fetchStoreDeductionsByStoreID = async (storeID: string) => {
     return response.data.fetchStoreDeductionsByStoreID as Deduction[];
 }
 
-export const fetchStoreCongestionByStoreID=async (storeID: string)=>{
-    const response=(await API.graphql(graphqlOperation(Queries.fetchStoreCongestionByStoreID,{
+export const fetchStoreCongestionByStoreID = async (storeID: string) => {
+    const response = (await API.graphql(graphqlOperation(Queries.fetchStoreCongestionByStoreID, {
         storeID: storeID
     }))) as {
         data: FetchStoreCongestionByStoreIDQuery;

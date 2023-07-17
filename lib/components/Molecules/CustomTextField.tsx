@@ -1,6 +1,6 @@
-import StyledTextField from "../../style/StyledTextField";
+import StyledTextField from "@/lib/style/StyledTextField";
 import {InputAdornment, ThemeProvider} from "@mui/material";
-import CancelBtn from "../Atom/Button/CancelBtn";
+import CancelBtn from "@/lib/components/Atom/Button/CancelBtn";
 import React, {ChangeEvent} from "react";
 import {createTheme} from "@mui/material/styles";
 
