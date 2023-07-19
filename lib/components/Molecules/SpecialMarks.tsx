@@ -8,13 +8,13 @@ const SpecialMarks = ({screenHookHeight}: {screenHookHeight:number}) => {
     return (
         <>
             {/*CSのマーク*/}
-            <SpecialMark imgPath={"/img/illustrations/vvvlow_centralstage_illustration.webp"}
+            <SpecialMark imgPath={"/img/illustrations/centralstage_illustration.webp"}
                          height={(90 / 1000) * screenHookHeight}
                          topDistance={(screenHookHeight / 1000) * 340}
                          leftDistance={(screenHookHeight / 1000) * 650}
             />
             {/*BSのマーク*/}
-            <SpecialMark imgPath={"/img/illustrations/vbeingstage_illustration.webp"}
+            <SpecialMark imgPath={"/img/illustrations/beingstage_illustration.webp"}
                          height={(90 / 1000) * screenHookHeight}
                          topDistance={(screenHookHeight / 1000) * 640}
                          leftDistance={(screenHookHeight / 1000) * 950}
@@ -26,7 +26,7 @@ const SpecialMarks = ({screenHookHeight}: {screenHookHeight:number}) => {
                          leftDistance={(screenHookHeight / 1000) * 920}
             />
             {/*フリーマーケットのマーク*/}
-            <SpecialMark imgPath={"/img/illustrations/vfreemarket_illustration.webp"}
+            <SpecialMark imgPath={"/img/illustrations/freemarket_illustration.webp"}
                          height={(90 / 1000) * screenHookHeight}
                          topDistance={(screenHookHeight / 1000) * 550}
                          leftDistance={(screenHookHeight / 1000) * 1100}
@@ -37,6 +37,7 @@ const SpecialMarks = ({screenHookHeight}: {screenHookHeight:number}) => {
                          topDistance={(screenHookHeight / 1000) * 550}
                          leftDistance={(screenHookHeight / 1000) * 700}
             />
+            {/*TODO:これは違う箇所に書きたい*/}
             {/*自分の位置のマーク*/}
             <SpecialMark imgPath={"/img/illustrations/location.webp"}
                          height={(60 / 1000) * screenHookHeight}

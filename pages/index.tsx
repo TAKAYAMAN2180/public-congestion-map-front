@@ -61,7 +61,7 @@ const App: NextPage = () => {
                     pointerEvents: "none",
                 }}>
 
-                    <Image src={"/img/congestion_list2.webp"} alt={"congestion_list"} fill
+                    <Image src={"/img/congestion_list.webp"} alt={"congestion_list"} fill
                            style={{
                                objectFit: "contain",
                                width: "100%",

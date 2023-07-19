@@ -54,7 +54,6 @@ const Header: FC<Props> = ({setStoresInfo, isMapPage}: Props) => {
                                     }
                                 }} toggled={isListOpen}/>
                             </Box>
-                            {/*//TODO:この幅に応じて表示させる画像を変化させる*/}
                             <Box sx={{height: 70, width: 'calc(100% - 60px - 58px)'}}>
                                 <BannerLogo/>
                             </Box>

@@ -9,7 +9,7 @@ const BannerLogo=()=>{
             justifyContent: "center",
             alignItems: "center"
         }}>
-            <img src={"/img/header2.webp"} alt={"Header Image"} placeholder={"blur"}
+            <img src={"/img/header.webp"} alt={"Header Image"} placeholder={"blur"}
                  style={{height: "90%", width: "100%", objectFit: "contain"}}/>
         </div>
     );
