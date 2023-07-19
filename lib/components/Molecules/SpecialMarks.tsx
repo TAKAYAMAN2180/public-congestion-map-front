@@ -9,30 +9,35 @@ const SpecialMarks = ({screenHookHeight}: {screenHookHeight:number}) => {
         <>
             {/*CSのマーク*/}
             <SpecialMark imgPath={"/img/illustrations/centralstage_illustration.webp"}
+                         description={"セントラルステージ"}
                          height={(90 / 1000) * screenHookHeight}
                          topDistance={(screenHookHeight / 1000) * 340}
                          leftDistance={(screenHookHeight / 1000) * 650}
             />
             {/*BSのマーク*/}
             <SpecialMark imgPath={"/img/illustrations/beingstage_illustration.webp"}
+                         description={"ビーイングステージ"}
                          height={(90 / 1000) * screenHookHeight}
                          topDistance={(screenHookHeight / 1000) * 640}
                          leftDistance={(screenHookHeight / 1000) * 950}
             />
             {/*抽選所のマーク*/}
             <SpecialMark imgPath={"/img/illustrations/lottery_illustration.webp"}
+                         description={"ラリー企画抽選所"}
                          height={(60 / 1000) * screenHookHeight}
                          topDistance={(screenHookHeight / 1000) * 455}
                          leftDistance={(screenHookHeight / 1000) * 920}
             />
             {/*フリーマーケットのマーク*/}
             <SpecialMark imgPath={"/img/illustrations/freemarket_illustration.webp"}
+                         description={"フリーマーケット"}
                          height={(90 / 1000) * screenHookHeight}
                          topDistance={(screenHookHeight / 1000) * 550}
                          leftDistance={(screenHookHeight / 1000) * 1100}
             />
             {/*バス乗り場のマーク*/}
             <SpecialMark imgPath={"/img/illustrations/bus.webp"}
+                         description={"バス乗り場"}
                          height={(50 / 1000) * screenHookHeight}
                          topDistance={(screenHookHeight / 1000) * 550}
                          leftDistance={(screenHookHeight / 1000) * 700}
