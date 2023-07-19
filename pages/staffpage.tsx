@@ -1,3 +1,4 @@
+/*
 import {useSession, signIn, signOut} from "next-auth/react";
 import React, {ReactNode, useEffect, useState} from "react";
 import Header from "@/lib/components/Organisms/Header";
@@ -113,7 +114,7 @@ const Storepage = () => {
                 setUser(
                     {
                         email: session.user.email!,
-                        /*@ts-ignore*/
+                        /!*@ts-ignore*!/
                         userID: session.user.id
                     });
             }
@@ -241,4 +242,4 @@ const Storepage = () => {
     );
 }
 
-export default Storepage;
+export default Storepage;*/
