@@ -42,13 +42,13 @@ const SpecialMarks = ({screenHookHeight}: {screenHookHeight:number}) => {
                          topDistance={(screenHookHeight / 1000) * 550}
                          leftDistance={(screenHookHeight / 1000) * 700}
             />
-            {/*TODO:これは違う箇所に書きたい*/}
-            {/*自分の位置のマーク*/}
+            {/*TODO:これは違う箇所に書きたい
+            自分の位置のマーク
             <SpecialMark imgPath={"/img/illustrations/location.webp"}
                          height={(60 / 1000) * screenHookHeight}
                          topDistance={(screenHookHeight / 1000) * 600}
                          leftDistance={(screenHookHeight / 1000) * 700}
-            />
+            />*/}
         </>
     )
 }
