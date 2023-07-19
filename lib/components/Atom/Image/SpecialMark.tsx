@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 type SpecialEventProps = {
     description?: string;
@@ -7,6 +8,18 @@ type SpecialEventProps = {
     topDistance: number;
     leftDistance: number
 };
+
+const StyledDiv = styled.div`
+  font-size: 0.3vw;
+  white-space: nowrap;
+  font-weight: 1000;
+
+  text-shadow:
+          0.1vw 0.1vw 0.1vw white, -0.1vw -0.1vw 0.1vw white,
+          -0.1vw 0.1vw 0.1vw white,  0.1vw -0.1vw 0.1vw white,
+          0.1vw 0px 0.1vw white, -0.1vw -0px 0.1vw white,
+          0px 0.1vw 0.1vw white,  0px -0.1vw 0.1vw white;
+`
 
 const SpecialMark = ({description, imgPath, height, topDistance, leftDistance}: SpecialEventProps) => (
     <div style={{
@@ -21,14 +34,7 @@ const SpecialMark = ({description, imgPath, height, topDistance, leftDistance}: 
         flexDirection: "column",
         alignItems: "center"
     }}>
-        <div style={{
-            fontSize: "0.3vw",
-            whiteSpace: "nowrap",
-            fontWeight: "bold",
-            textShadow: "-1px -1px 0 white,1px -1px 0 white,-1px 1px 0 white,1px 1px 0 white"
-            /*            overflow: "hidden",
-            textOverflow: "ellipsis"*/
-        }}>{description}</div>
+        <StyledDiv>{description}</StyledDiv>
         <img src={imgPath}
              height={height}
              style={{
