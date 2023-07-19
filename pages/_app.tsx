@@ -9,16 +9,6 @@ import {Amplify} from "aws-amplify";
 import HEAD from "next/head";
 import GoogleAnalytics from "@/lib/GoogleAnalytics";
 
-Amplify.configure({
-    "aws_project_region": process.env.NEXT_PUBLIC_AWS_PROJECT_REGION,
-    "aws_appsync_graphqlEndpoint": process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
-    "aws_appsync_region": process.env.NEXT_PUBLIC_AWS_PROJECT_REGION,
-    "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": process.env.NEXT_PUBLIC_COGNITO_API_KEY
-})
-
-
-
 function MyApp({Component, pageProps}: AppProps) {
     const [congestionData, setCongestionData] = useState<CongestionDataType[]>(congestionDataSample);
     return (

@@ -35,9 +35,18 @@ export const fetchStoreDeductionsByStoreID = /* GraphQL */ `
     }
   }
 `;
-export const fetchStoreByUserId = /* GraphQL */ `
-  query FetchStoreByUserId($userID: String!) {
-    fetchStoreByUserId(userID: $userID) {
+export const fetchStoreByUserID = /* GraphQL */ `
+  query FetchStoreByUserID($userID: String!) {
+    fetchStoreByUserID(userID: $userID) {
+      storeID
+      areaNum
+      __typename
+    }
+  }
+`;
+export const fetchStoreByStoreID = /* GraphQL */ `
+  query FetchStoreByStoreID($storeID: String!) {
+    fetchStoreByStoreID(storeID: $storeID) {
       storeID
       areaNum
       __typename

@@ -119,14 +119,26 @@ export type FetchStoreDeductionsByStoreIDQuery = {
   } | null >,
 };
 
-export type FetchStoreByUserIdQueryVariables = {
+export type FetchStoreByUserIDQueryVariables = {
   userID: string,
 };
 
-export type FetchStoreByUserIdQuery = {
-  fetchStoreByUserId:  {
+export type FetchStoreByUserIDQuery = {
+  fetchStoreByUserID:  {
     __typename: "Store",
     storeID: string,
     areaNum: number,
   },
+};
+
+export type FetchStoreByStoreIDQueryVariables = {
+  storeID: string,
+};
+
+export type FetchStoreByStoreIDQuery = {
+  fetchStoreByStoreID?:  {
+    __typename: "Store",
+    storeID: string,
+    areaNum: number,
+  } | null,
 };

@@ -2,7 +2,6 @@ import NextAuth from 'next-auth';
 import CognitoProvider from "next-auth/providers/cognito";
 import {CognitoIdentityServiceProvider} from 'aws-sdk';
 
-
 export default NextAuth({
     providers: [
         CognitoProvider({
@@ -15,11 +14,8 @@ export default NextAuth({
         async session({session, token, user}) {
             // Send properties to the client, like an access_token and user id from a provider.
             session.user.id = token.sub
-
             return session
         }
     },
-
     secret: "gvF8KSUfMG9yCiM5DXFTgrRvsI/kRPQ3AZ3eLW5d/D0=",
-
 })
