@@ -33,20 +33,6 @@ const SpecialMark = ({description, imgPath, height, topDistance, leftDistance}: 
         }
     }, [height, description]);
 
-    /*    useEffect(() => {
-            if (cssFontSize != "" || cssFontSize) {
-                console.log(cssFontSize);
-                setCssStyle({
-                    whiteSpace: "nowrap",
-                    fontWeight: 1000,
-                    textShadow: "0.1vw 0.1vw 0.1vw white, -0.1vw -0.1vw 0.1vw white, -0.1vw 0.1vw 0.1vw white, 0.1vw -0.1vw 0.1vw white, 0.1vw 0px 0.1vw white, -0.1vw -0px 0.1vw white, 0px 0.1vw 0.1vw white, 0px -0.1vw 0.1vw white",
-                    fontSize: cssFontSize,
-                });
-                console.log("css↓");
-                console.log(cssStyle);
-            }
-        }, [cssFontSize]);*/
-
     return (
         <div style={{
             //heightの数字を変えるとサイズが変更
