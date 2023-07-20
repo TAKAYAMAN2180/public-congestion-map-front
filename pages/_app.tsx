@@ -3,7 +3,7 @@ import React from "react";
 import {CssBaseline} from "@mui/material";
 import {SessionProvider} from "next-auth/react";
 import HEAD from "next/head";
-
+import { Analytics } from '@vercel/analytics/react';
 
 function MyApp({Component, pageProps}: AppProps) {
     return (
@@ -17,6 +17,7 @@ function MyApp({Component, pageProps}: AppProps) {
             <SessionProvider session={pageProps.session}>
                 <CssBaseline/>
                 <Component {...pageProps} />
+                <Analytics />
             </SessionProvider>
         </>
     );
