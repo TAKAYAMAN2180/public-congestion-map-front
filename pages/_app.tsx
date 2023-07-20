@@ -14,8 +14,9 @@ function MyApp({Component, pageProps}: AppProps) {
     return (
         <>
             <HEAD>
-                <link rel={"icon"} href={"/img/favicon.png"}/>
+                <link rel="icon" href={"/img/favicon.png"}/>
                 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+                <meta name="author" content="TAKAYAMA HAYATO" />
                 <title>BKC祭典混雑マップ</title>
             </HEAD>
             <GoogleAnalytics />
@@ -25,6 +26,11 @@ function MyApp({Component, pageProps}: AppProps) {
                     <Component {...pageProps} />
                 </SessionProvider>
             </HideScrollBarDiv>
+            {/*
+            Copyright (c) 2023 TAKAYAMA HAYATO
+            Released under the MIT license
+            https://opensource.org/licenses/mit-license.php
+            */}
         </>
     );
 }

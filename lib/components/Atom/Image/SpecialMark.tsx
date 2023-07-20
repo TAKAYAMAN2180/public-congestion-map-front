@@ -10,26 +10,12 @@ type SpecialEventProps = {
     leftDistance: number
 };
 
-const StyledDiv = styled.div`
-  font-size: 0.3vw;
-  white-space: nowrap;
-  font-weight: 1000;
-
-  text-shadow: 0.1vw 0.1vw 0.1vw white, -0.1vw -0.1vw 0.1vw white,
-  -0.1vw 0.1vw 0.1vw white,  0.1vw -0.1vw 0.1vw white,
-  0.1vw 0px 0.1vw white, -0.1vw -0px 0.1vw white,
-  0px 0.1vw 0.1vw white,  0px -0.1vw 0.1vw white;
-`
-
 const SpecialMark = ({description, imgPath, height, topDistance, leftDistance}: SpecialEventProps) => {
-    const ref = useRef<HTMLDivElement>(null);
     const [cssFontSize, setCssFontSize] = useState<number>(0);
-    const [cssStyle, setCssStyle] = useState<React.CSSProperties>();
 
     useEffect(() => {
         if (height != 0 && description != undefined) {
-            //window.alert(`calc((${height}/10)/${description?.length})`);
-            setCssFontSize((height)/description.length);
+            setCssFontSize(height / description.length);
         }
     }, [height, description]);
 
@@ -46,14 +32,10 @@ const SpecialMark = ({description, imgPath, height, topDistance, leftDistance}: 
             flexDirection: "column",
             alignItems: "center"
         }}>
-            {/*<StyledDiv length={height}>{description}</StyledDiv>*/}
-            {/*<Box width={"100%"} ref={ref}>
-               <span style={{fontSize: `${ref.current?.offsetWidth}/${description?.length}`}}>{description}</span>
-            </Box>*/}
             {description && <div style={{
                 whiteSpace: "nowrap",
                 fontWeight: 900,
-                textShadow: "0.1vw 0.1vw 0.1vw white, -0.1vw -0.1vw 0.1vw white, -0.1vw 0.1vw 0.1vw white, 0.1vw -0.1vw 0.1vw white, 0.1vw 0px 0.1vw white, -0.1vw -0px 0.1vw white, 0px 0.1vw 0.1vw white, 0px -0.1vw 0.1vw white",
+                textShadow: `${height / 40}px ${height / 40}px ${height / 40}px white, -${height / 40}px -${height / 40}px ${height / 40}px white, -${height / 40}px ${height / 40}px ${height / 40}px white, ${height / 40}px -${height / 40}px ${height / 40}px white, ${height / 40}px 0px ${height / 40}px white, -${height / 40}px -0px ${height / 40}px white, 0px ${height / 40}px ${height / 40}px white, 0px -${height / 40}px ${height / 40}px white`,
                 fontSize: cssFontSize,
             }}>
                 {description}
@@ -63,7 +45,6 @@ const SpecialMark = ({description, imgPath, height, topDistance, leftDistance}: 
                  style={{
                      filter: "drop-shadow(2px 2px 2px gray)",
                  }}
-
             />
         </div>
     );
