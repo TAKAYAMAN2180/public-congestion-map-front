@@ -3,10 +3,11 @@ import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
 import {useWindowSize} from "@/lib/hooks/useWindowSize";
 import StoresInfoType from "@/lib/type/StoresInfoType";
 import congestionDataSample from "@/public/data/test/congestionDataSample.json";
-import CongestionDataType from "@/lib/type/CongestionDataType";
+import {CongestionDataType} from "@/lib/type/CongestionDataType";
 import StorePaneType from "@/lib/type/StorePaneType";
 import SpecialMarks from "@/lib/components/Molecules/SpecialMarks";
 import CongestionMark from "@/lib/components/Atom/Image/CongestionMark";
+import {trackingEvent} from "@/lib/GoogleAnalystics";
 
 //TODO:座標のデータを入れたものを作る
 //下のはサンプルデータ
@@ -231,6 +232,7 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
                                                             handleOnClicked={() => {
                                                                 handleImgClicked({...eachCongestion, ...storeInfo});
                                                                 makeCenterFocus(point?.x, point?.y);
+                                                                trackingEvent("touch_storepane", "touch_event",storeInfo.areaNum.toString());
                                                             }}
                                             />
                                         );

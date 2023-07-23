@@ -1,6 +1,5 @@
-import React, {ReactNode, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Header from "@/lib/components/Organisms/Header";
-import HEAD from "next/head";
 import {
     fetchStoreDeductionsByStoreID,
     fetchStoreCongestionByStoreID,
@@ -10,209 +9,389 @@ import initStoresInfoData from "@/public/data/test/storesInfoData.json";
 import deductionListSampleData from "@/public/data/test/deductionListSampleData.json";
 import StoresInfoType from "@/lib/type/StoresInfoType";
 import {Box, Backdrop, CircularProgress, Button, ThemeProvider} from "@mui/material";
-import {Congestion} from "@/src/API";
-import theme from "@/lib/style/theme";
-import TextField from "@mui/material/TextField";
+import {Congestion as APICongestionType} from "@/src/API";
+import {useCookies} from "react-cookie";
+import InfoBox from "@/lib/components/Atom/InfoBox";
+import LoginPage from "@/lib/components/Organisms/LoginPage";
+import {
+    DeductionStatusEnum,
+    DeductionsSummaryType,
+    DeductionInfoType,
+    getDeductionStatusStr
+} from "@/lib/type/DeductionDataType";
+import {
+    CongestionDataType,
+    CongestionStatusEnum,
+    getCongestionStatusStr,
 
-type DeductionPoint = {
-    attentionTimes: number;
-    deductionPoints: number;
-}
+} from "@/lib/type/CongestionDataType";
+import {useRouter} from "next/router";
+import {
+    COOKIE_NAMES,
+    DatabaseValueCookieKeptType,
+    StoreIndexCookieKeptType
+} from "@/lib/cookieController";
 
-// SSGとかSSRに対応させてAPIキーの露出を防ぐ
-enum DeductionStatusEnum {
-    // 0→処理中、1→取り消し、2→注意、3→減点
-    PROCESS = 0,
-    CANCEL = 1,
-    ATTENTION = 2,
-    DEDUCTION = 3
-}
+// Cookieに保存するのはサーバから取ってきてる「減点情報(点数とその詳細)」、「混雑状況」、「区画番号」、「店舗ID(テンポキー)」
 
-const getDeductionStatusStr = (deductionStatusEnum: DeductionStatusEnum) => {
-    let returnStr: string = "";
-    switch (deductionStatusEnum) {
-        case DeductionStatusEnum.PROCESS:
-            returnStr = "処理中";
-            break;
-        case DeductionStatusEnum.CANCEL:
-            returnStr = "取り消し";
-            break;
-        case DeductionStatusEnum.ATTENTION:
-            returnStr = "注意";
-            break;
-        case DeductionStatusEnum.DEDUCTION:
-            returnStr = "減点";
-            break;
-    }
-    return returnStr;
-}
-
-enum CongestionStatusEnum {
-    STOP = 0,
-    EMPTY = 1,
-    LITTLE_CROWDED = 2,
-    CROWDED = 3,
-}
-
-const getCongestionStatusStr = (congestionStatusEnum: CongestionStatusEnum) => {
-    let returnStr = "";
-    switch (congestionStatusEnum) {
-        case CongestionStatusEnum.STOP:
-            returnStr = "中止しています";
-            break;
-        case CongestionStatusEnum.EMPTY:
-            returnStr = "空いています";
-            break;
-        case CongestionStatusEnum.LITTLE_CROWDED:
-            returnStr = "少し混雑しています";
-            break;
-        case CongestionStatusEnum.CROWDED:
-            returnStr = "混雑しています";
-            break;
-        default:
-            returnStr = "混雑状況にエラーが発生しています";
-            break;
-    }
-    return returnStr;
-}
-
-type DeductionBoxProps = {
-    index: number;
-    points: number;
-    content: string;
-    status: DeductionStatusEnum;
-}
-
-const InfoBox = ({title, children}: { title: string, children: ReactNode }) => (
-    <Box sx={{bgcolor: "#d3d3d3", padding: "1em", borderRadius: "1em", marginBottom: "1em"}}>
-        <div style={{color: "gray", fontSize: "0.7em"}}>{title}</div>
-        <div style={{color: "black"}}>
-            <span>{children}</span>
-        </div>
-    </Box>
-)
 
 const Storepage = () => {
-    const [store, setStore] = useState<StoresInfoType | null>(null);
-    const [deductions, setDeductions] = useState<DeductionBoxProps[]>([]);
-    const [deductionsDetail, setDeductionPoints] = useState<DeductionPoint>({
+    const [storeInfo, setStoreInfo] = useState<StoresInfoType | null>(null);
+    const [deductionsInfo, setDeductionsInfoInfo] = useState<DeductionInfoType[]>([]);
+    const [deductionsSummary, setDeductionSummary] = useState<DeductionsSummaryType>({
         attentionTimes: 0,
         deductionPoints: 0
     });
     const [isPageLoading, setIsPageLoading] = useState(false);
-    const [congestion, setCongestion] = useState<Congestion | null>(null);
-    const [textFieldValue, setTextFieldValue] = useState<string>("");
+    const [congestion, setCongestion] = useState<APICongestionType | null>(null);
+    const [cookies, setCookie, removeCookie] = useCookies(Array.from(COOKIE_NAMES));
+    const [storeID, setStoreID] = useState<string>("");
+    const [finishedFirstLoad, setFinishedFirstLoad] = useState<boolean>(false);
+    const router = useRouter();
 
+    // errorが発生したときやどこかの値がおかしいときはCookieを受け入れない&もとのCookieを消す
+    useEffect(() => {
+        // クエリパラメータがないとき実行するCookie管理関数
+        async function handleCookieWithNoParam() {
+            if (cookies) {
+                if (cookies.bkc_fes_storeIndex) {
+                    let hasValidCookie: boolean;
+                    let tempStoreInfo: StoresInfoType | null = null;
+                    let tempStoreID: string | null = null;
+                    try {
+                        // errorをキャッチできなかったら、nullであることは補償されているはず
+                        const getCookieData = cookies.bkc_fes_storeIndex as StoreIndexCookieKeptType;
+                        setStoreInfo(getCookieData.storeInfo);
+                        setStoreID(getCookieData.storeID);
+                        tempStoreInfo = getCookieData.storeInfo;
+                        tempStoreID = getCookieData.storeID;
+                        hasValidCookie = true;
+                    } catch (error) {
+                        resetCookie();
+                        console.log(error);
+                        return;
+                    }
 
-    const fetchInfos = async (storeID: string) => {
-        const fetchPromise = fetchStoreCongestionByStoreID(storeID);
-        const getDeductions = await fetchStoreDeductionsByStoreID(storeID);
-
-
-        for (const currentDeduction of getDeductions) {
-            const targetDeduction = deductionListSampleData.find(
-                (element) => element.index == currentDeduction.deductionIndex
-            );
-            if (targetDeduction) {
-                const element: DeductionBoxProps = {status: currentDeduction.status, ...targetDeduction}
-                setDeductions(prevArray => [...prevArray, element]);
-
-                // statusについて
-                // 0→処理中、1→取り消し、2→注意、3→減点
-                deductionsDetail.attentionTimes += 1;
-                // TODO:これではダメなので修正する
-                if (currentDeduction.status == DeductionStatusEnum.ATTENTION) {
-                    setDeductionPoints(prevState => ({
-                        attentionTimes: prevState.attentionTimes + 1,
-                        deductionPoints: prevState.deductionPoints
-                    }))
-                } else if (currentDeduction.status == DeductionStatusEnum.DEDUCTION) {
-                    if (targetDeduction) {
-                        setDeductionPoints(prevState => ({
-                            attentionTimes: prevState.attentionTimes,
-                            deductionPoints: prevState.deductionPoints + targetDeduction.points
-                        }))
+                    // Cookie「bkc_fes_storeIndex」がないと、そもそもCookie「bkc_fes_databaseValue」も参照しない
+                    if (cookies.bkc_fes_databaseValue) {
+                        try {
+                            const getCookieData = cookies.bkc_fes_databaseValue as DatabaseValueCookieKeptType;
+                            setDeductionsInfoInfo(getCookieData.deductionsInfo);
+                            setDeductionSummary(getCookieData.deductionsSummary);
+                            setCongestion(getCookieData.congestion);
+                        } catch (error) {
+                            resetStates();
+                            removeCookie("bkc_fes_databaseValue");
+                            console.log(error);
+                            return;
+                        }
+                    } else {
+                        setIsPageLoading(true);
+                        if (tempStoreID && tempStoreInfo) {
+                            await fetchInfosFromDatabase(tempStoreID, tempStoreInfo.areaNum);
+                        }
+                        setIsPageLoading(false);
+                    }
+                } else {
+                    // 「bkc_fes_storeIndex」がないのに、「bkc_fes_databaseValue」がある場合は「bkc_fes_databaseValue」を削除
+                    if (cookies.bkc_fes_databaseValue) {
+                        removeCookie("bkc_fes_databaseValue");
                     }
                 }
-
             }
 
+        }
+
+        // URLパラメータが指定されているときのCookieの扱い
+        async function handleCookieWithParam(storeIDByParam: string) {
+            let hasValidCookie: boolean = false;
+            if (cookies) {
+                if (cookies.bkc_fes_storeIndex) {
+                    let tempStoreInfo: StoresInfoType | null = null;
+                    let tempStoreID: string | null = null;
+                    let getCookieStoreIndexData: StoreIndexCookieKeptType;
+                    try {
+                        // errorをキャッチできなかったら、nullであることは補償されているはず
+                        getCookieStoreIndexData = cookies.bkc_fes_storeIndex as StoreIndexCookieKeptType;
+                    } catch (error) {
+                        resetCookie();
+                        console.log(error);
+                        return;
+                    }
+                    if (getCookieStoreIndexData.storeID == storeIDByParam) {
+                        setStoreInfo(getCookieStoreIndexData.storeInfo);
+                        setStoreID(getCookieStoreIndexData.storeID);
+                        tempStoreInfo = getCookieStoreIndexData.storeInfo;
+                        tempStoreID = getCookieStoreIndexData.storeID;
+
+                        hasValidCookie = true;
+
+                        if (cookies.bkc_fes_databaseValue) {
+                            try {
+                                const getCookieDatabaseData = cookies.bkc_fes_databaseValue as DatabaseValueCookieKeptType;
+                                setDeductionsInfoInfo(getCookieDatabaseData.deductionsInfo);
+                                setDeductionSummary(getCookieDatabaseData.deductionsSummary);
+                                setCongestion(getCookieDatabaseData.congestion);
+                            } catch (error) {
+                                resetStates();
+                                removeCookie("bkc_fes_databaseValue");
+                                console.log(error);
+                                return;
+                            }
+                        } else {
+                            setIsPageLoading(true);
+                            if (tempStoreID && tempStoreInfo) {
+                                await fetchInfosFromDatabase(tempStoreID, tempStoreInfo.areaNum);
+                            }
+                            setIsPageLoading(false);
+                        }
+                    }
+                }
+            }
+
+            if (!hasValidCookie) {
+                await logIn(storeIDByParam);
+            }
+
+
+        }
+
+
+        // Cookieとリクエストパラメータがどっちもあるなら
+        // リクエストパラメータを優先する
+        // let hasUrlParam = false;
+        if (!finishedFirstLoad) {
+            if (router.isReady) {
+                setFinishedFirstLoad(true);
+                setIsPageLoading(false);
+
+                let keyInUrlParam: string | null = null;
+                let hasValidUrlParam: boolean = false;
+
+                const paramKey = router.query.key;
+
+                if (paramKey != null) {
+                    if (Array.isArray(paramKey) || paramKey == "") {
+                        hasValidUrlParam = false;
+                    } else {
+
+                        (async () => {
+                            try {
+                                // @ts-ignore
+                                await fetchAreaNumByStoreID(router.query.key);
+                                // @ts-ignore
+                                keyInUrlParam = paramKey as string;
+                                hasValidUrlParam = true;
+                            } catch (e) {
+                                let error = e as Error;
+                                hasValidUrlParam = false;
+                                window.alert(error.message);
+                            }
+                        })();
+                    }
+                    removeQueryParam("key");
+                }
+                (async () => {
+                    if (hasValidUrlParam && keyInUrlParam) {
+                        await handleCookieWithParam(keyInUrlParam);
+                    } else {
+                        await handleCookieWithNoParam();
+                    }
+                })();
+            } else {
+                setIsPageLoading(true);
+            }
+        }
+    }, [router.isReady]);
+
+    const fetchInfosFromDatabase = async (storeID: string, areaNum: number) => {
+        const targetStoreInfo = initStoresInfoData.find((element) => element.areaNum == areaNum);
+        if (targetStoreInfo) {
+            setStoreInfo(targetStoreInfo);
+
+            // ログインに成功したとき→Cookieを入れる
+            // 入れる値がnullではないか
+            const fetchPromise = fetchStoreCongestionByStoreID(storeID);
+            const getDeductions = await fetchStoreDeductionsByStoreID(storeID);
+
+            let tempDeductions: DeductionInfoType[] = [];
+            let tempDeductionSummary: DeductionsSummaryType = {
+                attentionTimes: 0,
+                deductionPoints: 0
+            }
+
+            for (const currentDeduction of getDeductions) {
+                const targetDeduction = deductionListSampleData.find(
+                    (element) => element.index == currentDeduction.deductionIndex
+                );
+                if (targetDeduction) {
+                    const element: DeductionInfoType = {status: currentDeduction.status, ...targetDeduction}
+                    tempDeductions.push(element);
+
+                    // statusについて
+                    // 0→処理中、1→取り消し、2→注意、3→減点
+                    if (currentDeduction.status == DeductionStatusEnum.ATTENTION) {
+                        tempDeductionSummary.attentionTimes = tempDeductionSummary.attentionTimes + 1;
+                    } else if (currentDeduction.status == DeductionStatusEnum.DEDUCTION) {
+                        if (targetDeduction) {
+                            tempDeductionSummary.deductionPoints = tempDeductionSummary.deductionPoints + targetDeduction.points;
+                        }
+                    }
+                }
+            }
+            setDeductionSummary(tempDeductionSummary);
+            setDeductionsInfoInfo(tempDeductions);
             const getCongestion = await fetchPromise;
             setCongestion(getCongestion);
+
+
+            const storeInfoCookieKeptObj: DatabaseValueCookieKeptType = {
+                deductionsSummary: tempDeductionSummary,
+                deductionsInfo: tempDeductions,
+                congestion: getCongestion
+            };
+
+            const tempTime = new Date();
+
+            // 3分を足す
+            tempTime.setMinutes(tempTime.getMinutes() + 3);
+
+            setCookie('bkc_fes_databaseValue', JSON.stringify(storeInfoCookieKeptObj), {
+                expires: tempTime,
+                path: '/'
+            });
+
+            if (!cookies.bkc_fes_storeIndex) {
+                const storeIndexCookieKept: StoreIndexCookieKeptType = {
+                    storeInfo: targetStoreInfo,
+                    storeID: storeID
+                }
+
+                setCookie("bkc_fes_storeIndex", JSON.stringify(storeIndexCookieKept));
+            }
         }
     }
 
-    // TODO:Cookieを使いたい！
-    const logIn = async (storeKey: string) => {
+
+// このボタンが押されているときはCookieはないハズ
+    const logIn = async (storeKey: string): Promise<void> => {
         resetStates();
-        if (storeKey == "") {
-            alert("テキストフィールドに何も入力されていません");
+        setIsPageLoading(true);
+        try {
+            const resultAreaNum = await fetchAreaNumByStoreID(storeKey);
+            resetCookie();
+            await fetchInfosFromDatabase(storeKey, resultAreaNum);
+        } catch (e) {
+            let error = e as Error;
+            console.log(error);
+            window.alert(error.message);
+        }
+        setIsPageLoading(false);
+    };
+
+// うまくいっていたら、trueを返して、ダメだったらstringを返す
+    const fetchAreaNumByStoreID = async (storeID: string): Promise<number> => {
+        let isValid = false;
+        let errorStr: string = "";
+        let getAreaNum: number | null = null;
+
+        if (storeID == "") {
+            errorStr = "テキストフィールドに何も入力されていません";
         } else {
             // 正規表現パターン：アルファベット（大文字・小文字）と数字のみを許可
             const pattern = /^[A-Za-z0-9]*$/;
 
-            if (pattern.test(storeKey)) {
+            if (pattern.test(storeID)) {
                 setIsPageLoading(true);
                 try {
-                    const getStore = await fetchStoreByStoreID(storeKey);
+                    const getStore = await fetchStoreByStoreID(storeID);
 
                     if (getStore) {
-                        const targetStoreInfo = initStoresInfoData.find((element) => element.areaNum == getStore.areaNum);
-                        if (targetStoreInfo) {
-                            setStore(targetStoreInfo);
-                            await fetchInfos(storeKey);
-                        }
+                        isValid = true;
+                        getAreaNum = getStore.areaNum;
+                        errorStr = "店舗キーがデータベースに登録されていません";
                     }
                 } catch (error) {
-                    alert("店舗キーに誤りがあります。");
+                    errorStr = "店舗キーがデータベースに登録されていないか、データベースを読込むことができません";
+                    console.log(error);
                 }
                 setIsPageLoading(false);
             } else {
-                alert("店舗IDはアルファベットと数字しか含まれません。確認してください。");
+                errorStr = "店舗IDはアルファベットと数字しか含まれません。確認してください。";
             }
         }
-    };
+        if (isValid) {
+            if (getAreaNum) {
+                return getAreaNum;
+            } else {
+                throw new Error("正しく区画番号が設定されませんでした");
+            }
+        } else {
+            throw new Error(errorStr);
+        }
+    }
 
     const logOut = () => {
+        resetCookie();
         resetStates();
     };
 
+    const resetCookie = () => {
+        console.log("Cookie RESET");
+        removeCookie("bkc_fes_storeIndex");
+        removeCookie("bkc_fes_databaseValue");
+    }
+
     const resetStates = () => {
-        setDeductions([]);
-        setDeductionPoints(
+        setDeductionsInfoInfo([]);
+        setDeductionSummary(
             {
                 attentionTimes: 0,
                 deductionPoints: 0
             });
-        setStore(null);
+        setStoreInfo(null);
     }
+
+    const removeQueryParam = (key: string) => {
+        // 現在の query オブジェクトをコピー
+        const newQuery: { [key: string]: string | string[] | undefined } = { ...router.query };
+
+        // キーを削除
+        delete newQuery[key];
+
+        // 新しいクエリでルートを更新
+        router.push({
+            pathname: router.pathname,
+            query: newQuery,
+        }, undefined, { shallow: true });  // shallow: true でページ全体の再レンダリングを回避
+    };
 
     return (
         <>
-
             <Header isMapPage={false}/>
             <div style={{marginTop: "70px"}}>
-                {store ?
+                {storeInfo ?
                     <div style={{padding: "20px"}}>
                         <div style={{fontWeight: "bold"}}>
-                            <span style={{fontSize: "2rem"}}>{store?.storeName}</span><br/>
-                            {store?.groupName && <span style={{marginRight: "0.5em"}}>{store?.groupName}</span>}
-                            <span>区画番号 {store?.areaNum}番</span>
+                            <span style={{fontSize: "2rem"}}>{storeInfo?.storeName}</span><br/>
+                            {storeInfo?.groupName &&
+                                <span style={{marginRight: "0.5em"}}>{storeInfo?.groupName}</span>}
+                            <span>区画番号 {storeInfo?.areaNum}番</span>
                         </div>
                         <div style={{marginTop: "30px"}}>
                             <div style={{fontSize: "1.7rem", fontWeight: "bold"}}>
                                 詳細
                             </div>
-                            <InfoBox title={"販売品目"}>{store?.food}</InfoBox>
+                            <InfoBox title={"販売品目"}>{storeInfo?.food}</InfoBox>
                             <InfoBox
                                 title={"現在の混雑状況"}>{congestion && getCongestionStatusStr(congestion.congestionLevel)}</InfoBox>
                             <InfoBox title={"減点状況"}>
                                 <div style={{fontSize: "1.5rem"}}>
-                                    注意 {deductionsDetail.attentionTimes}回,
-                                    減点 {deductionsDetail.deductionPoints}点
+                                    注意 {deductionsSummary.attentionTimes}回,
+                                    減点 {deductionsSummary.deductionPoints}点
                                 </div>
                                 <div>
-                                    {deductions.map((deduction, key) => (
+                                    {deductionsInfo.map((deduction, key) => (
                                         <div key={key}>
                                             {deduction.points}点
                                             減点項目 {getDeductionStatusStr(deduction.status)}<br/>
@@ -221,31 +400,12 @@ const Storepage = () => {
                                     ))}
                                 </div>
                             </InfoBox>
+                            <div style={{fontSize: "0.5rem"}}>※これらの情報は約３分ごとに更新されます。</div>
                             <button onClick={() => logOut()}>Sign Out</button>
                             <br/>
                         </div>
-                    </div> : <div>
-                        <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                            <div style={{fontWeight: "Bold", padding: "1em", fontSize: "1.5rem"}}>
-                                このページは模擬店出店者向けのページです。<br/>
-                                下の入力欄に店舗キーを入力してください。
-                            </div>
-
-                            <ThemeProvider theme={theme}>
-                                <div style={{width: "80%", maxWidth: "500px"}}>
-                                    <TextField fullWidth
-                                               id="standard-search"
-                                               label="店舗キー"
-                                               type="search"
-                                               variant="standard"
-                                               onChange={(event) => setTextFieldValue(event.target.value)}
-                                    />
-                                </div>
-                                <Button variant="contained" sx={{marginTop: 3}}
-                                        onClick={() => logIn(textFieldValue)}>ログイン</Button>
-                            </ThemeProvider>
-                        </div>
-                    </div>
+                    </div> :
+                    <LoginPage onLogInBtnClicked={logIn}/>
                 }
             </div>
             <Backdrop open={isPageLoading}>

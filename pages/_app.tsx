@@ -3,7 +3,12 @@ import React from "react";
 import {CssBaseline} from "@mui/material";
 import {SessionProvider} from "next-auth/react";
 import HEAD from "next/head";
-import { Analytics } from '@vercel/analytics/react';
+import GoogleAnalytics from "@/lib/GoogleAnalystics"
+import awsmobile from "@/src/aws-exports";
+import {Amplify} from "aws-amplify";
+import {CookiesProvider} from "react-cookie";
+
+Amplify.configure(awsmobile);
 
 function MyApp({Component, pageProps}: AppProps) {
     return (
@@ -14,10 +19,10 @@ function MyApp({Component, pageProps}: AppProps) {
                 <meta name="author" content="TAKAYAMA HAYATO"/>
                 <title>BKC祭典混雑マップ</title>
             </HEAD>
+            <GoogleAnalytics/>
             <SessionProvider session={pageProps.session}>
                 <CssBaseline/>
                 <Component {...pageProps} />
-                <Analytics />
             </SessionProvider>
         </>
     );
