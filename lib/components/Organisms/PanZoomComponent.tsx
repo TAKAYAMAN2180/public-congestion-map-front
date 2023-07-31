@@ -56,13 +56,6 @@ const PanZoomComponent: FC<Props> = ({storePaneDataSetter, targetStoresInfo, foc
 
     const MAX_SCALE = 2.5;
 
-    useEffect(() => {
-        const innerHeightSize = window.innerHeight;
-
-        //console.log("innerHeightSize:" + innerHeightSize);
-        //setScreenHeight(innerHeightSize);
-    }, []);
-
 
     const handleImgClicked = (getStorePaneData: StorePaneType) => {
         storePaneDataSetter(getStorePaneData);
