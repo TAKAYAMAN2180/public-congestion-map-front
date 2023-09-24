@@ -16,6 +16,13 @@ module.exports = {
       use: ['@svgr/webpack']
     });
 
+    // HTMLファイルのローダー設定
+    config.module.rules.push({
+      test: /\.html$/,
+      use: 'html-loader',
+    });
+
+
     return config;
   }
 };
