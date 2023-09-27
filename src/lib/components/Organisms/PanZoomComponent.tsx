@@ -10,27 +10,9 @@ import CongestionMark from "@/src/lib/components/Atom/Image/CongestionMark";
 import {trackingEvent} from "@/src/lib/GoogleAnalystics";
 import {useRecoilState} from "recoil";
 import {atomPaneState, AtomPaneStateType, PaneKindStateEnum} from "@/src/lib/recoilAtom";
+import points from "@/src/lib/pointInfos"
 
 //TODO:座標のデータを入れたものを作る
-//下のはサンプルデータ
-const points = [
-    {areaNum: 1, x: 1090, y: 450},
-    {areaNum: 2, x: 1090, y: 480},
-    {areaNum: 3, x: 1090, y: 510},
-    {areaNum: 4, x: 950, y: 385},
-    {areaNum: 5, x: 1000, y: 385},
-    {areaNum: 6, x: 1070, y: 535},
-    {areaNum: 7, x: 1045, y: 560},
-    {areaNum: 8, x: 1020, y: 585},
-    {areaNum: 9, x: 995, y: 605},
-    {areaNum: 10, x: 970, y: 585},
-    {areaNum: 11, x: 945, y: 560},
-    {areaNum: 12, x: 920, y: 535},
-    {areaNum: 13, x: 885, y: 535},
-    {areaNum: 14, x: 860, y: 510},
-    {areaNum: 15, x: 1050, y: 385},
-];
-
 type Borders = {
     leftXBoarder: number;
     rightXBoarder: number;
@@ -56,7 +38,7 @@ const PanZoomComponent: FC<Props> = ({targetStoresInfo, focusedNum}: Props) => {
     const [screenHeight, setScreenHeight] = useState<number>();
     const [paneState, setPaneState] = useRecoilState(atomPaneState);
 
-    const MAX_SCALE = 2.5;
+    const MAX_SCALE = 5;
 
 
     const handleImgClicked = (getStorePaneData: StorePaneType) => {
@@ -195,7 +177,6 @@ const PanZoomComponent: FC<Props> = ({targetStoresInfo, focusedNum}: Props) => {
                     <div style={{
                         height: screenHookHeight,
                     }}>
-                        {/*↑この２つを消したら、うまく横スクロールできる*/}
                         <img
                             ref={imgRef}
                             height={screenHookHeight}

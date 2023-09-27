@@ -63,3 +63,10 @@ amplifytools.xcconfig
 #lock files
 yarn.lock
 package-lock.json
+
+#error file
+yarn-error.log
+
+#IDE unsed directory
+.idea
+.vscode

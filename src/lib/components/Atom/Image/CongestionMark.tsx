@@ -46,24 +46,34 @@ const CongestionMark = ({
 
 
     return (
-        <img src={`/img/marks/congestion${eachCongestion.congestionLevel}.webp`}
-             alt={"congestion situation"}
-             key={targetStoreInfo.areaNum}
-             onClick={handleOnClicked}
-             width={(25 / 1000) * screenHookHeight}
-             height={(25 / 1000) * screenHookHeight}
+        <>
+            <div style={{
+                position: "absolute",
+                top: `${(screenHookHeight / 1000) * (point?.y+20)}px`,
+                left: `${(screenHookHeight / 1000) * point?.x}px`,
+                zIndex: 1,
+                pointerEvents: "auto",
+                opacity: `${opacity}`
+            }}>{point.areaNum}</div>
+            <img src={`/img/marks/congestion${eachCongestion.congestionLevel}.webp`}
+                 alt={"congestion situation"}
+                 key={targetStoreInfo.areaNum}
+                 onClick={handleOnClicked}
+                 width={(8 / 1000) * screenHookHeight}
+                 height={(8 / 1000) * screenHookHeight}
 
-             style={{
-                 position: "absolute",
-                 top: `${(screenHookHeight / 1000) * point?.y}px`,
-                 left: `${(screenHookHeight / 1000) * point?.x}px`,
-                 zIndex: 1,
-                 boxShadow: "0 0 4px gray",
-                 pointerEvents: "auto",
-                 borderRadius: "50%",
-                 opacity: `${opacity}`
-             }}
-        />
+                 style={{
+                     position: "absolute",
+                     top: `${(screenHookHeight / 1000) * point?.y}px`,
+                     left: `${(screenHookHeight / 1000) * point?.x}px`,
+                     zIndex: 1,
+                     boxShadow: "0 0 4px gray",
+                     pointerEvents: "auto",
+                     borderRadius: "50%",
+                     opacity: `${opacity}`
+                 }}
+            />
+        </>
     )
 }
 
