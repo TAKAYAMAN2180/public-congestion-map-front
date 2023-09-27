@@ -47,14 +47,15 @@ const CongestionMark = ({
 
     return (
         <>
-            <div style={{
+            {/*下の記述は配置するときに利用 → 配置に文字をつけられる*/}
+{/*            <div style={{
                 position: "absolute",
                 top: `${(screenHookHeight / 1000) * (point?.y+20)}px`,
                 left: `${(screenHookHeight / 1000) * point?.x}px`,
                 zIndex: 1,
                 pointerEvents: "auto",
                 opacity: `${opacity}`
-            }}>{point.areaNum}</div>
+            }}>{point.areaNum}</div>*/}
             <img src={`/img/marks/congestion${eachCongestion.congestionLevel}.webp`}
                  alt={"congestion situation"}
                  key={targetStoreInfo.areaNum}
