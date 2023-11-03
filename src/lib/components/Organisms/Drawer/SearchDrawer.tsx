@@ -20,7 +20,6 @@ function reformat(arg: any[]): StoresInfoType[] {
 }
 
 
-
 const SearchDrawer = ({isSearchBoxOpen, handleCloseIconClicked, setStoresInfo}: Props) => {
     const [textFieldValue, setTextFieldValue] = useState<string>("");
     const [preTextFieldValue, setPreTextFieldValue] = useState<string>("");

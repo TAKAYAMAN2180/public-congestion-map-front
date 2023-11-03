@@ -31,7 +31,7 @@ const CustomTextField = ({textFieldValue, handleTextFieldChanged, handleCancelBt
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position="end">
-                            <CancelBtn onClick={handleCancelBtnClicked}/>
+                            {textFieldValue.length > 0 && <CancelBtn onClick={handleCancelBtnClicked}/>}
                         </InputAdornment>
                     ),
                 }}
