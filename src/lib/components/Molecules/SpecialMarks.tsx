@@ -14,9 +14,9 @@ const SpecialMarks = ({screenHookHeight, centerFocusFunction}: {
             {/*CSのマーク*/}
             <SpecialMark imgPath={"/img/illustrations/centralstage_illustration.webp"}
                          description={"セントラルステージ"}
-                         height={(90 / 1000) * screenHookHeight}
-                         topDistance={340}
-                         leftDistance={650}
+                         height={(50 / 1000) * screenHookHeight}
+                         topDistance={355}
+                         leftDistance={720}
                          specialMarkKindEnum={SpecialMarkKindEnum.CENTRAL_STAGE}
                          content={"大人気！ステージ企画！あの有名人も登場！？"}
                          contentUrl={"https://google.com"}
@@ -25,7 +25,7 @@ const SpecialMarks = ({screenHookHeight, centerFocusFunction}: {
             {/*BSのマーク*/}
             <SpecialMark imgPath={"/img/illustrations/beingstage_illustration.webp"}
                          description={"ビーイングステージ"}
-                         height={(80 / 1000) * screenHookHeight}
+                         height={(50 / 1000) * screenHookHeight}
                          topDistance={650}
                          leftDistance={970}
                          specialMarkKindEnum={SpecialMarkKindEnum.BEING_STAGE}
@@ -47,8 +47,8 @@ const SpecialMarks = ({screenHookHeight, centerFocusFunction}: {
             {/*フリーマーケットのマーク*/}
             <SpecialMark imgPath={"/img/illustrations/freemarket_illustration.webp"}
                          description={"フリーマーケット"}
-                         height={(90 / 1000) * screenHookHeight}
-                         topDistance={350}
+                         height={(50 / 1000) * screenHookHeight}
+                         topDistance={370}
                          leftDistance={1100}
                          specialMarkKindEnum={SpecialMarkKindEnum.FREE_MARKET}
                          content={"フリーマーケットで掘り出し物を見つけよう！"}
@@ -64,6 +64,58 @@ const SpecialMarks = ({screenHookHeight, centerFocusFunction}: {
                          specialMarkKindEnum={SpecialMarkKindEnum.BUS_STOP}
                          content={"便利なバス位置情報を提供中！"}
                          contentUrl={"https://google.com"}
+                         {...{centerFocusFunction}}
+            />
+            {/*総合案内所のマーク*/}
+            <SpecialMark imgPath={"/img/illustrations/info.webp"}
+                         description={"総合案内所"}
+                         height={(50 / 1000) * screenHookHeight}
+                         topDistance={350}
+                         leftDistance={850}
+                         specialMarkKindEnum={SpecialMarkKindEnum.INFO_CENTER}
+                         content={"困ったときはぜひこちらへ！"}
+                         contentUrl={"https://google.com"}
+                         {...{centerFocusFunction}}
+            />
+            {/*投票所のマーク*/}
+            <SpecialMark imgPath={"/img/illustrations/voting_station.webp"}
+                         description={"模擬店投票所"}
+                         height={(35 / 1000) * screenHookHeight}
+                         topDistance={570}
+                         leftDistance={870}
+                         specialMarkKindEnum={SpecialMarkKindEnum.VOTING_STATION}
+                         content={"模擬店に投票して立命館グッズをゲットしよう！！"}
+                         contentUrl={"https://google.com"}
+                         {...{centerFocusFunction}}
+            />
+            {/*休憩所(ユニオンのマーク)*/}
+            <SpecialMark imgPath={"/img/illustrations/lounge.webp"}
+                         description={"休憩所"}
+                         height={(35 / 1000) * screenHookHeight}
+                         topDistance={480}
+                         leftDistance={810}
+                         specialMarkKindEnum={SpecialMarkKindEnum.LOUNGE_UNION}
+                         content={"ユニオンスクエア1階"}
+                         {...{centerFocusFunction}}
+            />
+            {/*休憩所(リンクのマーク)*/}
+            <SpecialMark imgPath={"/img/illustrations/lounge.webp"}
+                         description={"休憩所"}
+                         height={(35 / 1000) * screenHookHeight}
+                         topDistance={310}
+                         leftDistance={1100}
+                         specialMarkKindEnum={SpecialMarkKindEnum.LOUNGE_LINK}
+                         content={"リンクスクエア1階"}
+                         {...{centerFocusFunction}}
+            />
+            {/*休憩所(コラ１のマーク)*/}
+            <SpecialMark imgPath={"/img/illustrations/lounge.webp"}
+                         description={"休憩所"}
+                         height={(35 / 1000) * screenHookHeight}
+                         topDistance={480}
+                         leftDistance={1120}
+                         specialMarkKindEnum={SpecialMarkKindEnum.LOUNGE_COLEARNING}
+                         content={"コラーニングハウス1階"}
                          {...{centerFocusFunction}}
             />
 

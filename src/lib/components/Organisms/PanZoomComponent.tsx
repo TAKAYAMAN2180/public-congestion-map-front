@@ -11,6 +11,7 @@ import {trackingEvent} from "@/src/lib/GoogleAnalystics";
 import {useRecoilState} from "recoil";
 import {atomPaneState, AtomPaneStateType, PaneKindStateEnum} from "@/src/lib/recoilAtom";
 import points from "@/src/lib/pointInfos"
+import {centerView} from "react-zoom-pan-pinch/src/core/handlers/handlers.logic";
 
 //TODO:座標のデータを入れたものを作る
 type Borders = {
@@ -27,6 +28,7 @@ type Props = {
 
 
 const PanZoomComponent: FC<Props> = ({targetStoresInfo, focusedNum}: Props) => {
+    const [hasSet, setHasSet] = useState<boolean>(false);
     const [screenHookWidth, screenHookHeight] = useWindowSize();
     const movableRef = useRef<any>(null);
     const imgRef = useRef<HTMLImageElement | null>(null);
@@ -38,8 +40,38 @@ const PanZoomComponent: FC<Props> = ({targetStoresInfo, focusedNum}: Props) => {
     const [screenHeight, setScreenHeight] = useState<number>();
     const [paneState, setPaneState] = useRecoilState(atomPaneState);
 
-    const MAX_SCALE = 5;
+    const MAX_SCALE = 10;
+    const INITIAL_SCALE = 2.5;
 
+    //const [centerPositionX, setCenterPositionX] = useState<number>();
+    //const [centerPositionY, setCenterPositionY] = useState<number>();
+
+    useEffect(() => {
+        if (!hasSet) {
+            let centerPositionX = 0;
+            let centerPositionY = 0;
+
+            if (!imgRef.current?.clientWidth || !divRef.current?.clientWidth || imgRef.current?.clientWidth == 0 || divRef.current?.clientWidth == 0) {/*
+                console.log("imgRef:" + !imgRef.current);
+                console.log("divRef:" + !divRef.current);
+                console.log("divRef:" + !imgRef.current?.clientWidth);
+                console.log("divRef:" + !divRef.current?.clientWidth);
+
+
+                console.log("imgRefclientWidth:" + imgRef.current?.clientWidth);
+                console.log("divRefclientWidth:" + divRef.current?.clientWidth);*/
+
+            } else {
+                const {leftXBoarder, rightXBoarder, topYBoarder, bottomYBoarder} = getBoarders(INITIAL_SCALE);
+                centerPositionX=(leftXBoarder + rightXBoarder*1.2) / 2;
+                centerPositionY=(topYBoarder + bottomYBoarder) / 2;
+
+                console.log(centerPositionX + "," + centerPositionY);
+                movableRef.current.setTransform(centerPositionX, centerPositionY, INITIAL_SCALE);
+                setHasSet(true);
+            }
+        }
+    }, [imgRef.current, divRef.current, imgRef.current?.clientWidth, divRef.current?.clientWidth]);
 
     const handleImgClicked = (getStorePaneData: StorePaneType) => {
         const temp: AtomPaneStateType = {
@@ -58,7 +90,6 @@ const PanZoomComponent: FC<Props> = ({targetStoresInfo, focusedNum}: Props) => {
 
         //console.log("image-width:" + imgRef.current!.clientWidth + " / image-height:" + imgRef.current!.clientHeight);
         //console.log("screen-width:" + innerWidthSize + " / screen-height:" + innerHeightSize);
-
 
         let leftXBoarder;
         let rightXBoarder;
@@ -79,7 +110,7 @@ const PanZoomComponent: FC<Props> = ({targetStoresInfo, focusedNum}: Props) => {
             topYBoarder = 0;
             bottomYBoarder = innerHeightSize - imgRef.current!.clientHeight * scale;
         }
-        //console.log("leftXBoarder:" + leftXBoarder + " / rightXBoarder:" + rightXBoarder + " / topYBoarder:" + topYBoarder + " / bottomYBoarder:" + bottomYBoarder);
+        console.log("leftXBoarder:" + leftXBoarder + " / rightXBoarder:" + rightXBoarder + " / topYBoarder:" + topYBoarder + " / bottomYBoarder:" + bottomYBoarder);
 
         return {leftXBoarder, rightXBoarder, topYBoarder, bottomYBoarder};
 
@@ -91,10 +122,11 @@ const PanZoomComponent: FC<Props> = ({targetStoresInfo, focusedNum}: Props) => {
 
         let {positionX, positionY, scale} = e.state;
 
-        const {leftXBoarder, rightXBoarder, topYBoarder, bottomYBoarder} = getBoarders(scale);
+        let {leftXBoarder, rightXBoarder, topYBoarder, bottomYBoarder} = getBoarders(scale);
         //alert(`x:${positionX}, y:${positionY}, scale: ${scale}, screenHeight: ${innerHeightSize},screenWidth: ${innerWidthSize}`);
 
         //console.log(`x:${positionX}, y:${positionY}, scale: ${scale}, screenHeight: ${innerHeightSize},screenWidth: ${innerWidthSize}`);
+
 
         if (scale < 1) {
 
@@ -138,7 +170,7 @@ const PanZoomComponent: FC<Props> = ({targetStoresInfo, focusedNum}: Props) => {
         //console.log(`x-point:${(screenHookHeight / 1000) * point?.x}, y-point:${(screenHookHeight / 1000) * point?.y}`);
 
         //1.5がMAX_SCALEがいい
-        const FOCUS_SCALE = MAX_SCALE;
+        const FOCUS_SCALE = 4.0;
 
         //中央にフォーカスさせる
         movableRef.current.setTransform(
@@ -157,7 +189,9 @@ const PanZoomComponent: FC<Props> = ({targetStoresInfo, focusedNum}: Props) => {
             }}
         >
             <TransformWrapper
-                initialScale={1}
+                initialScale={INITIAL_SCALE}
+                initialPositionX={0}
+                initialPositionY={0}
                 minScale={1}
                 maxScale={MAX_SCALE}
 

@@ -13,7 +13,7 @@ type SpecialMarkProps = {
     specialMarkKindEnum: SpecialMarkKindEnum;
     centerFocusFunction: (x: number, y: number) => void;
     content: string;
-    contentUrl: string;
+    contentUrl?: string;
 };
 
 const SpecialMark = ({content, contentUrl, description, specialMarkKindEnum, imgPath, height, topDistance, leftDistance, centerFocusFunction}: SpecialMarkProps) => {

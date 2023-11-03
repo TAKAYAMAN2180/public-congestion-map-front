@@ -24,6 +24,12 @@ export enum SpecialMarkKindEnum {
     LOTTERY = -3,
     FREE_MARKET = -4,
     BUS_STOP = -5,
+    INFO_CENTER = -6,
+    VOTING_STATION=-7,
+    LOUNGE_UNION=-8,
+    LOUNGE_LINK=-9,
+    LOUNGE_COLEARNING=-10
+
 }
 
 

@@ -85,7 +85,7 @@ const SpecialMarkPane = ({specialMarkPaneData}: { specialMarkPaneData: SpecialMa
                     {specialMarkPaneData.title}
                 </div>
                 <SpecialMarkDescDiv desc={specialMarkPaneData.content}/>
-                <SpecialMarkUrlDiv url={specialMarkPaneData.url}/>
+                {specialMarkPaneData.url && <SpecialMarkUrlDiv url={specialMarkPaneData.url}/>}
             </div>
         </>
     );
