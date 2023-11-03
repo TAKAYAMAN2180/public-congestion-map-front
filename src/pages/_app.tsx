@@ -16,7 +16,7 @@ function MyApp({Component, pageProps}: AppProps) {
         <>
             <HEAD>
                 <link rel="icon" href={"/img/favicon.png"}/>
-                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
                 <meta name="author" content="TAKAYAMA HAYATO"/>
                 <title>BKC祭典混雑マップ</title>
             </HEAD>

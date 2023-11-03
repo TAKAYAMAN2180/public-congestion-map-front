@@ -20,7 +20,6 @@ function reformat(arg: any[]): StoresInfoType[] {
 }
 
 
-//TODO:ここを対象に拡大すると表示がおかしくなるのを解消
 
 const SearchDrawer = ({isSearchBoxOpen, handleCloseIconClicked, setStoresInfo}: Props) => {
     const [textFieldValue, setTextFieldValue] = useState<string>("");
