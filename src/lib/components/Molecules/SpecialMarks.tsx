@@ -33,17 +33,7 @@ const SpecialMarks = ({screenHookHeight, centerFocusFunction}: {
                          contentUrl={"https://google.com"}
                          {...{centerFocusFunction}}
             />
-            {/*ラリーの抽選所のマーク*/}
-            <SpecialMark imgPath={"/img/illustrations/lottery_illustration.webp"}
-                         description={"ラリー企画抽選所"}
-                         height={(60 / 1000) * screenHookHeight}
-                         topDistance={620}
-                         leftDistance={910}
-                         specialMarkKindEnum={SpecialMarkKindEnum.LOTTERY}
-                         content={"ラリー企画に参加して豪華賞品をゲット！"}
-                         contentUrl={"https://google.com"}
-                         {...{centerFocusFunction}}
-            />
+
             {/*フリーマーケットのマーク*/}
             <SpecialMark imgPath={"/img/illustrations/freemarket_illustration.webp"}
                          description={"フリーマーケット"}
@@ -52,7 +42,6 @@ const SpecialMarks = ({screenHookHeight, centerFocusFunction}: {
                          leftDistance={1100}
                          specialMarkKindEnum={SpecialMarkKindEnum.FREE_MARKET}
                          content={"フリーマーケットで掘り出し物を見つけよう！"}
-                         contentUrl={"https://google.com"}
                          {...{centerFocusFunction}}
             />
             {/*バス乗り場のマーク*/}
@@ -74,7 +63,6 @@ const SpecialMarks = ({screenHookHeight, centerFocusFunction}: {
                          leftDistance={850}
                          specialMarkKindEnum={SpecialMarkKindEnum.INFO_CENTER}
                          content={"困ったときはぜひこちらへ！"}
-                         contentUrl={"https://google.com"}
                          {...{centerFocusFunction}}
             />
             {/*投票所のマーク*/}
@@ -95,7 +83,7 @@ const SpecialMarks = ({screenHookHeight, centerFocusFunction}: {
                          topDistance={480}
                          leftDistance={810}
                          specialMarkKindEnum={SpecialMarkKindEnum.LOUNGE_UNION}
-                         content={"ユニオンスクエア1階"}
+                         content={"ユニオンスクエア1階・2階"}
                          {...{centerFocusFunction}}
             />
             {/*休憩所(リンクのマーク)*/}
@@ -115,7 +103,7 @@ const SpecialMarks = ({screenHookHeight, centerFocusFunction}: {
                          topDistance={480}
                          leftDistance={1120}
                          specialMarkKindEnum={SpecialMarkKindEnum.LOUNGE_COLEARNING}
-                         content={"コラーニングハウス1階"}
+                         content={"コラーニングハウスⅠ 1階 C106〜C109"}
                          {...{centerFocusFunction}}
             />
 
