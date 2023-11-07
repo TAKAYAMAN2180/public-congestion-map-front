@@ -11,7 +11,6 @@ import {trackingEvent} from "@/src/lib/GoogleAnalystics";
 import {useRecoilState} from "recoil";
 import {atomPaneState, AtomPaneStateType, PaneKindStateEnum} from "@/src/lib/recoilAtom";
 import points from "@/src/lib/pointInfos"
-import {centerView} from "react-zoom-pan-pinch/src/core/handlers/handlers.logic";
 
 //TODO:座標のデータを入れたものを作る
 type Borders = {
