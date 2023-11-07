@@ -1,4 +1,4 @@
-import type {AppProps} from 'next/app'
+import {AppProps} from 'next/app'
 import React from "react";
 import {CssBaseline} from "@mui/material";
 import {SessionProvider} from "next-auth/react";
