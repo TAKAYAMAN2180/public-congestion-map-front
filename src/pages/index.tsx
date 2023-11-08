@@ -9,7 +9,6 @@ import StorePaneType from "@/src/lib/type/StorePaneType";
 import {NextPage} from "next";
 import {atomPaneState, PaneKindStateEnum} from "@/src/lib/recoilAtom";
 import {useRecoilState} from "recoil";
-import SpecialMarkPane from "@/src/lib/components/Organisms/Pane/SpecialMarkPane";
 import RootPane from "@/src/lib/components/Organisms/Pane/RootPane";
 
 

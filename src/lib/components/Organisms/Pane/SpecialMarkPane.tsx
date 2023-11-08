@@ -1,6 +1,3 @@
-import parse from 'html-react-parser';
-import Doc from '@/public/html/freemarket/freemarket.html';
-import RootPane from "@/src/lib/components/Organisms/Pane/RootPane";
 import SpecialMarkPaneType from "@/src/lib/type/SpecialMarkPaneType";
 import {useWindowSize} from "@/src/lib/hooks/useWindowSize";
 import {useEffect, useState} from "react";
