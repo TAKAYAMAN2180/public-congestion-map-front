@@ -1,0 +1,262 @@
+[
+  {
+    "areaNum": 1,
+    "storeName": "ぎょうざの里",
+    "food": "あんかけ揚げ餃子"
+  },
+  {
+    "areaNum": 2,
+    "storeName": "ひき肉(フランクフルト)です",
+    "food": "フランクフルト"
+  },
+  {
+    "areaNum": 3,
+    "storeName": "行列のできるかもしれない焼きそば屋",
+    "food": "焼きそば"
+  },
+  {
+    "areaNum": 4,
+    "storeName": "凌一朗のホットチョコレート",
+    "food": "ホットチョコレート"
+  },
+  {
+    "areaNum": 5,
+    "storeName": "えんじぃのホットドッグ",
+    "food": "ホットドッグ"
+  },
+  {
+    "areaNum": 6,
+    "storeName": "だもんで、やってみた。",
+    "food": "まぜそば"
+  },
+  {
+    "areaNum": 7,
+    "storeName": "月2：コンポタ(20)",
+    "food": "コーンポタージュ"
+  },
+  {
+    "areaNum": 8,
+    "storeName": "オレの本気(マジ)水餃子",
+    "food": "水餃子"
+  },
+  {
+    "areaNum": 9,
+    "storeName": "出張！！BBP",
+    "food": "スンドゥブ"
+  },
+  {
+    "areaNum": 10,
+    "storeName": "GIんだこ",
+    "food": "たこ焼き"
+  },
+  {
+    "areaNum": 11,
+    "storeName": "モリ食",
+    "food": "豚汁"
+  },
+  {
+    "areaNum": 12,
+    "storeName": "3代目ラーメン風そば「極」",
+    "food": "ラーメン風そば"
+  },
+  {
+    "areaNum": 13,
+    "storeName": "チュンチュロ",
+    "food": "チュロス"
+  },
+  {
+    "areaNum": 14,
+    "storeName": "Moulin焼きおにぎり",
+    "food": "焼きおにぎり"
+  },
+  {
+    "areaNum": 15,
+    "storeName": "ぜんざい堂",
+    "food": "ぜんざい"
+  },
+  {
+    "areaNum": 16,
+    "storeName": "食らうん",
+    "food": "たこ焼き"
+  },
+  {
+    "areaNum": 17,
+    "storeName": "幸せのワッフル工房",
+    "food": "ワッフル"
+  },
+  {
+    "areaNum": 18,
+    "storeName": "月光茶屋",
+    "food": "みたらし団子、あんこ団子"
+  },
+  {
+    "areaNum": 19,
+    "storeName": "これとそれとあとフランクフルトください。",
+    "food": "フランクフルト"
+  },
+  {
+    "areaNum": 20,
+    "storeName": "金の牛太郎",
+    "food": "牛串"
+  },
+  {
+    "areaNum": 21,
+    "storeName": "トマッティーナ田中",
+    "food": "ミネストローネ"
+  },
+  {
+    "areaNum": 22,
+    "storeName": "ジャンボフランクフルト",
+    "food": "フランクフルト"
+  },
+  {
+    "areaNum": 23,
+    "storeName": "侍ソリューションズ",
+    "food": "ラスク　揚げパン"
+  },
+  {
+    "areaNum": 24,
+    "storeName": "星チュロス",
+    "food": "チュロス"
+  },
+  {
+    "areaNum": 25,
+    "storeName": "フリッテリア",
+    "food": "イタリアの揚げ物盛り合わせ"
+  },
+  {
+    "areaNum": 26,
+    "storeName": "やきそば屋しゅんちゃん",
+    "food": "やきそば"
+  },
+  {
+    "areaNum": 27,
+    "storeName": "立命韓食堂",
+    "food": "ホットク"
+  },
+  {
+    "areaNum": 28,
+    "storeName": "肉・まん次郎",
+    "food": "中華まん"
+  },
+  {
+    "areaNum": 29,
+    "storeName": "品川餃子大作戦",
+    "food": "水餃子"
+  },
+  {
+    "areaNum": 30,
+    "storeName": "ドーナッジボール",
+    "food": "ドーナッツ"
+  },
+  {
+    "areaNum": 31,
+    "storeName": "ぜんざいや",
+    "food": "ぜんざい"
+  },
+  {
+    "areaNum": 32,
+    "storeName": "短足とんとん",
+    "food": "豚汁"
+  },
+  {
+    "areaNum": 33,
+    "storeName": "チュッロス",
+    "food": "チュロス"
+  },
+  {
+    "areaNum": 34,
+    "storeName": "チゲ工房",
+    "food": "チゲ鍋"
+  },
+  {
+    "areaNum": 35,
+    "storeName": "にぽ次朗",
+    "food": "焼きそば"
+  },
+  {
+    "areaNum": 36,
+    "storeName": "立命館大学珈琲研究会 RCS Cafe",
+    "food": "ホットコーヒー"
+  },
+  {
+    "areaNum": 37,
+    "storeName": "ベビーカステラ",
+    "food": "ベビーカステラ"
+  },
+  {
+    "areaNum": 38,
+    "storeName": "ソトック天国",
+    "food": "ソトックソトック"
+  },
+  {
+    "areaNum": 39,
+    "storeName": "こだわり野菜のポトフ屋",
+    "food": "ポトフ"
+  },
+  {
+    "areaNum": 40,
+    "storeName": "魔法のスープ",
+    "food": "ミネストローネ"
+  },
+  {
+    "areaNum": 41,
+    "storeName": "A.N.E.D.焼きそば屋さん",
+    "food": "焼きそば"
+  },
+  {
+    "areaNum": 42,
+    "storeName": "らぷかふぇ",
+    "food": "抹茶ラテ ココア"
+  },
+  {
+    "areaNum": 43,
+    "storeName": "NGISぜんざい",
+    "food": "ぜんざい"
+  },
+  {
+    "areaNum": 44,
+    "storeName": "おぐらんてぃ",
+    "food": "小倉トースト"
+  },
+  {
+    "areaNum": 45,
+    "storeName": "蜀签",
+    "food": "しゃぶしゃぶ(火鍋)"
+  },
+  {
+    "areaNum": 46,
+    "storeName": "美味",
+    "food": "チヂミ"
+  },
+  {
+    "areaNum": 47,
+    "storeName": "カノールカフェ",
+    "food": "オリーブティーとチュロス"
+  },
+  {
+    "areaNum": 48,
+    "storeName": "たません",
+    "food": "たません"
+  },
+  {
+    "areaNum": 49,
+    "storeName": "餃子屋さん",
+    "food": "揚げ餃子"
+  },
+  {
+    "areaNum": 50,
+    "storeName": "たこやきでやんす。",
+    "food": "たこ焼き"
+  },
+  {
+    "areaNum": 51,
+    "storeName": "BKCにチヂミを",
+    "food": "チヂミ"
+  },
+  {
+    "areaNum": 52,
+    "storeName": "みたらし友の会",
+    "food": "みたらし団子・チョコ大福"
+  }
+]

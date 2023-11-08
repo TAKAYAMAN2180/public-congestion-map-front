@@ -4,7 +4,7 @@ import StyledDrawer from "@/src/lib/style/StyledDrawer";
 import SearchIcon from '@mui/icons-material/Search';
 import search from "@/src/lib/search"
 import StoresInfoType from "@/src/lib/type/StoresInfoType";
-import initStoresInfoData from "@/public/data/test/storesInfoData.json";
+import initStoresInfoData from "@/public/data/prod/storesInfoData.json";
 import CustomTextField from "@/src/lib/components/Molecules/CustomTextField";
 import SearchBtn from "@/src/lib/components/Atom/Button/SearchBtn";
 
@@ -35,16 +35,27 @@ const SearchDrawer = ({isSearchBoxOpen, handleCloseIconClicked, setStoresInfo}: 
     }
 
     const handleSearchBtnClick = async () => {
-        if (textFieldValue === preTextFieldValue) {
+        if (textFieldValue === "") {
+            alert("検索ワードを入力してください。");
             return;
         } else {
-            setPreTextFieldValue(textFieldValue);
-            if (textFieldValue === "") {
-                resetStoresInfo();
+            if (textFieldValue === preTextFieldValue) {
+                alert("同じ検索ワードです。");
+                return;
             } else {
-                let getData = await search(textFieldValue);
-                getData = reformat(getData);
-                setStoresInfo(getData);
+                setPreTextFieldValue(textFieldValue);
+                if (textFieldValue === "") {
+                    resetStoresInfo();
+                } else {
+                    let getData = await search(textFieldValue);
+                    if (getData.length === 0) {
+                        alert("検索結果がありませんでした。");
+                        return;
+                    } else {
+                        getData = reformat(getData);
+                        setStoresInfo(getData);
+                    }
+                }
             }
         }
     }

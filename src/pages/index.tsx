@@ -3,7 +3,7 @@ import PanZoomComponent from "@/src/lib/components/Organisms/PanZoomComponent";
 import Header from "@/src/lib/components/Organisms/Header";
 import StorePane from "@/src/lib/components/Organisms/Pane/StorePane";
 import Image from "next/image";
-import initStoresInfoData from "../../public/data/test/storesInfoData.json";
+import initStoresInfoData from "../../public/data/prod/storesInfoData.json";
 import StoresInfoType from "@/src/lib/type/StoresInfoType";
 import StorePaneType from "@/src/lib/type/StorePaneType";
 import {NextPage} from "next";

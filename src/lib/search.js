@@ -7,7 +7,7 @@ const search = async (keyword) => {
     );
 
 
-    const index = algoliaClient.initIndex("congection_test_index");
+    const index = algoliaClient.initIndex("congestion_map_store_info_index");
 
     const params = {
         hitsPerPage: 100,
@@ -16,7 +16,7 @@ const search = async (keyword) => {
 
     const req = await index.search(keyword, params);
 
-    console.log(req.hits);
+    // console.log(req.hits);
 
     return req.hits;
 }
