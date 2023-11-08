@@ -16,6 +16,7 @@ type StoreDescProps = {
 
 const StoreDescDiv = ({title, desc}: StoreDescProps) => {
     // const [screenHookWidth, screenHookHeight] = useWindowSize();
+    //let fontSize;
     const [fontSize, setFontSize] = useState<number>(DEFAULT_FONT_SIZE);
 
     useEffect(() => {
@@ -24,11 +25,6 @@ const StoreDescDiv = ({title, desc}: StoreDescProps) => {
             if (typeof tempDesc === "number") {
                 tempDesc = tempDesc.toString();
             }
-
-            const contentWidth = getStringWidthCanvas(desc as string, `${DEFAULT_FONT_SIZE}px`);
-            const titleWidth = getStringWidthCanvas(title as string, '16px');
-
-            console.log(window.innerWidth * (DEFAULT_WIDTH_RATIO / 100));
 
             // descに費やせる幅を計算
             // desc.length * DEFAULT_FONT_SIZE→descの文字数×デフォルトのフォントサイズ
@@ -40,16 +36,10 @@ const StoreDescDiv = ({title, desc}: StoreDescProps) => {
             const validWidth = (window.innerWidth * (DEFAULT_WIDTH_RATIO / 100)) - title.length * 16 - 8 - 8 - 8;
 
             // 画面幅が狭い場合はフォントサイズを小さくする
-            /*if (tempDesc.length * DEFAULT_FONT_SIZE > validWidth) {
-                setFontSize(validWidth / tempDesc.length);
-            }*/
-            //console.log("contentWidth:" + contentWidth + " validWidth:" + validWidth);
-            //alert("contentWidth:" + contentWidth + ",validWidth:" + validWidth + ",contentWidth nocavas:" + tempDesc.length * DEFAULT_FONT_SIZE)
-
             if (tempDesc.length * DEFAULT_FONT_SIZE > validWidth) {
                 // alert("validWidth / tempDesc.length:" + (validWidth / tempDesc.length));
                 setFontSize(validWidth / tempDesc.length);
-            }else {
+            } else {
                 setFontSize(DEFAULT_FONT_SIZE);
             }
         }
@@ -62,24 +52,6 @@ const StoreDescDiv = ({title, desc}: StoreDescProps) => {
             <span style={{marginLeft: "8px", fontSize: `${fontSize}px`}}>{desc}</span>
         </div>
     );
-}
-
-function getStringWidthCanvas(str: string, font: string) {
-    // Canvas要素を作成
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    let value = 0;
-
-    if (context != null) {
-        // フォントスタイルを設定
-        context.font = font;
-
-        // 文字列の幅を取得
-        const metrics = context.measureText(str);
-        value = metrics.width;
-    }
-    //alert("str:"+str+" value:"+value);
-    return value;
 }
 
 const StorePane = ({storePaneData}: { storePaneData: StorePaneType }) => {
