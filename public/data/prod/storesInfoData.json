@@ -1,11 +1,13 @@
 [
   {
     "areaNum": 1,
+    "groupName": "國枝ゼミ",
     "storeName": "ぎょうざの里",
     "food": "あんかけ揚げ餃子"
   },
   {
     "areaNum": 2,
+    "groupName": "衣笠会",
     "storeName": "ひき肉(フランクフルト)です",
     "food": "フランクフルト"
   },
@@ -16,16 +18,19 @@
   },
   {
     "areaNum": 4,
+    "groupName": "食マネジメント学部自治会",
     "storeName": "凌一朗のホットチョコレート",
     "food": "ホットチョコレート"
   },
   {
     "areaNum": 5,
+    "groupName": "Into the Green",
     "storeName": "えんじぃのホットドッグ",
     "food": "ホットドッグ"
   },
   {
     "areaNum": 6,
+    "groupName": "だもんで、やってみた。",
     "storeName": "だもんで、やってみた。",
     "food": "まぜそば"
   },
@@ -36,16 +41,19 @@
   },
   {
     "areaNum": 8,
+    "groupName": "watnow",
     "storeName": "オレの本気(マジ)水餃子",
     "food": "水餃子"
   },
   {
     "areaNum": 9,
+    "groupName": "BBP",
     "storeName": "出張！！BBP",
     "food": "スンドゥブ"
   },
   {
     "areaNum": 10,
+    "groupName": "立命館生協学生委員会",
     "storeName": "GIんだこ",
     "food": "たこ焼き"
   },
@@ -56,6 +64,7 @@
   },
   {
     "areaNum": 12,
+    "groupName": "段ボール同好会",
     "storeName": "3代目ラーメン風そば「極」",
     "food": "ラーメン風そば"
   },
@@ -66,6 +75,7 @@
   },
   {
     "areaNum": 14,
+    "groupName": "Moulin",
     "storeName": "Moulin焼きおにぎり",
     "food": "焼きおにぎり"
   },
@@ -76,36 +86,43 @@
   },
   {
     "areaNum": 16,
+    "groupName": "学生団体clown",
     "storeName": "食らうん",
     "food": "たこ焼き"
   },
   {
     "areaNum": 17,
+    "groupName": "入試広報スタッフ",
     "storeName": "幸せのワッフル工房",
     "food": "ワッフル"
   },
   {
     "areaNum": 18,
+    "groupName": "劇団月光斜teamBKC",
     "storeName": "月光茶屋",
     "food": "みたらし団子、あんこ団子"
   },
   {
     "areaNum": 19,
+    "groupName": "RIBERTY",
     "storeName": "これとそれとあとフランクフルトください。",
     "food": "フランクフルト"
   },
   {
     "areaNum": 20,
+    "groupName": "金太郎スキー同好会",
     "storeName": "金の牛太郎",
     "food": "牛串"
   },
   {
     "areaNum": 21,
+    "groupName": "ピンポンマンション",
     "storeName": "トマッティーナ田中",
-    "food": "ミネストローネ"
+    "food": "ミネストローネ　"
   },
   {
     "areaNum": 22,
+    "groupName": "まねやま",
     "storeName": "ジャンボフランクフルト",
     "food": "フランクフルト"
   },
@@ -116,16 +133,19 @@
   },
   {
     "areaNum": 24,
+    "groupName": "草津天文研究会",
     "storeName": "星チュロス",
     "food": "チュロス"
   },
   {
     "areaNum": 25,
+    "groupName": "ナポリ食文化研究会",
     "storeName": "フリッテリア",
     "food": "イタリアの揚げ物盛り合わせ"
   },
   {
     "areaNum": 26,
+    "groupName": "りべろ",
     "storeName": "やきそば屋しゅんちゃん",
     "food": "やきそば"
   },
@@ -136,61 +156,73 @@
   },
   {
     "areaNum": 28,
+    "groupName": "物理科学科有志",
     "storeName": "肉・まん次郎",
     "food": "中華まん"
   },
   {
     "areaNum": 29,
+    "groupName": "NEXUS",
     "storeName": "品川餃子大作戦",
     "food": "水餃子"
   },
   {
     "areaNum": 30,
+    "groupName": "Rits 避球隊",
     "storeName": "ドーナッジボール",
     "food": "ドーナッツ"
   },
   {
     "areaNum": 31,
+    "groupName": "薬学研究会",
     "storeName": "ぜんざいや",
     "food": "ぜんざい"
   },
   {
     "areaNum": 32,
+    "groupName": "Short Legs",
     "storeName": "短足とんとん",
     "food": "豚汁"
   },
   {
     "areaNum": 33,
+    "groupName": "IVUSA草津",
     "storeName": "チュッロス",
     "food": "チュロス"
   },
   {
     "areaNum": 34,
+    "groupName": "応化11",
     "storeName": "チゲ工房",
     "food": "チゲ鍋"
   },
   {
     "areaNum": 35,
+    "groupName": "ALEX2",
     "storeName": "にぽ次朗",
     "food": "焼きそば"
   },
   {
     "areaNum": 36,
+    "groupName": "立命館珈琲研究会 RCS",
     "storeName": "立命館大学珈琲研究会 RCS Cafe",
     "food": "ホットコーヒー"
   },
   {
     "areaNum": 37,
+    "groupName": "Rits BBS",
     "storeName": "ベビーカステラ",
     "food": "ベビーカステラ"
   },
   {
     "areaNum": 38,
+    "groupName": "韓国人留学生会",
     "storeName": "ソトック天国",
     "food": "ソトックソトック"
   },
   {
     "areaNum": 39,
+    "groupName": "R vege",
     "storeName": "こだわり野菜のポトフ屋",
     "food": "ポトフ"
   },
@@ -201,21 +233,25 @@
   },
   {
     "areaNum": 41,
+    "groupName": "A.N.E.D.",
     "storeName": "A.N.E.D.焼きそば屋さん",
     "food": "焼きそば"
   },
   {
     "areaNum": 42,
+    "groupName": "飛行機研究会",
     "storeName": "らぷかふぇ",
     "food": "抹茶ラテ ココア"
   },
   {
     "areaNum": 43,
+    "groupName": "NGIS",
     "storeName": "NGISぜんざい",
     "food": "ぜんざい"
   },
   {
     "areaNum": 44,
+    "groupName": "硬式テニスサークルぶらんてぃ～",
     "storeName": "おぐらんてぃ",
     "food": "小倉トースト"
   },
@@ -232,22 +268,26 @@
   {
     "areaNum": 47,
     "storeName": "カノールカフェ",
-    "food": "オリーブティーとチュロス"
+    "food": "オリーブティーとチュロス",
+    "groupName": "カノール"
   },
   {
     "areaNum": 48,
     "storeName": "たません",
-    "food": "たません"
+    "food": "たません",
+    "groupName": "Voots"
   },
   {
     "areaNum": 49,
     "storeName": "餃子屋さん",
-    "food": "揚げ餃子"
+    "food": "揚げ餃子",
+    "groupName": "SHOVE-IT"
   },
   {
     "areaNum": 50,
     "storeName": "たこやきでやんす。",
-    "food": "たこ焼き"
+    "food": "たこ焼き",
+    "groupName": "FC栗松"
   },
   {
     "areaNum": 51,
@@ -257,6 +297,7 @@
   {
     "areaNum": 52,
     "storeName": "みたらし友の会",
-    "food": "みたらし団子・チョコ大福"
+    "food": "みたらし団子・チョコ大福",
+    "groupName": "レシーブ友の会"
   }
 ]

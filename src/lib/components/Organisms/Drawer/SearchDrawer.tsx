@@ -16,7 +16,7 @@ type Props = {
 }
 
 function reformat(arg: any[]): StoresInfoType[] {
-    return arg.map(({areaNum, storeName, food}) => ({areaNum, storeName, food}));
+    return arg.map(({areaNum, storeName, food, groupName}) => ({areaNum, storeName, food, groupName}));
 }
 
 
