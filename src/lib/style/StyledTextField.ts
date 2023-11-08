@@ -1,5 +1,5 @@
 import TextField from '@mui/material/TextField';
-import {styled} from '@mui/system';
+import styled from "styled-components";
 
 const StyledTextField = styled(TextField)`
   background-color: rgba(256, 256, 256, 0.9);
