@@ -3,142 +3,142 @@
 //  This file was automatically generated and should not be edited.
 
 export type CongestionInput = {
-  storeID: string,
-  congestionLevel: number,
+  storeID: string;
+  congestionLevel: number;
 };
 
 export type Congestion = {
-  __typename: "Congestion",
-  storeID: string,
-  congestionLevel: number,
-  editAt: string,
+  __typename: "Congestion";
+  storeID: string;
+  congestionLevel: number;
+  editAt: string;
 };
 
 export type DeductionInput = {
-  storeID: string,
-  deductionIndex: number,
-  status: number,
+  storeID: string;
+  deductionIndex: number;
+  status: number;
 };
 
 export type Deduction = {
-  __typename: "Deduction",
-  storeID: string,
-  deductionID: string,
-  deductionIndex: number,
-  status: number,
-  createAt: string,
-  editAt: string,
+  __typename: "Deduction";
+  storeID: string;
+  deductionID: string;
+  deductionIndex: number;
+  status: number;
+  createAt: string;
+  editAt: string;
 };
 
 export type Store = {
-  __typename: "Store",
-  storeID: string,
-  areaNum: number,
+  __typename: "Store";
+  storeID: string;
+  areaNum: number;
 };
 
 export type UpdateStoreCongestionByStoreIDMutationVariables = {
-  input: CongestionInput,
+  input: CongestionInput;
 };
 
 export type UpdateStoreCongestionByStoreIDMutation = {
-  updateStoreCongestionByStoreID?:  {
-    __typename: "Congestion",
-    storeID: string,
-    congestionLevel: number,
-    editAt: string,
-  } | null,
+  updateStoreCongestionByStoreID?: {
+    __typename: "Congestion";
+    storeID: string;
+    congestionLevel: number;
+    editAt: string;
+  } | null;
 };
 
 export type CreateStoreDeductionMutationVariables = {
-  input: DeductionInput,
+  input: DeductionInput;
 };
 
 export type CreateStoreDeductionMutation = {
-  createStoreDeduction?:  {
-    __typename: "Deduction",
-    storeID: string,
-    deductionID: string,
-    deductionIndex: number,
-    status: number,
-    createAt: string,
-    editAt: string,
-  } | null,
+  createStoreDeduction?: {
+    __typename: "Deduction";
+    storeID: string;
+    deductionID: string;
+    deductionIndex: number;
+    status: number;
+    createAt: string;
+    editAt: string;
+  } | null;
 };
 
 export type UpdateStoreDeductionMutationVariables = {
-  input: DeductionInput,
+  input: DeductionInput;
 };
 
 export type UpdateStoreDeductionMutation = {
-  updateStoreDeduction:  {
-    __typename: "Deduction",
-    storeID: string,
-    deductionID: string,
-    deductionIndex: number,
-    status: number,
-    createAt: string,
-    editAt: string,
-  },
+  updateStoreDeduction: {
+    __typename: "Deduction";
+    storeID: string;
+    deductionID: string;
+    deductionIndex: number;
+    status: number;
+    createAt: string;
+    editAt: string;
+  };
 };
 
 export type FetchAllCongestionsQuery = {
-  fetchAllCongestions:  Array< {
-    __typename: "Congestion",
-    storeID: string,
-    congestionLevel: number,
-    editAt: string,
-  } >,
+  fetchAllCongestions: Array<{
+    __typename: "Congestion";
+    storeID: string;
+    congestionLevel: number;
+    editAt: string;
+  }>;
 };
 
 export type FetchStoreCongestionByStoreIDQueryVariables = {
-  storeID: string,
+  storeID: string;
 };
 
 export type FetchStoreCongestionByStoreIDQuery = {
-  fetchStoreCongestionByStoreID?:  {
-    __typename: "Congestion",
-    storeID: string,
-    congestionLevel: number,
-    editAt: string,
-  } | null,
+  fetchStoreCongestionByStoreID?: {
+    __typename: "Congestion";
+    storeID: string;
+    congestionLevel: number;
+    editAt: string;
+  } | null;
 };
 
 export type FetchStoreDeductionsByStoreIDQueryVariables = {
-  storeID: string,
+  storeID: string;
 };
 
 export type FetchStoreDeductionsByStoreIDQuery = {
-  fetchStoreDeductionsByStoreID:  Array< {
-    __typename: "Deduction",
-    storeID: string,
-    deductionID: string,
-    deductionIndex: number,
-    status: number,
-    createAt: string,
-    editAt: string,
-  } | null >,
+  fetchStoreDeductionsByStoreID: Array<{
+    __typename: "Deduction";
+    storeID: string;
+    deductionID: string;
+    deductionIndex: number;
+    status: number;
+    createAt: string;
+    editAt: string;
+  } | null>;
 };
 
 export type FetchStoreByUserIDQueryVariables = {
-  userID: string,
+  userID: string;
 };
 
 export type FetchStoreByUserIDQuery = {
-  fetchStoreByUserID:  {
-    __typename: "Store",
-    storeID: string,
-    areaNum: number,
-  },
+  fetchStoreByUserID: {
+    __typename: "Store";
+    storeID: string;
+    areaNum: number;
+  };
 };
 
 export type FetchStoreByStoreIDQueryVariables = {
-  storeID: string,
+  storeID: string;
 };
 
 export type FetchStoreByStoreIDQuery = {
-  fetchStoreByStoreID?:  {
-    __typename: "Store",
-    storeID: string,
-    areaNum: number,
-  } | null,
+  fetchStoreByStoreID?: {
+    __typename: "Store";
+    storeID: string;
+    areaNum: number;
+  } | null;
 };
