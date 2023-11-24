@@ -45,7 +45,7 @@ const SpecialMarks = ({
         description={"フリーマーケット"}
         height={(50 / 1000) * screenHookHeight}
         topDistance={370}
-        leftDistance={1100}
+        leftDistance={1120}
         specialMarkKindEnum={SpecialMarkKindEnum.FREE_MARKET}
         content={"フリーマーケットで掘り出し物を見つけよう！"}
         {...{ centerFocusFunction }}

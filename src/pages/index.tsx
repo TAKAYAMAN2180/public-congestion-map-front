@@ -32,10 +32,6 @@ const App: NextPage = () => {
     document.addEventListener("touchmove", mobile_no_scroll, {
       passive: false,
     });
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      setPosition({ latitude, longitude });
-    });
   }, []);
 
   function mobile_no_scroll(event: any) {
