@@ -32,13 +32,17 @@ const App: NextPage = () => {
     document.addEventListener("touchmove", mobile_no_scroll, {
       passive: false,
     });
+    // コンポーネントがマウントされたらスクロールを禁止
+    window.addEventListener("scroll", disableScroll);
   }, []);
 
   function mobile_no_scroll(event: any) {
-    if (event.touches.length >= 2) {
-      event.preventDefault();
-    }
+    event.preventDefault();
   }
+
+  const disableScroll = () => {
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
