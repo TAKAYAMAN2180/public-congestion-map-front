@@ -100,35 +100,41 @@ type Props = {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const response = await fetch(process.env.LAMBDA_API_URL!, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": process.env.LAMBDA_API_KEY!,
-    },
-    body: '{"query": "{ fetchAllCongestions { areaNum congestionLevel updatedAt } }"}',
-  });
-
-  const returnCongestionsData: CongestionDataType[] = [];
-
-  const fetchedCongestionsData: {
-    areaNum: number;
-    congestionLevel: number;
-    updatedAt: number;
-  }[] = (await response.json()).data.fetchAllCongestions;
-
-  fetchedCongestionsData.forEach((congestionData) => {
-    returnCongestionsData.push({
-      areaNum: congestionData.areaNum,
-      congestionLevel: congestionData.congestionLevel,
-      updatedAt: congestionData.updatedAt,
+  try {
+    const response = await fetch(process.env.LAMBDA_API_URL!, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": process.env.LAMBDA_API_KEY!,
+      },
+      body: '{"query": "{ fetchAllCongestions { areaNum congestionLevel updatedAt } }"}',
     });
-  });
 
-  return {
-    props: {
-      congestionDataArray: returnCongestionsData,
-    },
-    revalidate: 10,
-  };
+    const returnCongestionsData: CongestionDataType[] = [];
+
+    const fetchedCongestionsData: {
+      areaNum: number;
+      congestionLevel: number;
+      updatedAt: number;
+    }[] = (await response.json()).data.fetchAllCongestions;
+
+    fetchedCongestionsData.forEach((congestionData) => {
+      returnCongestionsData.push({
+        areaNum: congestionData.areaNum,
+        congestionLevel: congestionData.congestionLevel,
+        updatedAt: congestionData.updatedAt,
+      });
+    });
+
+    return {
+      props: {
+        congestionDataArray: returnCongestionsData,
+      },
+      revalidate: 10,
+    };
+  } catch (e) {
+    return {
+      notFound: true,
+    };
+  }
 };
