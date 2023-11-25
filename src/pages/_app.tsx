@@ -24,10 +24,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>BKC祭典混雑マップ</title>
       </HEAD>
       <GoogleAnalytics />
-        <RecoilRoot>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </RecoilRoot>
+      <RecoilRoot>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </RecoilRoot>
     </>
   );
 }
