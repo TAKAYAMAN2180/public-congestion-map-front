@@ -1,7 +1,7 @@
 export type CongestionDataType = {
   areaNum: number;
   congestionLevel: CongestionStatusEnum;
-  updateTime: string;
+  updatedAt: number;
 };
 
 export enum CongestionStatusEnum {

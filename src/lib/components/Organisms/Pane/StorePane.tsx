@@ -5,6 +5,7 @@ import CancelBtn from "../../Atom/Button/CancelBtn";
 import StorePaneType from "@/src/lib/type/StorePaneType";
 import CongestionSentence from "../../Atom/CongestionSentence";
 import { useWindowSize } from "@/src/lib/hooks/useWindowSize";
+import formatUnixTimeToHHMM from "@/src/lib/formatUnixTimeToHHMM";
 
 const DEFAULT_WIDTH_RATIO = 95;
 const DEFAULT_FONT_SIZE = 24;
@@ -94,7 +95,7 @@ const StorePane = ({ storePaneData }: { storePaneData: StorePaneType }) => {
             }}
           >
             <div style={{ fontSize: 10, marginBottom: -5 }}>更新時間</div>
-            <div>{storePaneData.updateTime}</div>
+            <div>{formatUnixTimeToHHMM(storePaneData.updatedAt)}</div>
           </div>
         </>
       )}

@@ -6,17 +6,18 @@ import Image from "next/image";
 import initStoresInfoData from "../../public/data/prod/storesInfoData.json";
 import StoresInfoType from "@/src/lib/type/StoresInfoType";
 import StorePaneType from "@/src/lib/type/StorePaneType";
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { atomPaneState, PaneKindStateEnum } from "@/src/lib/recoilAtom";
 import { useRecoilState } from "recoil";
 import RootPane from "@/src/lib/components/Organisms/Pane/RootPane";
+import { CongestionDataType } from "@/src/lib/type/CongestionDataType";
 
 type Position = {
   latitude: number | null;
   longitude: number | null;
 };
 
-const App: NextPage = () => {
+const App: NextPage<Props> = (props) => {
   const [position, setPosition] = useState<Position>({
     latitude: null,
     longitude: null,
@@ -59,6 +60,7 @@ const App: NextPage = () => {
           <PanZoomComponent
             targetStoresInfo={storesInfo}
             focusedNum={storePaneData?.areaNum}
+            congestionsData={props.congestionDataArray}
           />
         </div>
 
@@ -92,3 +94,41 @@ const App: NextPage = () => {
 };
 
 export default App;
+
+type Props = {
+  congestionDataArray: CongestionDataType[];
+};
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const response = await fetch(process.env.LAMBDA_API_URL!, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": process.env.LAMBDA_API_KEY!,
+    },
+    body: '{"query": "{ fetchAllCongestions { areaNum congestionLevel updatedAt } }"}',
+  });
+
+  const returnCongestionsData: CongestionDataType[] = [];
+
+  const fetchedCongestionsData: {
+    areaNum: number;
+    congestionLevel: number;
+    updatedAt: number;
+  }[] = (await response.json()).data.fetchAllCongestions;
+
+  fetchedCongestionsData.forEach((congestionData) => {
+    returnCongestionsData.push({
+      areaNum: congestionData.areaNum,
+      congestionLevel: congestionData.congestionLevel,
+      updatedAt: congestionData.updatedAt,
+    });
+  });
+
+  return {
+    props: {
+      congestionDataArray: returnCongestionsData,
+    },
+    revalidate: 10,
+  };
+};

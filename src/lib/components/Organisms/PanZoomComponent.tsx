@@ -1,15 +1,7 @@
-import React, {
-  Dispatch,
-  FC,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useWindowSize } from "@/src/lib/hooks/useWindowSize";
 import StoresInfoType from "@/src/lib/type/StoresInfoType";
-import congestionDataSample from "@/public/data/test/congestionDataSample.json";
 import { CongestionDataType } from "@/src/lib/type/CongestionDataType";
 import StorePaneType from "@/src/lib/type/StorePaneType";
 import SpecialMarks from "@/src/lib/components/Molecules/SpecialMarks";
@@ -24,7 +16,6 @@ import {
 import points from "@/src/lib/pointInfos";
 import TrashMarks from "@/src/lib/components/Molecules/TrashMarks";
 import CurrentLocationMark from "../Molecules/CurrentLocationMark";
-import TestLocationMark from "@/src/lib/components/Molecules/TestLocationMark";
 
 //TODO:座標のデータを入れたものを作る
 type Borders = {
@@ -37,11 +28,13 @@ type Borders = {
 type Props = {
   targetStoresInfo: StoresInfoType[];
   focusedNum: number | null | undefined;
+  congestionsData: CongestionDataType[];
 };
 
 const PanZoomComponent: FC<Props> = ({
   targetStoresInfo,
   focusedNum,
+  congestionsData,
 }: Props) => {
   const [hasSet, setHasSet] = useState<boolean>(false);
   const [screenHookWidth, screenHookHeight] = useWindowSize();
@@ -50,9 +43,7 @@ const PanZoomComponent: FC<Props> = ({
   const divRef = useRef<HTMLDivElement | null>(null);
 
   const storesInfoData: StoresInfoType[] = targetStoresInfo;
-  const congestionData: CongestionDataType[] = congestionDataSample;
 
-  const [screenHeight, setScreenHeight] = useState<number>();
   const [paneState, setPaneState] = useRecoilState(atomPaneState);
 
   const MAX_SCALE = 10;
@@ -73,14 +64,14 @@ const PanZoomComponent: FC<Props> = ({
         divRef.current?.clientWidth == 0
       ) {
         /*
-                        console.log("imgRef:" + !imgRef.current);
-                        console.log("divRef:" + !divRef.current);
-                        console.log("divRef:" + !imgRef.current?.clientWidth);
-                        console.log("divRef:" + !divRef.current?.clientWidth);
+                                console.log("imgRef:" + !imgRef.current);
+                                console.log("divRef:" + !divRef.current);
+                                console.log("divRef:" + !imgRef.current?.clientWidth);
+                                console.log("divRef:" + !divRef.current?.clientWidth);
 
 
-                        console.log("imgRefclientWidth:" + imgRef.current?.clientWidth);
-                        console.log("divRefclientWidth:" + divRef.current?.clientWidth);*/
+                                console.log("imgRefclientWidth:" + imgRef.current?.clientWidth);
+                                console.log("divRefclientWidth:" + divRef.current?.clientWidth);*/
       } else {
         const { leftXBoarder, rightXBoarder, topYBoarder, bottomYBoarder } =
           getBoarders(INITIAL_SCALE);
@@ -224,7 +215,7 @@ const PanZoomComponent: FC<Props> = ({
       style={{
         height: screenHookHeight,
         /*border: "10px solid blue",
-                        boxSizing: "border-box"*/
+                                boxSizing: "border-box"*/
       }}
     >
       <TransformWrapper
@@ -287,7 +278,7 @@ const PanZoomComponent: FC<Props> = ({
                   (temp) => temp.areaNum == storeInfo.areaNum,
                 );
                 // それぞれの混雑情報
-                const eachCongestion = congestionData.find(
+                const eachCongestion = congestionsData.find(
                   (temp) => temp.areaNum == storeInfo.areaNum,
                 );
                 if (!point || !eachCongestion) {
