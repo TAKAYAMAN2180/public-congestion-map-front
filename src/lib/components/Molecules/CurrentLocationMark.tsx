@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useCurrentLocation from "@/src/lib/hooks/useLocationEffect";
 import styled, { keyframes } from "styled-components";
-import { Box, Button, Drawer, Grow } from "@mui/material";
 import { useRecoilState } from "recoil";
 import { atomMessageState } from "@/src/lib/recoilAtom";
 
