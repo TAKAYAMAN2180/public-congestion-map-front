@@ -1,5 +1,35 @@
 import {useEffect, useState} from "react";
 import useCurrentLocation from "@/src/lib/hooks/useLocationEffect";
+import styled, {keyframes} from "styled-components";
+
+interface MarkerProps {
+    size: number;
+}
+
+const createPulse =　(size:number)=> keyframes`
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 255, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 ${size}px rgba(0, 0, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 255, 0);
+    }
+`;
+
+
+
+const Marker = styled.div<MarkerProps>`
+    width: ${props => props.size}px;
+    height: ${props => props.size}px;
+    background-color: blue;
+    border-radius: 50%;
+    position: relative;
+    animation: ${props =>createPulse(props.size)} 2s infinite;
+    border: ${props => props.size/10}px solid ghostwhite;
+`;
+
 
 const CurrentLocationMark = ({
                                  screenHookHeight,
@@ -18,11 +48,11 @@ const CurrentLocationMark = ({
             location.longitude == null
         ) {
         } else {
-            // let lat: number = location.latitude;
-            // let lng: number = location.longitude;
+            let lat: number = location.latitude;
+            let lng: number = location.longitude;
 
-            let lat: number = 34.9785273;
-            let lng: number = 135.964968;
+            //let lat: number = 34.9785273;
+            //let lng: number = 135.964968;
 
             // window.alert(`lat: ${(lat - 34.9) * 10000000}, lng: ${(lng - 34.9) * 10000000}`);
 
@@ -53,12 +83,7 @@ const CurrentLocationMark = ({
                 pointerEvents: "none",
             }}
         >
-            <div className={"marker"}/>
-            {/*    <div className="dot med">*/}
-            {/*<span className="point">*/}
-            {/*  <span className="pulse"></span>*/}
-            {/*</span>*/}
-            {/*    </div>*/}
+            <Marker size={(16 / 1000) * screenHookHeight}/>
         </div>
     );
 };
