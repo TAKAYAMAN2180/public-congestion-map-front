@@ -66,8 +66,6 @@ const App: NextPage<Props> = (props) => {
       <div style={{ msOverflowStyle: "none" }}>
         <Header isMapPage={true} {...{ setStoresInfo }} />
 
-
-
         <div
           style={{
             width: "100%",

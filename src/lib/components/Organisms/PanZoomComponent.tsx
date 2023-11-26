@@ -15,7 +15,7 @@ import {
 } from "@/src/lib/recoilAtom";
 import points from "@/src/lib/pointInfos";
 import TrashMarks from "@/src/lib/components/Molecules/TrashMarks";
-import CurrentLocationMark from "../Molecules/CurrentLocationMark";
+import CurrentLocationMark from "../Atom/Image/CurrentLocationMark";
 
 //TODO:座標のデータを入れたものを作る
 type Borders = {
