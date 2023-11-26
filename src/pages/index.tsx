@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import PanZoomComponent from "@/src/lib/components/Organisms/PanZoomComponent";
 import Header from "@/src/lib/components/Organisms/Header";
 import StorePane from "@/src/lib/components/Organisms/Pane/StorePane";
@@ -7,10 +7,15 @@ import initStoresInfoData from "../../public/data/prod/storesInfoData.json";
 import StoresInfoType from "@/src/lib/type/StoresInfoType";
 import StorePaneType from "@/src/lib/type/StorePaneType";
 import { GetStaticProps, NextPage } from "next";
-import { atomPaneState, PaneKindStateEnum } from "@/src/lib/recoilAtom";
+import {
+  atomMessageState,
+  atomPaneState,
+  PaneKindStateEnum,
+} from "@/src/lib/recoilAtom";
 import { useRecoilState } from "recoil";
 import RootPane from "@/src/lib/components/Organisms/Pane/RootPane";
 import { CongestionDataType } from "@/src/lib/type/CongestionDataType";
+import { Grow } from "@mui/material";
 
 type Position = {
   latitude: number | null;
@@ -28,6 +33,17 @@ const App: NextPage<Props> = (props) => {
     null,
   );
   const [paneState, setPaneState] = useRecoilState(atomPaneState);
+  const [messageState, setMessageState] = useRecoilState(atomMessageState);
+  const [isMessageOpen, setIsMessageOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (messageState != null && messageState != "") {
+      setIsMessageOpen(true);
+    }
+    setTimeout(() => {
+        setIsMessageOpen(false);
+    },8000);
+  }, [messageState]);
 
   useEffect(() => {
     document.addEventListener("touchmove", mobile_no_scroll, {
@@ -49,6 +65,9 @@ const App: NextPage<Props> = (props) => {
     <>
       <div style={{ msOverflowStyle: "none" }}>
         <Header isMapPage={true} {...{ setStoresInfo }} />
+
+
+
         <div
           style={{
             width: "100%",
@@ -63,6 +82,33 @@ const App: NextPage<Props> = (props) => {
             congestionsData={props.congestionDataArray}
           />
         </div>
+
+          <div
+              style={{
+                  position: "fixed",
+                  top: "80px",
+                  width: "100vw",
+                  display: "flex",
+                  justifyContent: "center",
+              }}
+          >
+              <Grow in={isMessageOpen}>
+                  <div
+                      style={{
+                          backgroundColor: "rgba(0,0,0,0.8)",
+                          borderRadius: "1.5rem",
+                          maxWidth: "90vw",
+                          padding: "0.5rem",
+                          zIndex: 1000,
+                          color: "white",
+                          textAlign: "center",
+                          width: `calc(calc(1rem * ${messageState.length}) + 2rem)`,
+                      }}
+                  >
+                      {messageState}
+                  </div>
+              </Grow>
+          </div>
 
         <RootPane />
 

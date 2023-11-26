@@ -39,3 +39,10 @@ export const atomPaneState = atom<AtomPaneStateType>({
     info: null,
   },
 });
+
+export type MessageStateType = string;
+
+export const atomMessageState = atom<MessageStateType>({
+  key: "messageState",
+  default: "",
+});
