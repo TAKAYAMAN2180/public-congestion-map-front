@@ -43,6 +43,7 @@ const CurrentLocationMark = ({
   const [isOk, setIsOk] = useState<boolean>(false);
 
   useEffect(() => {
+    //window.alert(JSON.stringify(location));
     if (
       location == null ||
       location.latitude == null ||
@@ -84,7 +85,7 @@ const CurrentLocationMark = ({
         setIsOk(true);
       }
     }
-  }, [location]);
+  }, [location,location.latitude,location.longitude]);
 
   return isOk ? null : (
     <div
