@@ -1,59 +1,52 @@
-import {
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
-import MapIcon from "@mui/icons-material/Map";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import LightbulbIcon from "@mui/icons-material/Lightbulb";
+import {List} from "@mui/material";
 import StyledDrawer from "@/src/lib/style/StyledDrawer";
-import StyledWhiteDivider from "@/src/lib/components/Atom/StyledWhiteDivider";
 import React from "react";
 import SideDrawerBtn from "@/src/lib/components/Molecules/SideDrawerBtn";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import StoreIcon from "@mui/icons-material/Store";
+import TwitterIcon from '@mui/icons-material/Twitter';
+import WebAssetIcon from '@mui/icons-material/WebAsset';
+import FestivalIcon from '@mui/icons-material/Festival';
 
 type Props = {
-  isListOpen: boolean;
-  handleCloseIconClicked: (event: any) => void;
+    isListOpen: boolean;
+    handleCloseIconClicked: (event: any) => void;
 };
 
-const MenuDrawer = ({ isListOpen, handleCloseIconClicked }: Props) => {
-  return (
-    <>
-      <StyledDrawer
-        anchor="left"
-        open={isListOpen}
-        onClose={handleCloseIconClicked}
-      >
-        <div style={{ height: 70 }} />
-        <List>
-          <SideDrawerBtn
-            text={"混雑マップ"}
-            key={"Map"}
-            SvgIcon={MapIcon}
-            page={"/"}
-          />
-          {/*<SideDrawerBtn text={'各種リンク'} key={'Links'} SvgIcon={LinkIcon}/>*/}
-          {/*<SideDrawerBtn text={'困ったときは？'} key={'Info'} SvgIcon={HelpOutlineIcon}/>*/}
-          {/*<SideDrawerBtn text={'このサイトについて'} key={'Explain'} SvgIcon={LightbulbIcon}/>*/}
-          <SideDrawerBtn
-            text={"出店者向けページ"}
-            key={"StorePage"}
-            SvgIcon={StoreIcon}
-            page={"/storepage"}
-          />
-          <SideDrawerBtn
-            text={"事業部向けページ"}
-            key={"AdminPage"}
-            SvgIcon={AdminPanelSettingsIcon}
-            page={"/"}
-          />
-        </List>
-      </StyledDrawer>
-    </>
-  );
+const MenuDrawer = ({isListOpen, handleCloseIconClicked}: Props) => {
+    return (
+        <>
+            <StyledDrawer
+                anchor="left"
+                open={isListOpen}
+                onClose={handleCloseIconClicked}
+            >
+                <div style={{height: 70}}/>
+                <List>
+                    {/*<SideDrawerBtn text={'各種リンク'} key={'Links'} SvgIcon={LinkIcon}/>*/}
+                    {/*<SideDrawerBtn text={'困ったときは？'} key={'Info'} SvgIcon={HelpOutlineIcon}/>*/}
+                    {/*<SideDrawerBtn text={'このサイトについて'} key={'Explain'} SvgIcon={LightbulbIcon}/>*/}
+                    <SideDrawerBtn
+                        text={"BKC祭典公式サイト"}
+                        key={"Bkc-Official-site"}
+                        SvgIcon={FestivalIcon}
+                        page={"http://festival.ritsumei.club/rits-brothers/bkc/"}
+                    />
+                    <SideDrawerBtn
+                        text={"立命館大学学園祭公式サイト"}
+                        key={"Official-site"}
+                        SvgIcon={WebAssetIcon}
+                        page={"http://festival.ritsumei.club/rits-brothers/"}
+                    />
+                    <SideDrawerBtn
+                        text={"BKC祭典公式Twitter"}
+                        key={"Official-Twitter"}
+                        SvgIcon={TwitterIcon}
+                        page={"https://x.com/rits_fes_koho"}
+                    />
+                </List>
+            </StyledDrawer>
+        </>
+    );
 };
 
 export default MenuDrawer;
