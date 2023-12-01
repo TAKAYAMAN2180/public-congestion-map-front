@@ -87,6 +87,7 @@ const CurrentLocationMark = ({
                 setMessageState("現在位置が表示可能範囲の外側になっています。大学構内では現在地を表示することができます。");
             } else {
                 setIsOk(true);
+                setMessageState("");
             }
         }
     }, [location, location.latitude, location.longitude, setMessageState]);
