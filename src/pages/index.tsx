@@ -174,7 +174,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
       props: {
         congestionDataArray: returnCongestionsData,
       },
-      revalidate: 10,
+      revalidate: 30,
     };
   } catch (e) {
     return {
