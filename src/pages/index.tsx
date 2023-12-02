@@ -35,14 +35,17 @@ const App: NextPage<Props> = (props) => {
   const [paneState, setPaneState] = useRecoilState(atomPaneState);
   const [messageState, setMessageState] = useRecoilState(atomMessageState);
   const [isMessageOpen, setIsMessageOpen] = useState<boolean>(false);
+  const [isOK, setIsOK] = useState<boolean>(false);
 
   useEffect(() => {
     if (messageState != null && messageState != "") {
       setIsMessageOpen(true);
+      setIsOK(true);
     }
     setTimeout(() => {
-        setIsMessageOpen(false);
-    },8000);
+      setIsMessageOpen(false);
+      setIsOK(false);
+    }, 8000);
   }, [messageState]);
 
   useEffect(() => {
@@ -80,33 +83,34 @@ const App: NextPage<Props> = (props) => {
             congestionsData={props.congestionDataArray}
           />
         </div>
-
+        {isOK && (
           <div
-              style={{
-                  position: "fixed",
-                  top: "80px",
-                  width: "100vw",
-                  display: "flex",
-                  justifyContent: "center",
-              }}
+            style={{
+              position: "fixed",
+              top: "80px",
+              width: "100vw",
+              display: "flex",
+              justifyContent: "center",
+            }}
           >
-              <Grow in={isMessageOpen}>
-                  <div
-                      style={{
-                          backgroundColor: "rgba(0,0,0,0.8)",
-                          borderRadius: "1.5rem",
-                          maxWidth: "90vw",
-                          padding: "0.5rem",
-                          zIndex: 1000,
-                          color: "white",
-                          textAlign: "center",
-                          width: `calc(calc(1rem * ${messageState.length}) + 2rem)`,
-                      }}
-                  >
-                      {messageState}
-                  </div>
-              </Grow>
+            <Grow in={isMessageOpen}>
+              <div
+                style={{
+                  backgroundColor: "rgba(0,0,0,0.8)",
+                  borderRadius: "1.5rem",
+                  maxWidth: "90vw",
+                  padding: "0.5rem",
+                  zIndex: 1000,
+                  color: "white",
+                  textAlign: "center",
+                  width: `calc(calc(1rem * ${messageState.length}) + 2rem)`,
+                }}
+              >
+                {messageState}
+              </div>
+            </Grow>
           </div>
+        )}
 
         <RootPane />
 
