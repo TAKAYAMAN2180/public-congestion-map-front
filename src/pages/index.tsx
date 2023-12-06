@@ -41,11 +41,14 @@ const App: NextPage<Props> = (props) => {
     if (messageState != null && messageState != "") {
       setIsMessageOpen(true);
       setIsOK(true);
+      setTimeout(() => {
+        setIsMessageOpen(false);
+        setIsOK(false);
+      }, 8000);
+    }else {
+        setIsMessageOpen(false);
+        setIsOK(false);
     }
-    setTimeout(() => {
-      setIsMessageOpen(false);
-      setIsOK(false);
-    }, 8000);
   }, [messageState]);
 
   useEffect(() => {
