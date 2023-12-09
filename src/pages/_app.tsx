@@ -5,7 +5,7 @@ import HEAD from "next/head";
 import GoogleAnalytics from "@/src/lib/GoogleAnalystics";
 import awsmobile from "@/src/graphql/aws-exports";
 import { Amplify } from "aws-amplify";
-// import "@/src/lib/style/current-location.css";
+import "@/src/lib/style/current-location.css";
 
 import { RecoilRoot } from "recoil";
 
