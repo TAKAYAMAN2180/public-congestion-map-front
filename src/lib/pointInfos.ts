@@ -56,7 +56,7 @@ const points = [
 
   { areaNum: 43, x: 985, y: 420 },
   { areaNum: 44, x: 975, y: 420 },
-  { areaNum: 45, x: 965, y: 420 },
+  // { areaNum: 45, x: 965, y: 420 },
 
   { areaNum: 46, x: 935, y: 420 },
   { areaNum: 47, x: 945, y: 420 },
