@@ -23,7 +23,7 @@ const SpecialMarks = ({
         leftDistance={720}
         specialMarkKindEnum={SpecialMarkKindEnum.CENTRAL_STAGE}
         content={"大人気！ステージ企画！あの有名人も登場！？"}
-        contentUrl={"https://google.com"}
+        contentUrl={"https://drive.google.com/file/d/1tlS_fhu4hw0OQbGujcEXwQIIpw7UvbAH/view?usp=sharing"}
         {...{ centerFocusFunction }}
       />
       {/*BSのマーク*/}
@@ -35,7 +35,7 @@ const SpecialMarks = ({
         leftDistance={970}
         specialMarkKindEnum={SpecialMarkKindEnum.BEING_STAGE}
         content={"多彩な団体によるステージ企画を実施中！"}
-        contentUrl={"https://google.com"}
+        contentUrl={"https://drive.google.com/file/d/1XWrXMimkSiksvGLwgxnhNV8I9oABgxQq/view?usp=sharing"}
         {...{ centerFocusFunction }}
       />
 
@@ -59,7 +59,6 @@ const SpecialMarks = ({
         leftDistance={700}
         specialMarkKindEnum={SpecialMarkKindEnum.BUS_STOP}
         content={"便利なバス位置情報を提供中！"}
-        contentUrl={"https://google.com"}
         {...{ centerFocusFunction }}
       />
       {/*総合案内所のマーク*/}
@@ -82,7 +81,7 @@ const SpecialMarks = ({
         leftDistance={870}
         specialMarkKindEnum={SpecialMarkKindEnum.VOTING_STATION}
         content={"模擬店に投票して立命館グッズをゲットしよう！！"}
-        contentUrl={"https://google.com"}
+        contentUrl={"https://drive.google.com/file/d/1ELN_bDM7-Hbc57yeK8VMmJSxqferUNfr/view?usp=sharing"}
         {...{ centerFocusFunction }}
       />
       {/*休憩所(ユニオンのマーク)*/}
